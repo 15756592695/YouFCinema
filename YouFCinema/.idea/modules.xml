@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/YouFCinema.iml" filepath="$PROJECT_DIR$/YouFCinema.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YouFCinema-common/YouFCinema-common.iml" filepath="$PROJECT_DIR$/YouFCinema-common/YouFCinema-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YouFCinema_eureka_9000/YouFCinema_eureka_9000.iml" filepath="$PROJECT_DIR$/YouFCinema_eureka_9000/YouFCinema_eureka_9000.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YouFCinema_comment/YouFcinema_comment.iml" filepath="$PROJECT_DIR$/YouFCinema_comment/YouFcinema_comment.iml" />
+    </modules>
+  </component>
+</project>

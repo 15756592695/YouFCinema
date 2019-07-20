@@ -90,6 +90,8 @@
 		</plugins>
 	</build>
   <modules>
-  	<module>YouFCinema-common</module>
+  		<module>YouFCinema-common</module>
+	    <module>YouFCinema_comment</module>
+	  <module>YouFCinema_eureka_9000</module>
   </modules>
 </project>
