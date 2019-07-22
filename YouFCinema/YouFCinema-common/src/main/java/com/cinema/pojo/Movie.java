@@ -38,8 +38,20 @@ public class Movie {
     private Integer f_length;//电影时长
 
     private Integer f_flag;
+    
+    private Filetype filmType;//电影类型
+    
+    
 
-    public Integer getF_id() {
+    public Filetype getFilmType() {
+		return filmType;
+	}
+
+	public void setFilmType(Filetype filmType) {
+		this.filmType = filmType;
+	}
+
+	public Integer getF_id() {
         return f_id;
     }
 

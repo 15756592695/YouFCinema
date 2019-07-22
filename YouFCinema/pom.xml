@@ -66,6 +66,12 @@
 				<artifactId>log4j</artifactId>
 				<version>${log4j.version}</version>
 			</dependency>
+			<!-- 引入druid -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>1.0.18</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<!-- 等会要读取mavan项目文件的文件的时候需要用到 -->
@@ -95,5 +101,8 @@
 	  <module>YouFCinema_eureka_9000</module>
 	  <module>YouFCinema-Order01</module>
 	  <module>YouFCinema-film-8000</module>
+
+	  <module>YouFCinema-zuul-9001</module>
+	  <module>232</module>
   </modules>
 </project>
