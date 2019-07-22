@@ -95,6 +95,6 @@
 	  <module>YouFCinema_eureka_9000</module>
 	  <module>YouFCinema-Order01</module>
 	  <module>YouFCinema-zuul-9001</module>
-	  <module>YouFCinema-9999</module>
+      <module>YouFCinema_user8247</module>
   </modules>
 </project>

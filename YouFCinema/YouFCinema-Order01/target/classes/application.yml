@@ -28,5 +28,5 @@ spring:
 info: #监控信息 
   app.name: YouFCinema
   company.name: www.woniuxy.com
-  build.artifactId: YouFCinema-Order01
-  build.version: 0.0.1-SNAPSHOT
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
