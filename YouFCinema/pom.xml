@@ -66,6 +66,12 @@
 				<artifactId>log4j</artifactId>
 				<version>${log4j.version}</version>
 			</dependency>
+			<!-- 引入druid -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>1.0.18</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<!-- 等会要读取mavan项目文件的文件的时候需要用到 -->
