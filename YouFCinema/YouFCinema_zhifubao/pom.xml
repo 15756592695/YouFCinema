@@ -9,13 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yy.main</groupId>
-    <artifactId>YouFcinema_comment</artifactId>
-    <dependencies>
+    <groupId>com.wnxy.main</groupId>
+    <artifactId>YouFCinema_zhifubao</artifactId>
 
-
-
-
-    </dependencies>
 
 </project>
