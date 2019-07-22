@@ -4,14 +4,13 @@ import java.util.Date;
 
 public class Movie {
 	
-	
     public Movie() {
 		super();
 	}
 
 	public Movie(Integer f_id, String f_name, Integer f_typeid, String f_area, String f_runtime, Integer f_hot,
 			Double f_score, String f_describe, String f_forecast, Long f_price, String f_performer, Date f_time,
-			String f_picture, String f_dimension, Integer f_length, Integer f_flag) {
+			String f_picture, String f_dimension, Integer f_length, Filetype filetype, Integer f_flag) {
 		super();
 		this.f_id = f_id;
 		this.f_name = f_name;
@@ -29,6 +28,7 @@ public class Movie {
 		this.f_dimension = f_dimension;
 		this.f_length = f_length;
 		this.f_flag = f_flag;
+		this.filetype = filetype;
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class Movie {
 				+ ", f_runtime=" + f_runtime + ", f_hot=" + f_hot + ", f_score=" + f_score + ", f_describe="
 				+ f_describe + ", f_forecast=" + f_forecast + ", f_price=" + f_price + ", f_performer=" + f_performer
 				+ ", f_time=" + f_time + ", f_picture=" + f_picture + ", f_dimension=" + f_dimension + ", f_length="
-				+ f_length + ", f_flag=" + f_flag + "]";
+				+ f_length + ", filetype=" + filetype + ", f_flag=" + f_flag + "]";
 	}
 
 	private Integer f_id;
@@ -71,8 +71,18 @@ public class Movie {
     private Integer f_length;
 
     private Integer f_flag;
+    
+    private Filetype filetype;
+    
+    public Filetype getFiletype() {
+		return filetype;
+	}
 
-    public Integer getF_id() {
+	public void setFiletype(Filetype filetype) {
+		this.filetype = filetype;
+	}
+
+	public Integer getF_id() {
         return f_id;
     }
 
