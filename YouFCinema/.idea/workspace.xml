@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a464f132-d26c-4059-a35b-30edb4cc3044" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_comment/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_comment/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_comment/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_comment/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_comment/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_comment/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_comment/target/classes/META-INF/maven/com.yy.main/YouFcinema_comment/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_comment/target/classes/META-INF/maven/com.yy.main/YouFcinema_comment/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/YouFCinema_comment/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_zhifubao/YouFCinema_zhifubao.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YouFCinema_zhifubao/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a464f132-d26c-4059-a35b-30edb4cc3044" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/YouFCinema-common/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -223,7 +209,7 @@
       <workItem from="1563606123455" duration="108000" />
       <workItem from="1563606254763" duration="5087000" />
       <workItem from="1563765217870" duration="84000" />
-      <workItem from="1563769025472" duration="1533000" />
+      <workItem from="1563769025472" duration="1777000" />
     </task>
     <task id="LOCAL-00001" summary="注册机 eureka 9000">
       <created>1563609001440</created>
@@ -232,16 +218,23 @@
       <option name="project" value="LOCAL" />
       <updated>1563609001440</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="更改">
+      <created>1563772690443</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1563772690443</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6812000" />
+    <option name="totallyTimeSpent" value="7056000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3152789" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3152789" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -257,7 +250,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.3250444" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.3250444" />
       <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" />
@@ -281,7 +274,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="注册机 eureka 9000" />
-    <option name="LAST_COMMIT_MESSAGE" value="注册机 eureka 9000" />
+    <MESSAGE value="更改" />
+    <option name="LAST_COMMIT_MESSAGE" value="更改" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../YouFCinema_comment/pom.xml" />

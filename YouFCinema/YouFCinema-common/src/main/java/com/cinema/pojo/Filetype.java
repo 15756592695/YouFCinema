@@ -1,9 +1,13 @@
 package com.cinema.pojo;
-
+/**
+ * 	电影类型表
+ * @author 小范
+ *
+ */
 public class Filetype {
-    private Integer t_id;
+    private Integer t_id;//id
 
-    private String t_name;
+    private String t_name;//类型名称
 
     private Integer t_flag;
 

@@ -1,37 +1,41 @@
 package com.cinema.pojo;
 
 import java.util.Date;
-
+/**
+ * 	电影表
+ * @author 小范
+ *
+ */
 public class Movie {
-    private Integer f_id;
+    private Integer f_id;//id
 
-    private String f_name;
+    private String f_name;//电影名字
 
-    private Integer f_typeid;
+    private Integer f_typeid;//电影类型id
 
-    private String f_area;
+    private String f_area;//上映地区
 
-    private String f_runtime;
+    private String f_runtime;//上映日期
 
-    private Double f_hot;
+    private Double f_hot;//热度
 
-    private Double f_score;
+    private Double f_score;//评分
 
-    private String f_describe;
+    private String f_describe;//描述
 
-    private String f_forecast;
+    private String f_forecast;//预告片URL
 
-    private Long f_price;
+    private Long f_price;//价格
 
-    private String f_performer;
+    private String f_performer;//演员
 
-    private Date f_time;
+    private Date f_time;//不记得了
 
-    private String f_picture;
+    private String f_picture;//电影海报
 
-    private String f_dimension;
+    private String f_dimension;//语言版本
 
-    private Integer f_length;
+    private Integer f_length;//电影时长
 
     private Integer f_flag;
 

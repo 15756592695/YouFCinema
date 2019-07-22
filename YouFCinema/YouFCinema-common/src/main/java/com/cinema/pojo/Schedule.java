@@ -1,21 +1,25 @@
 package com.cinema.pojo;
 
 import java.util.Date;
-
+/**
+ * 	排片表
+ * @author 小范
+ *
+ */
 public class Schedule {
-    private Integer s_id;
+    private Integer s_id;//id
 
-    private Integer s_filmid;
+    private Integer s_filmid;//电影id
 
-    private Date s_date;
+    private Date s_date;//播放日期
 
-    private Date s_starttime;
+    private Date s_starttime;//放映时间
 
-    private Date s_endtime;
+    private Date s_endtime;//结束时间
 
-    private Integer s_roomid;
+    private Integer s_roomid;//厅室号
 
-    private Double s_discount;
+    private Double s_discount;//打折率
 
     private Integer s_flag;
 
