@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Schedule.java
 D:\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Seatrecords.java
 D:\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Comment.java
@@ -6,3 +7,26 @@ D:\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\p
 D:\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Room.java
 D:\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Order.java
 D:\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\User.java
+=======
+<<<<<<< HEAD
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Comment.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\User.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Filetype.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Movie.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Seatrecords.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Order.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Schedule.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Room.java
+=======
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\config\RedisConfig.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\User.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\util\RedisUtil.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Schedule.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Order.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Seatrecords.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Room.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Movie.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Filetype.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Comment.java
+>>>>>>> branch 'master' of https://github.com/15756592695/YouFCinema.git
+>>>>>>> branch 'master' of https://github.com/15756592695/YouFCinema.git
