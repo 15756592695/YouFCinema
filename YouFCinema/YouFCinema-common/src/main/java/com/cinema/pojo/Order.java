@@ -1,33 +1,7 @@
 package com.cinema.pojo;
 
 public class Order {
-	
-    public Order(Integer o_id, Integer scheduleid, Integer o_number, Long o_totalprice, String o_ordertime, Integer uid,
-			String o_ordernumber, String o_paynumber, Integer flag) {
-		super();
-		this.o_id = o_id;
-		this.scheduleid = scheduleid;
-		this.o_number = o_number;
-		this.o_totalprice = o_totalprice;
-		this.o_ordertime = o_ordertime;
-		this.uid = uid;
-		this.o_ordernumber = o_ordernumber;
-		this.o_paynumber = o_paynumber;
-		this.flag = flag;
-	}
-
-	public Order() {
-		super();
-	}
-
-	@Override
-	public String toString() {
-		return "Order [o_id=" + o_id + ", scheduleid=" + scheduleid + ", o_number=" + o_number + ", o_totalprice="
-				+ o_totalprice + ", o_ordertime=" + o_ordertime + ", uid=" + uid + ", o_ordernumber=" + o_ordernumber
-				+ ", o_paynumber=" + o_paynumber + ", flag=" + flag + "]";
-	}
-
-	private Integer o_id;
+    private Integer o_id;
 
     private Integer scheduleid;
 

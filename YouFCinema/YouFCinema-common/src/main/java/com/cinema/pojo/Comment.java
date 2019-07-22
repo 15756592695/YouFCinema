@@ -18,32 +18,8 @@ public class Comment {
     private Date c_deltime;
 
     private Integer flag;
-    
-    public Comment() {
-		super();
-	}
 
-	public Comment(Integer c_id, String c_message, Integer uid, Integer filmid, Date c_commenttime, Integer c_score,
-			Date c_deltime, Integer flag) {
-		super();
-		this.c_id = c_id;
-		this.c_message = c_message;
-		this.uid = uid;
-		this.filmid = filmid;
-		this.c_commenttime = c_commenttime;
-		this.c_score = c_score;
-		this.c_deltime = c_deltime;
-		this.flag = flag;
-	}
-
-	@Override
-	public String toString() {
-		return "Comment [c_id=" + c_id + ", c_message=" + c_message + ", uid=" + uid + ", filmid=" + filmid
-				+ ", c_commenttime=" + c_commenttime + ", c_score=" + c_score + ", c_deltime=" + c_deltime + ", flag="
-				+ flag + "]";
-	}
-
-	public Integer getC_id() {
+    public Integer getC_id() {
         return c_id;
     }
 
