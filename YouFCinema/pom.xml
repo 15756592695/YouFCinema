@@ -94,5 +94,6 @@
 	    <module>YouFCinema_comment</module>
 	  <module>YouFCinema_eureka_9000</module>
 	  <module>YouFCinema-Order01</module>
+	  <module>YouFCinema-zuul-9001</module>
   </modules>
 </project>
