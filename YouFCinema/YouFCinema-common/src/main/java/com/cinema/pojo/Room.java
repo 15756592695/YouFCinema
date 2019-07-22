@@ -1,11 +1,15 @@
 package com.cinema.pojo;
-
+/**
+ * 	厅室表
+ * @author 小范
+ *
+ */
 public class Room {
-    private Integer r_id;
+    private Integer r_id;//id
 
-    private String r_name;
+    private String r_name;//厅室名字
 
-    private Integer r_seatnumber;
+    private Integer r_seatnumber;//座位数量
 
     private Integer flag;
 

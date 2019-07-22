@@ -1,21 +1,25 @@
 package com.cinema.pojo;
-
+/**
+ * 	订单表
+ * @author 小范
+ *
+ */
 public class Order {
-    private Integer o_id;
+    private Integer o_id;//id
 
-    private Integer scheduleid;
+    private Integer scheduleid;//排片表id
 
-    private Integer o_number;
+    private Integer o_number;//票数数量
 
-    private Long o_totalprice;
+    private Long o_totalprice;//总价
 
-    private String o_ordertime;
+    private String o_ordertime;//订单时间
 
-    private Integer uid;
+    private Integer uid;//用户id
 
-    private String o_ordernumber;
+    private String o_ordernumber;//订单号
 
-    private String o_paynumber;
+    private String o_paynumber;//支付号
 
     private Integer flag;
 

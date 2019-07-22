@@ -1,17 +1,19 @@
 package com.cinema.pojo;
-
+/**
+ *	座位记录表
+ */
 public class Seatrecords {
-    private Integer s_id;
+    private Integer s_id;//id
 
-    private String s_room;
+    private String s_room;//厅室号
 
     private Integer s_seatrow;//第几排
 
     private Integer s_seatcol;//座号
 
-    private Integer orderid;
+    private Integer orderid;//订单号
 
-    private Integer flag;
+    private Integer flag;//软删除
 
     public Integer getS_id() {
         return s_id;

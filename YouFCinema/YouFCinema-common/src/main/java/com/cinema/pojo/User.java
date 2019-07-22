@@ -1,19 +1,23 @@
 package com.cinema.pojo;
-
+/**
+ * 	 用户表
+ * @author 小范
+ *
+ */
 public class User {
-    private Integer u_id;
+    private Integer u_id;//id
 
-    private String u_tel;
+    private String u_tel;//手机号
 
-    private String u_password;
+    private String u_password;//密码
 
-    private String u_role;
+    private String u_role;//角色
 
-    private String u_headimg;
+    private String u_headimg;//头像
 
-    private String u_registertime;
+    private String u_registertime;//注册时间
 
-    private String u_nickname;
+    private String u_nickname;//昵称
 
     private Integer flag;
 

@@ -93,5 +93,6 @@
   		<module>YouFCinema-common</module>
 	    <module>YouFCinema_comment</module>
 	  <module>YouFCinema_eureka_9000</module>
+	  <module>YouFCinema-Order01</module>
   </modules>
 </project>

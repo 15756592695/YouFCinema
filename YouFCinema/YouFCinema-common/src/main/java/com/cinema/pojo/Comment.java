@@ -1,21 +1,25 @@
 package com.cinema.pojo;
 
 import java.util.Date;
-
+/**
+ * 	评论表
+ * @author 小范
+ *
+ */
 public class Comment {
-    private Integer c_id;
+    private Integer c_id;//id
 
-    private String c_message;
+    private String c_message;//评论信息
 
-    private Integer uid;
+    private Integer uid;//用户id
 
-    private Integer filmid;
+    private Integer filmid;//电影id
 
-    private Date c_commenttime;
+    private Date c_commenttime;//评论时间
 
-    private Integer c_score;
+    private Integer c_score;//评分
 
-    private Date c_deltime;
+    private Date c_deltime;//删除时间
 
     private Integer flag;
 
