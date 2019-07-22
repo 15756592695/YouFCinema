@@ -1,49 +1,29 @@
 package com.cinema.pojo;
 
 import java.util.Date;
-
+/**
+ * 	评论表
+ * @author 小范
+ *
+ */
 public class Comment {
-    private Integer c_id;
+    private Integer c_id;//id
 
-    private String c_message;
+    private String c_message;//评论信息
 
-    private Integer uid;
+    private Integer uid;//用户id
 
-    private Integer filmid;
+    private Integer filmid;//电影id
 
-    private Date c_commenttime;
+    private Date c_commenttime;//评论时间
 
-    private Integer c_score;
+    private Integer c_score;//评分
 
-    private Date c_deltime;
+    private Date c_deltime;//删除时间
 
     private Integer flag;
-    
-    public Comment() {
-		super();
-	}
 
-	public Comment(Integer c_id, String c_message, Integer uid, Integer filmid, Date c_commenttime, Integer c_score,
-			Date c_deltime, Integer flag) {
-		super();
-		this.c_id = c_id;
-		this.c_message = c_message;
-		this.uid = uid;
-		this.filmid = filmid;
-		this.c_commenttime = c_commenttime;
-		this.c_score = c_score;
-		this.c_deltime = c_deltime;
-		this.flag = flag;
-	}
-
-	@Override
-	public String toString() {
-		return "Comment [c_id=" + c_id + ", c_message=" + c_message + ", uid=" + uid + ", filmid=" + filmid
-				+ ", c_commenttime=" + c_commenttime + ", c_score=" + c_score + ", c_deltime=" + c_deltime + ", flag="
-				+ flag + "]";
-	}
-
-	public Integer getC_id() {
+    public Integer getC_id() {
         return c_id;
     }
 

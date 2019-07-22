@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="YouFCinema-common" />
+        <module name="YouFCinema-Order01" />
         <module name="YouFCinema_eureka_9000" />
         <module name="YouFcinema_comment" />
       </profile>
@@ -15,6 +16,7 @@
     <bytecodeTargetLevel>
       <module name="YouFCinema" target="1.8" />
       <module name="YouFCinema-common" target="1.8" />
+      <module name="YouFCinema-Order01" target="1.8" />
       <module name="YouFCinema_comment" target="1.8" />
       <module name="YouFcinema_comment" target="1.8" />
       <module name="YouFCinema_eureka_9000" target="1.8" />

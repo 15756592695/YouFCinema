@@ -1,14 +1,19 @@
 package com.cinema.pojo;
 
 import java.util.Date;
-
+/**
+ * 	电影表
+ * @author 小范
+ *
+ */
 public class Movie {
 	
     public Movie() {
 		super();
 	}
+    private Integer f_id;//id
 
-	public Movie(Integer f_id, String f_name, Integer f_typeid, String f_area, String f_runtime, Integer f_hot,
+	public Movie(Integer f_id, String f_name, Integer f_typeid, String f_area, String f_runtime, Double f_hot,
 			Double f_score, String f_describe, String f_forecast, Long f_price, String f_performer, Date f_time,
 			String f_picture, String f_dimension, Integer f_length, Filetype filetype, Integer f_flag) {
 		super();
@@ -30,6 +35,7 @@ public class Movie {
 		this.f_flag = f_flag;
 		this.filetype = filetype;
 	}
+    private String f_name;//电影名字
 
 	@Override
 	public String toString() {
@@ -39,36 +45,31 @@ public class Movie {
 				+ ", f_time=" + f_time + ", f_picture=" + f_picture + ", f_dimension=" + f_dimension + ", f_length="
 				+ f_length + ", filetype=" + filetype + ", f_flag=" + f_flag + "]";
 	}
+    private Integer f_typeid;//电影类型id
 
-	private Integer f_id;
+    private String f_area;//上映地区
 
-    private String f_name;
+    private String f_runtime;//上映日期
 
-    private Integer f_typeid;
+    private Double f_hot;//热度
 
-    private String f_area;
+    private Double f_score;//评分
 
-    private String f_runtime;
+    private String f_describe;//描述
 
-    private Integer f_hot;
+    private String f_forecast;//预告片URL
 
-    private Double f_score;
+    private Long f_price;//价格
 
-    private String f_describe;
+    private String f_performer;//演员
 
-    private String f_forecast;
+    private Date f_time;//不记得了
 
-    private Long f_price;
+    private String f_picture;//电影海报
 
-    private String f_performer;
+    private String f_dimension;//语言版本
 
-    private Date f_time;
-
-    private String f_picture;
-
-    private String f_dimension;
-
-    private Integer f_length;
+    private Integer f_length;//电影时长
 
     private Integer f_flag;
     
@@ -122,11 +123,11 @@ public class Movie {
         this.f_runtime = f_runtime == null ? null : f_runtime.trim();
     }
 
-    public Integer getF_hot() {
+    public Double getF_hot() {
         return f_hot;
     }
 
-    public void setF_hot(Integer f_hot) {
+    public void setF_hot(Double f_hot) {
         this.f_hot = f_hot;
     }
 

@@ -1,47 +1,25 @@
 package com.cinema.pojo;
 
 import java.util.Date;
-
+/**
+ * 	排片表
+ * @author 小范
+ *
+ */
 public class Schedule {
-	
-	
-    public Schedule() {
-		super();
-	}
+    private Integer s_id;//id
 
-	public Schedule(Integer s_id, Integer s_filmid, Date s_date, Date s_starttime, Date s_endtime, Integer s_roomid,
-			Double s_discount, Integer s_flag) {
-		super();
-		this.s_id = s_id;
-		this.s_filmid = s_filmid;
-		this.s_date = s_date;
-		this.s_starttime = s_starttime;
-		this.s_endtime = s_endtime;
-		this.s_roomid = s_roomid;
-		this.s_discount = s_discount;
-		this.s_flag = s_flag;
-	}
+    private Integer s_filmid;//电影id
 
-	@Override
-	public String toString() {
-		return "Schedule [s_id=" + s_id + ", s_filmid=" + s_filmid + ", s_date=" + s_date + ", s_starttime="
-				+ s_starttime + ", s_endtime=" + s_endtime + ", s_roomid=" + s_roomid + ", s_discount=" + s_discount
-				+ ", s_flag=" + s_flag + "]";
-	}
+    private Date s_date;//播放日期
 
-	private Integer s_id;
+    private Date s_starttime;//放映时间
 
-    private Integer s_filmid;
+    private Date s_endtime;//结束时间
 
-    private Date s_date;
+    private Integer s_roomid;//厅室号
 
-    private Date s_starttime;
-
-    private Date s_endtime;
-
-    private Integer s_roomid;
-
-    private Double s_discount;
+    private Double s_discount;//打折率
 
     private Integer s_flag;
 

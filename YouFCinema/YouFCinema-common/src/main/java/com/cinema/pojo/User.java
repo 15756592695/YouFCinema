@@ -1,45 +1,23 @@
 package com.cinema.pojo;
-
+/**
+ * 	 用户表
+ * @author 小范
+ *
+ */
 public class User {
-	
-	
-    public User() {
-		super();
-	}
+    private Integer u_id;//id
 
-	public User(Integer u_id, String u_tel, String u_password, String u_role, String u_headimg, String u_registertime,
-			String u_nickname, Integer flag) {
-		super();
-		this.u_id = u_id;
-		this.u_tel = u_tel;
-		this.u_password = u_password;
-		this.u_role = u_role;
-		this.u_headimg = u_headimg;
-		this.u_registertime = u_registertime;
-		this.u_nickname = u_nickname;
-		this.flag = flag;
-	}
+    private String u_tel;//手机号
 
-	@Override
-	public String toString() {
-		return "User [u_id=" + u_id + ", u_tel=" + u_tel + ", u_password=" + u_password + ", u_role=" + u_role
-				+ ", u_headimg=" + u_headimg + ", u_registertime=" + u_registertime + ", u_nickname=" + u_nickname
-				+ ", flag=" + flag + "]";
-	}
+    private String u_password;//密码
 
-	private Integer u_id;
+    private String u_role;//角色
 
-    private String u_tel;
+    private String u_headimg;//头像
 
-    private String u_password;
+    private String u_registertime;//注册时间
 
-    private String u_role;
-
-    private String u_headimg;
-
-    private String u_registertime;
-
-    private String u_nickname;
+    private String u_nickname;//昵称
 
     private Integer flag;
 

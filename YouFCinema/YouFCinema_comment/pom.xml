@@ -10,12 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.yy.main</groupId>
-    <artifactId>YouFcinema_comment</artifactId>
+    <artifactId>YouFCinema_comment</artifactId>
+
     <dependencies>
 
 
-
-
+        <dependency>
+            <groupId>com.wnxy</groupId>
+            <artifactId>YouFCinema-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
 
 </project>

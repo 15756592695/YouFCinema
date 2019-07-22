@@ -1,36 +1,19 @@
 package com.cinema.pojo;
-
+/**
+ *	座位记录表
+ */
 public class Seatrecords {
-	
-	
-    public Seatrecords() {
-		super();
-	}
+    private Integer s_id;//id
 
-	public Seatrecords(Integer s_id, String s_room, Integer s_seatnumber, Integer orderid, Integer flag) {
-		super();
-		this.s_id = s_id;
-		this.s_room = s_room;
-		this.s_seatnumber = s_seatnumber;
-		this.orderid = orderid;
-		this.flag = flag;
-	}
+    private String s_room;//厅室号
 
-	@Override
-	public String toString() {
-		return "Seatrecords [s_id=" + s_id + ", s_room=" + s_room + ", s_seatnumber=" + s_seatnumber + ", orderid="
-				+ orderid + ", flag=" + flag + "]";
-	}
+    private Integer s_seatrow;//第几排
 
-	private Integer s_id;
+    private Integer s_seatcol;//座号
 
-    private String s_room;
+    private Integer orderid;//订单号
 
-    private Integer s_seatnumber;
-
-    private Integer orderid;
-
-    private Integer flag;
+    private Integer flag;//软删除
 
     public Integer getS_id() {
         return s_id;
@@ -48,12 +31,20 @@ public class Seatrecords {
         this.s_room = s_room == null ? null : s_room.trim();
     }
 
-    public Integer getS_seatnumber() {
-        return s_seatnumber;
+    public Integer getS_seatrow() {
+        return s_seatrow;
     }
 
-    public void setS_seatnumber(Integer s_seatnumber) {
-        this.s_seatnumber = s_seatnumber;
+    public void setS_seatrow(Integer s_seatrow) {
+        this.s_seatrow = s_seatrow;
+    }
+
+    public Integer getS_seatcol() {
+        return s_seatcol;
+    }
+
+    public void setS_seatcol(Integer s_seatcol) {
+        this.s_seatcol = s_seatcol;
     }
 
     public Integer getOrderid() {
