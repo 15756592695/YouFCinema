@@ -1,7 +1,33 @@
 package com.cinema.pojo;
 
 public class User {
-    private Integer u_id;
+	
+	
+    public User() {
+		super();
+	}
+
+	public User(Integer u_id, String u_tel, String u_password, String u_role, String u_headimg, String u_registertime,
+			String u_nickname, Integer flag) {
+		super();
+		this.u_id = u_id;
+		this.u_tel = u_tel;
+		this.u_password = u_password;
+		this.u_role = u_role;
+		this.u_headimg = u_headimg;
+		this.u_registertime = u_registertime;
+		this.u_nickname = u_nickname;
+		this.flag = flag;
+	}
+
+	@Override
+	public String toString() {
+		return "User [u_id=" + u_id + ", u_tel=" + u_tel + ", u_password=" + u_password + ", u_role=" + u_role
+				+ ", u_headimg=" + u_headimg + ", u_registertime=" + u_registertime + ", u_nickname=" + u_nickname
+				+ ", flag=" + flag + "]";
+	}
+
+	private Integer u_id;
 
     private String u_tel;
 

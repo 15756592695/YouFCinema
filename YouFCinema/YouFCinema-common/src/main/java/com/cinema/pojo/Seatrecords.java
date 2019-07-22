@@ -1,7 +1,28 @@
 package com.cinema.pojo;
 
 public class Seatrecords {
-    private Integer s_id;
+	
+	
+    public Seatrecords() {
+		super();
+	}
+
+	public Seatrecords(Integer s_id, String s_room, Integer s_seatnumber, Integer orderid, Integer flag) {
+		super();
+		this.s_id = s_id;
+		this.s_room = s_room;
+		this.s_seatnumber = s_seatnumber;
+		this.orderid = orderid;
+		this.flag = flag;
+	}
+
+	@Override
+	public String toString() {
+		return "Seatrecords [s_id=" + s_id + ", s_room=" + s_room + ", s_seatnumber=" + s_seatnumber + ", orderid="
+				+ orderid + ", flag=" + flag + "]";
+	}
+
+	private Integer s_id;
 
     private String s_room;
 

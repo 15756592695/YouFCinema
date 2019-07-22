@@ -3,7 +3,33 @@ package com.cinema.pojo;
 import java.util.Date;
 
 public class Schedule {
-    private Integer s_id;
+	
+	
+    public Schedule() {
+		super();
+	}
+
+	public Schedule(Integer s_id, Integer s_filmid, Date s_date, Date s_starttime, Date s_endtime, Integer s_roomid,
+			Double s_discount, Integer s_flag) {
+		super();
+		this.s_id = s_id;
+		this.s_filmid = s_filmid;
+		this.s_date = s_date;
+		this.s_starttime = s_starttime;
+		this.s_endtime = s_endtime;
+		this.s_roomid = s_roomid;
+		this.s_discount = s_discount;
+		this.s_flag = s_flag;
+	}
+
+	@Override
+	public String toString() {
+		return "Schedule [s_id=" + s_id + ", s_filmid=" + s_filmid + ", s_date=" + s_date + ", s_starttime="
+				+ s_starttime + ", s_endtime=" + s_endtime + ", s_roomid=" + s_roomid + ", s_discount=" + s_discount
+				+ ", s_flag=" + s_flag + "]";
+	}
+
+	private Integer s_id;
 
     private Integer s_filmid;
 

@@ -1,7 +1,26 @@
 package com.cinema.pojo;
 
 public class Room {
-    private Integer r_id;
+	
+	
+    public Room() {
+		super();
+	}
+
+	public Room(Integer r_id, String r_name, Integer r_seatnumber, Integer flag) {
+		super();
+		this.r_id = r_id;
+		this.r_name = r_name;
+		this.r_seatnumber = r_seatnumber;
+		this.flag = flag;
+	}
+
+	@Override
+	public String toString() {
+		return "Room [r_id=" + r_id + ", r_name=" + r_name + ", r_seatnumber=" + r_seatnumber + ", flag=" + flag + "]";
+	}
+
+	private Integer r_id;
 
     private String r_name;
 
