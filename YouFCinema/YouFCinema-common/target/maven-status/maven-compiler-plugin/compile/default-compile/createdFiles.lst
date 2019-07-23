@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 com\cinema\pojo\Filetype.class
 com\cinema\pojo\Movie.class
 com\cinema\pojo\Order.class
@@ -6,3 +8,4 @@ com\cinema\pojo\Room.class
 com\cinema\pojo\Seatrecords.class
 com\cinema\pojo\Schedule.class
 com\cinema\pojo\Comment.class
+>>>>>>> branch 'master' of https://github.com/15756592695/YouFCinema.git
