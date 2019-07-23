@@ -7,7 +7,12 @@ import java.util.Date;
  *
  */
 public class Movie {
+	
+    public Movie() {
+		super();
+	}
     private Integer f_id;//id
+
 
     private String f_name;//电影名字
 
@@ -39,7 +44,19 @@ public class Movie {
 
     private Integer f_flag;
 
-    public Integer getF_id() {
+    private Filetype filmType;//电影类型
+    
+
+
+    public Filetype getFilmType() {
+		return filmType;
+	}
+
+	public void setFilmType(Filetype filmType) {
+		this.filmType = filmType;
+	}
+
+	public Integer getF_id() {
         return f_id;
     }
 
