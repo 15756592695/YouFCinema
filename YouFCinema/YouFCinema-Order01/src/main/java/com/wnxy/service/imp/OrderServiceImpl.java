@@ -29,5 +29,21 @@ public class OrderServiceImpl implements IOrderService{
 		// TODO Auto-generated method stub
 		return orderDao.queryOrderByUid(uid);
 	}
+	/**
+	 * 	支付修改订单的状态
+	 */
+	@Override
+	public String addPayNumber(int ordernumber,int paynumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * 	退款修改订单的状态
+	 */
+	@Override
+	public String refund(int ordernumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
