@@ -19,4 +19,14 @@ public class CommentServiceImp implements CommentService {
     public List<Comment> findAllById(int id) {
         return commentDao.findAllById(id);
     }
+
+    @Override
+    public Boolean addComment(Comment comment) {
+        return commentDao.addComment(comment);
+    }
+
+    @Override
+    public Boolean delComment(Integer id) {
+        return commentDao.delComment(id);
+    }
 }

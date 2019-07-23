@@ -9,10 +9,12 @@
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/phone.js"></script>
 <script type="text/javascript" src="js/layer-v3.0.3/layer/layer.js"></script>
+<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
-	<div class="whole">
+	<div class="whole" id="movieDetail">
 		<div class="movie">
 			<div class="back">
 				<img src="image/back.png" />
@@ -21,18 +23,18 @@
 				src="image/start.png" />
 			</span>
 		</div>
-		<div class="detail">
+		<div class="detail" >
 			<div class="bol">
 				<img src="image/bg-bg.png" />
 			</div>
 			<div class="det-con">
 				<div class="common det-c">
 					<div class="jz-pic">
-						<img src="image/shenqinvxia.jpg" />
+						<img :src="movie.f_picture" />
 					</div>
 					<div class="det-inf">
 						<p class="det-titles">
-							<span>湄公河行动</span> <span class="eng">Operation Mekong</span>
+							<span>{{movie.f_name}}</span> <span class="eng">{{movie.f_performer}}</span>
 						</p>
 						<ul class="stars">
 							<li><img src="image/stars.png" /></li>
@@ -41,32 +43,69 @@
 							<li><img src="image/stars.png" /></li>
 							<li><img src="image/stars.png" /></li>
 						</ul>
-						<p class="det-tag">动作 警匪 犯罪</p>
+						<p class="det-tag">{{movie.f_filmType}}</p>
 
 					</div>
 				</div>
 
 				<div class="common parti">
-					<span>2011年10月15日，两艘中国商船在湄公河金三角水域遭遇袭击，13名中国船员全部遇难，泰国警方从船上搜出90万颗冰毒。消息传回之后，警察派出高级警官协助在湄公河金三角水域的卧底啊贤实施抓捕行动</span>
+					<span>{{movie.f_describe}}</span>
 				</div>
 
 				<div class="common stage-photo">
 					<h3>剧照和视频</h3>
-					<ul>
+					<!-- <ul>
 						<li><img src="image/story-1.jpg" /></li>
 						<li><img src="image/story-2.jpg" /></li>
 						<li><img src="image/story-1.jpg" /></li>
 						<li><img src="image/story-2.jpg" /></li>
 						<li><img src="image/story-1.jpg" /></li>
 						<li><img src="image/story-2.jpg" /></li>
-					</ul>
+					</ul> -->
 				</div>
 
 			</div>
 		</div>
-		<a class="footer" href="film_cinema.html">立即订票</a>
+		<a class="footer" href="javascript:void(0)" @click="chooseTicket(movie.f_id,movie.f_name,movie.f_length,movie.f_price)">立即订票</a>
 	</div>
+<<<<<<< HEAD
 	<script type="text/javascript">
+=======
+<script type="text/javascript">
+
+//获取url的参数
+var movieid = window.location.href.split("=")[1];
+
+	var vm=new Vue({
+		el:"#movieDetail",
+		data:{
+			movie:""
+		},
+		created(){
+		
+			axios({
+				url:"/moviedetail",
+				method:"post",
+				params:{
+					movieid:movieid
+				}
+			})
+			.then(res=>{
+				
+				this.movie=res.data;
+				
+			})
+			.catch(res=>{
+				console.info(res)
+			});
+		},
+		methods:{
+			chooseTicket:function(movieid,name,length,price){
+				window.location.href="tickets.html?movieid="+movieid+"&name="+name+"&length="+length+"&price="+price;
+			}
+		}
+	});
+>>>>>>> branch 'master' of https://github.com/15756592695/YouFCinema.git
 $(document).ready(function() {
 	
 	$('.movie').click(function(){
@@ -91,13 +130,7 @@ $(document).ready(function() {
 	
 });
 
-//获取url的参数
-var productid = window.location.href.split("=")[1];
-alert(productid);
 
-	var vm=new Vue({
-		
-	})
 </script>
 </body>
 </html>

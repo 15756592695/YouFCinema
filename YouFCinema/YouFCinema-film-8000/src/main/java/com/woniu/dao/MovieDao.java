@@ -13,10 +13,17 @@ import org.apache.ibatis.annotations.One;
 
 
 public interface MovieDao {
-	@Select("select * from movie")
+	@Select("select * from movie where f_flag!=0")
 	@Results({
 		@Result(id = true, column = "f_id", property = "f_id"),
 		@Result(column="f_typeid",property="filmType",one=@One(select="com.woniu.dao.FilmTypeDao.findTypeById"))
 	})
 	public List<Movie> findAll();
+	//根据电影id获取电影所有信息
+	@Select("select * from movie where f_id=#{movieid}")
+	@Results({
+		@Result(id=true,column="f_id",property="f_id"),
+		@Result(column="f_typeid",property="filmType",one=@One(select="com.woniu.dao.FilmTypeDao.findTypeById"))
+	})
+	public Movie getMovieDtailById(Integer movieid);
 }
