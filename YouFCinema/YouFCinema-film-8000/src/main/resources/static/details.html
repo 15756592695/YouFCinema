@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>详情</title>
+<link href="css/details.css" type="text/css" rel="stylesheet" />
+<link href="js/layer-v3.0.3/layer/mobile/need/layer.css"
+	rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/phone.js"></script>
+<script type="text/javascript" src="js/layer-v3.0.3/layer/layer.js"></script>
+</head>
+
+<body>
+	<div class="whole">
+		<div class="movie">
+			<div class="back">
+				<img src="image/back.png" />
+			</div>
+			<img src="image/lunbo.jpg" /> <span> <img
+				src="image/start.png" />
+			</span>
+		</div>
+		<div class="detail">
+			<div class="bol">
+				<img src="image/bg-bg.png" />
+			</div>
+			<div class="det-con">
+				<div class="common det-c">
+					<div class="jz-pic">
+						<img src="image/shenqinvxia.jpg" />
+					</div>
+					<div class="det-inf">
+						<p class="det-titles">
+							<span>湄公河行动</span> <span class="eng">Operation Mekong</span>
+						</p>
+						<ul class="stars">
+							<li><img src="image/stars.png" /></li>
+							<li><img src="image/stars.png" /></li>
+							<li><img src="image/stars.png" /></li>
+							<li><img src="image/stars.png" /></li>
+							<li><img src="image/stars.png" /></li>
+						</ul>
+						<p class="det-tag">动作 警匪 犯罪</p>
+
+					</div>
+				</div>
+
+				<div class="common parti">
+					<span>2011年10月15日，两艘中国商船在湄公河金三角水域遭遇袭击，13名中国船员全部遇难，泰国警方从船上搜出90万颗冰毒。消息传回之后，警察派出高级警官协助在湄公河金三角水域的卧底啊贤实施抓捕行动</span>
+				</div>
+
+				<div class="common stage-photo">
+					<h3>剧照和视频</h3>
+					<ul>
+						<li><img src="image/story-1.jpg" /></li>
+						<li><img src="image/story-2.jpg" /></li>
+						<li><img src="image/story-1.jpg" /></li>
+						<li><img src="image/story-2.jpg" /></li>
+						<li><img src="image/story-1.jpg" /></li>
+						<li><img src="image/story-2.jpg" /></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		<a class="footer" href="film_cinema.html">立即订票</a>
+	</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$('.movie').click(function(){
+		movie();
+	});
+	
+	function movie(){
+		layer.open({
+		  type: 2,
+		  title: false,
+		  area: ['630px', '360px'],
+		  shade: 0.8,
+		  closeBtn: 0,
+		  shadeClose: true,
+		  content: 'movies/meigonghe.mp4'
+		});	
+	}
+	
+	$('.back').on('click',function(){
+		window.history.go(-1);
+	});
+	
+});
+
+//获取url的参数
+var productid = window.location.href.split("=")[1];
+alert(productid);
+
+	var vm=new Vue({
+		
+	})
+</script>
+</body>
+</html>
