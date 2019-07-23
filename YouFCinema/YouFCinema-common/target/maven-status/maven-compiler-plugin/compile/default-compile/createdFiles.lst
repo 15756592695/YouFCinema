@@ -1,11 +1,12 @@
-<<<<<<< HEAD
-=======
+com\cinema\interfaces\OrderController.class
+com\cinema\pojo\User.class
+com\cinema\config\RedisConfig$1.class
+com\cinema\pojo\Seatrecords.class
+com\cinema\util\RedisUtil.class
 com\cinema\pojo\Filetype.class
 com\cinema\pojo\Movie.class
 com\cinema\pojo\Order.class
-com\cinema\pojo\User.class
 com\cinema\pojo\Room.class
-com\cinema\pojo\Seatrecords.class
+com\cinema\config\RedisConfig.class
 com\cinema\pojo\Schedule.class
 com\cinema\pojo\Comment.class
->>>>>>> branch 'master' of https://github.com/15756592695/YouFCinema.git

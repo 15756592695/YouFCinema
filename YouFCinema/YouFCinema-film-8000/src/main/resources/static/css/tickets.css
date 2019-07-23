@@ -9,7 +9,17 @@ img { border:0px;}
 .whole{
 	overflow:hidden;
 }
-
+/*
+电影日期*/
+#datenav ul li{
+		border:1px burlywood solid;
+		background-color: white; 
+		width: 33%;
+		height: 80px;
+		float: left;
+		line-height: 80px;
+		text-align: center;
+	}
 header{
 	overflow:hidden;
 	width:100%;

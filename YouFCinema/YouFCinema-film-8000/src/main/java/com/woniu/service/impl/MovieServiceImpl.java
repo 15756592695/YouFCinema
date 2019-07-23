@@ -19,5 +19,13 @@ public class MovieServiceImpl implements MovieService{
 		
 		return movieDao.findAll();
 	}
+	/*
+	 * 根据电影id获取电影所有信息(non-Javadoc)
+	 */
+	@Override
+	public Movie getMovieDetailById(Integer movieid) {
+		
+		return movieDao.getMovieDtailById(movieid);
+	}
 	
 }
