@@ -15,9 +15,9 @@ public class Schedule {
 
     private Date s_date;//播放日期
 
-    private String s_starttime;//放映时间
+    private Date s_starttime;//放映时间
 
-    private String s_endtime;//结束时间
+    private Date s_endtime;//结束时间
 
     private Integer s_roomid;//厅室id
 
@@ -27,14 +27,25 @@ public class Schedule {
     
     private String room;//厅室名
     
+    private String start;
+    private String end;
+    
     
 
-	public String getRoom() {
-		return room;
+	public String getStart() {
+		return start;
 	}
 
-	public void setRoom(String room) {
-		this.room = room;
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
 	}
 
 	public Integer getS_id() {
@@ -69,19 +80,19 @@ public class Schedule {
 		this.s_date = s_date;
 	}
 
-	public String getS_starttime() {
+	public Date getS_starttime() {
 		return s_starttime;
 	}
 
-	public void setS_starttime(String s_starttime) {
+	public void setS_starttime(Date s_starttime) {
 		this.s_starttime = s_starttime;
 	}
 
-	public String getS_endtime() {
+	public Date getS_endtime() {
 		return s_endtime;
 	}
 
-	public void setS_endtime(String s_endtime) {
+	public void setS_endtime(Date s_endtime) {
 		this.s_endtime = s_endtime;
 	}
 
@@ -108,7 +119,16 @@ public class Schedule {
 	public void setS_flag(Integer s_flag) {
 		this.s_flag = s_flag;
 	}
+
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
+	}
     
     
+
     
 }
