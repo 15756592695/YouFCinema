@@ -4,62 +4,52 @@
 <meta charset="utf-8">
 <title>详情</title>
 <link href="css/seat.css" type="text/css" rel="stylesheet" />
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="js/layer-v3.0.3/layer/mobile/need/layer.css" rel="stylesheet" type="text/css" />
-<link href="js/layer-v3.0.3/layer/mobile/need/layer.css" rel="stylesheet" type="text/css" />
+<link
+	href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link href="js/layer-v3.0.3/layer/mobile/need/layer.css"
+	rel="stylesheet" type="text/css" />
+<link href="js/layer-v3.0.3/layer/mobile/need/layer.css"
+	rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/phone.js" ></script>
-<script type="text/javascript" src="js/layer-v3.0.3/layer/mobile/layer.js"></script>
+<script type="text/javascript" src="js/phone.js"></script>
+<script type="text/javascript"
+	src="js/layer-v3.0.3/layer/mobile/layer.js"></script>
 </head>
 
 <body>
-<div class="whole">
+	<div class="whole">
 
-	<header class="header">
-        <a href="javascript:history.back(-1)" class="fa fa-angle-left"></a>
-        <span class="names">变形金刚5：最后的骑士</span>
-    </header>
-    
-    <div class="seat_head">
-    	<h3>北京沃美影城常营店</h3>
-        <span>
-        	<a>今天07-06</a>
-            <a>19:00</a>
-            <a>(国语 3D)</a>
-        </span>
-    </div>
-    
-    <div class="seat_show">
-    	<ul>
-        	<li>
-            	<i></i>
-                <span>可选</span>
-            </li>
-            <li>
-            	<i></i>
-                <span>已售</span>
-            </li>
-            <li>
-            	<i></i>
-                <span>已选</span>
-            </li>
-            <li>
-            	<i></i>
-                <span>最佳区域</span>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="seat_choose">
-    	<div class="number" id="num"></div>
-    	<div class="seats" id="seats"></div>
-        
-    </div>
-    <div class="buttons">确认选择</div>
+		<header class="header">
+			<a href="javascript:history.back(-1)" class="fa fa-angle-left"></a> <span
+				class="names">变形金刚5：最后的骑士</span>
+		</header>
 
-</div>
+		<div class="seat_head">
+			<h3>北京沃美影城常营店</h3>
+			<span> <a>今天07-06</a> <a>19:00</a> <a>(国语 3D)</a>
+			</span>
+		</div>
 
-<script>
+		<div class="seat_show">
+			<ul>
+				<li><i></i> <span>可选</span></li>
+				<li><i></i> <span>已售</span></li>
+				<li><i></i> <span>已选</span></li>
+				<li><i></i> <span>最佳区域</span></li>
+			</ul>
+		</div>
+
+		<div class="seat_choose">
+			<div class="number" id="num"></div>
+			<div class="seats" id="seats"></div>
+
+		</div>
+		<div class="buttons">确认选择</div>
+
+	</div>
+
+	<script>
 $(function(){
 	var html='';
 		html+='<ul class="touchs" id="touchs"><div class="screen">大厅屏幕</div>';
@@ -118,8 +108,8 @@ $(function(){
 })
 </script>
 
-<!---拖拽js--->
-<script>
+	<!---拖拽js--->
+	<script>
 $(function(){
     var flag = false;
     var cur = {

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cinema.pojo.Order;
+import com.wnxy.dto.OrderDTO;
 import com.wnxy.service.IOrderService;
 
 @RestController
@@ -28,5 +29,21 @@ public class OrderController {
 	public List<Order> findAllByUid(Integer uid) {
 		List<Order> orders=service.findOrdersByUid(uid);
 		return orders;
+	}
+	/**
+	 * 	修改订单状态
+	 */
+	@GetMapping("order/updateState")
+	public String updateStateById() {
+		
+		return "";
+	}
+	/**
+	 * 	多条件查询订单
+	 */
+	@GetMapping
+	public void queryMore(OrderDTO orderDto) {
+		System.out.println(orderDto);
+
 	}
 }
