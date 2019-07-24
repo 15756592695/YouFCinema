@@ -3,11 +3,12 @@ package com.cinema.provider;
 import org.apache.ibatis.jdbc.SQL;
 
 import com.cinema.pojo.Order;
+import com.cinema.pojo.OrderDTO;
 
 public class OrderProvider {
 	
-	public String addOrder(Order order) {
-		SQL sql=new SQL().INSERT_INTO("`order`").VALUES("scheduleid", order.getScheduleid()+"");
+	public String addOrder(OrderDTO order) {
+		SQL sql=new SQL().INSERT_INTO("`order`").VALUES("scheduleid", order.getSchedule().getS_id()+"");
 		if(order.getO_number()!=null&&order.getO_number().toString().length()!=0) {
 			sql.VALUES("o_number", order.getO_number()+"");
 		}
