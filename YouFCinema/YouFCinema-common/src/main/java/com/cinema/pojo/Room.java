@@ -18,7 +18,7 @@ public class Room {
     
     private List<Seats> seats;//该厅室的所有坐位
     
-
+ 
     public List<Seats> getSeats() {
 		return seats;
 	}
