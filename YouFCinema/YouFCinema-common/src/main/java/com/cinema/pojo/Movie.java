@@ -1,5 +1,6 @@
 package com.cinema.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 /**
  * 	电影表
@@ -30,7 +31,7 @@ public class Movie {
 
     private String f_forecast;//预告片URL
 
-    private Long f_price;//价格
+    private BigDecimal f_price;//价格
 
     private String f_performer;//演员
 
@@ -128,15 +129,17 @@ public class Movie {
         this.f_forecast = f_forecast == null ? null : f_forecast.trim();
     }
 
-    public Long getF_price() {
-        return f_price;
-    }
+  
 
-    public void setF_price(Long f_price) {
-        this.f_price = f_price;
-    }
+    public BigDecimal getF_price() {
+		return f_price;
+	}
 
-    public String getF_performer() {
+	public void setF_price(BigDecimal f_price) {
+		this.f_price = f_price;
+	}
+
+	public String getF_performer() {
         return f_performer;
     }
 
