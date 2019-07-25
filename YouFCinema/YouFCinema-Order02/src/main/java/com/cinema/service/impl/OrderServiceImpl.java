@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cinema.dao.MovieDao;
 import com.cinema.dao.OrderDao;
@@ -18,6 +19,7 @@ import com.cinema.pojo.Schedule;
 import com.cinema.service.OrderService;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDao orderDao;
@@ -61,8 +63,9 @@ public class OrderServiceImpl implements OrderService {
 		}
 		Integer orderid=orderDao.findIdByOrder(ordernumber);
 		System.out.println("orderid"+orderid);
-		//拆分座次（a-a:b-b）
 		
+		
+		//拆分座次（a-a:b-b）
 		if(orderDTO.getSeat().contains(":")) {
 			String[] seats=orderDTO.getSeat().split(":");
 			for(int i=0;i<seats.length;i++) {
@@ -96,9 +99,9 @@ public class OrderServiceImpl implements OrderService {
 
 	// 查看所有订单
 	@Override
-	public List<Order> findAll(Integer id) {
+	public List<Order> findAllById(Integer id) {
 
-		List<Order> orders = orderDao.findAll(id);
+		List<Order> orders = orderDao.findAllById(id);
 		return orders;
 	}
 
