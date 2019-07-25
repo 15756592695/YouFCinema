@@ -96,6 +96,6 @@
 	  <module>YouFCinema-Order01</module>
 	  <module>YouFCinema-zuul-9001</module>
 	  <module>YouFCinema-9999</module>
-
+	  <module>YouFCinema-movbackground</module>
   </modules>
 </project>
