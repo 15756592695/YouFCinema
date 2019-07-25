@@ -12,10 +12,12 @@ import com.cinema.dao.MovieDao;
 import com.cinema.dao.OrderDao;
 import com.cinema.dao.ScheduleDao;
 import com.cinema.dao.SeatDao;
+import com.cinema.interfaces.AliPayController;
 import com.cinema.pojo.Movie;
 import com.cinema.pojo.Order;
 import com.cinema.pojo.OrderDTO;
 import com.cinema.pojo.Schedule;
+import com.cinema.service.ErweiService;
 import com.cinema.service.OrderService;
 
 @Service
@@ -29,60 +31,45 @@ public class OrderServiceImpl implements OrderService {
 	private ScheduleDao scheduleDao;
 	@Autowired
 	private SeatDao seatDao;
+	@Autowired
+	private AliPayController aliPayController;
+	@Autowired
+	private ErweiService erweiService;
 
 	// 新增
 	@Override
 	public String addOrder(OrderDTO orderDTO) {
-		/*
-		 * 1选择电影（可能用到的字段f_id,f_name,f_price）movie 2选择放映日期(可能用到的字段s_id)schedule
-		 * 3选择当日放映场次（放映时间s_id）schedule 4选择座位，确认厅室 5确认订单，下单付款（15min内可支付）
-		 * （付款成功后才生成订单，支付失败或取消不生成订单） （将选择好的座位状态改为不可用s_id,flag=1表示不可用，将订单id存入seatrecord）
-		 * （订单显示信息：上映日期，场次放映、结束时间（）厅室，折扣，座次，实付金额） 6电影结束后，将该场次所有座位的状态改为可用（根据s_id将flag改为0）
-		 */
-		// 1获得电影的id
+
+		// 1获得电影的信息
 		Movie movie = movieDao.findByName(orderDTO.getF_name());
-		// 2获得场次id
-		Schedule schedule = scheduleDao.findSchedule(movie.getF_id(), orderDTO.getS_date(), orderDTO.getS_starttime());
-		
-		if(schedule==null) {
-			return "fail";
-		}
-		orderDTO.setSchedule(schedule);
+		// 2获得场次信息
+		// Schedule schedule = scheduleDao.findSchedule(movie.getF_id(),
+		// orderDTO.getS_date(), orderDTO.getS_starttime());
+
 		// 4生成订单号（利用当前毫秒数后八位）
 		Date date = new Date();
 		String num = date.getTime() + "";
-		String ordernumber = num.substring(num.length()-8, num.length());
+		String ordernumber = num.substring(num.length() - 8, num.length());
 		orderDTO.setO_ordernumber(ordernumber);
-		System.out.println("ordernumber:"+ordernumber);
+		System.out.println("ordernumber:" + ordernumber);
 		// 5获取用户id
+
+		// 6获取支付宝交易号
+		aliPayController.pay(ordernumber, orderDTO.getF_name(), orderDTO.getO_totalprice());
+		
+		// 生成二维码,获取图片路径
+		String path = erweiService.createPic();
+		orderDTO.setO_img(path);
 		// 订单插入数据库
 		String result = null;
 		boolean b = orderDao.addOrder(orderDTO);
 		if (b) {
 			result = "ok";
 		}
-		Integer orderid=orderDao.findIdByOrder(ordernumber);
-		System.out.println("orderid"+orderid);
+		Integer orderid = orderDao.findIdByOrder(ordernumber);
+		System.out.println("orderid" + orderid);
+		//把订单id插入seatrecords
 		
-		
-		//拆分座次（a-a:b-b）
-		if(orderDTO.getSeat().contains(":")) {
-			String[] seats=orderDTO.getSeat().split(":");
-			for(int i=0;i<seats.length;i++) {
-			int s_seatrow=	Integer.parseInt(seats[i].substring(0));
-			int s_seatcl=Integer.parseInt(seats[i].substring(seats[i].length()-2,seats[i].length()-1));
-			boolean bb =seatDao.updateSeat(orderid, orderDTO.getS_room(), s_seatrow, s_seatcl);
-			System.out.println(bb);
-			}
-			
-		}else {
-			String[] seats=orderDTO.getSeat().split("-");
-			int s_seatrow=	Integer.parseInt(seats[0]);
-			int s_seatcl=	Integer.parseInt(seats[1]);
-			boolean bb =seatDao.updateSeat(orderid, orderDTO.getS_room(), s_seatrow, s_seatcl);
-			System.out.println(bb);
-		}
-
 		return result;
 	}
 
@@ -107,19 +94,32 @@ public class OrderServiceImpl implements OrderService {
 
 	// 获取订单价格
 	@Override
-	public String getPrice(String f_name, Date s_date, Date s_starttime,Integer number) {
+	public String getPrice(String f_name, Date s_date, Date s_starttime, Integer number) {
 		// 1获得电影的id
 		Movie movie = movieDao.findByName(f_name);
 		// 2获得场次
 		Schedule schedule = scheduleDao.findSchedule(movie.getF_id(), s_date, s_starttime);
 		System.out.println(schedule);
 		// 3打折计算
-		BigDecimal price=movie.getF_price();//单价
+		BigDecimal price = movie.getF_price();// 单价
 		Double discount = schedule.getS_discount();
-		BigDecimal s_discount = new BigDecimal(discount + "");//折扣
-		BigDecimal num = new BigDecimal(number + "");//数量
-		BigDecimal totalprice = price.multiply(s_discount).multiply(num);//总价
+		BigDecimal s_discount = new BigDecimal(discount + "");// 折扣
+		BigDecimal num = new BigDecimal(number + "");// 数量
+		BigDecimal totalprice = price.multiply(s_discount).multiply(num);// 总价
 		return totalprice.toString();
+	}
+
+	//更新订单的支付宝号
+	@Override
+	public String updateOrderByOnum(String o_number,String o_paynumber) {
+		Boolean b=orderDao.updateOrderByOnum(o_number,o_paynumber);
+		String result=null;
+		if(b) {
+			result="ok";
+		}else {
+			result="false";
+		}
+		return result;
 	}
 
 }

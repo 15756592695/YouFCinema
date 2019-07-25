@@ -15,6 +15,7 @@ public class OrderDTO {
 	private String o_ordernumber;//订单编号
 	private String o_paynumber;//支付号
 	private Integer flag;//订单状态0已支付，1未支付，2订单取消（退款）
+	private String o_img;//二维码图片地址
 	
 	
 	
@@ -42,6 +43,23 @@ public class OrderDTO {
 	private List<String> test;//测试
 	
 	
+	
+	public String getO_img() {
+		return o_img;
+	}
+
+	public void setO_img(String o_img) {
+		this.o_img = o_img;
+	}
+
+	public Integer getScheduleid() {
+		return scheduleid;
+	}
+
+	public void setScheduleid(Integer scheduleid) {
+		this.scheduleid = scheduleid;
+	}
+
 	public List<String> getTest() {
 		return test;
 	}

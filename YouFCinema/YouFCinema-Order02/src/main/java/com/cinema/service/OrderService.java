@@ -14,6 +14,8 @@ public interface OrderService {
 	public List<Order> findAllById(Integer id);	
 	//获取价格
 	public String getPrice(String f_name,Date s_date,Date s_starttime,Integer number);
+	//添加支付号
+	public String updateOrderByOnum(String o_number,String o_paynumber);
 	
 
 }

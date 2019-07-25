@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -12,6 +13,7 @@ import com.cinema.pojo.OrderDTO;
 import com.cinema.provider.OrderProvider;
 
 import aj.org.objectweb.asm.Type;
+import lombok.Value;
 
 public interface OrderDao {
 	
@@ -30,7 +32,11 @@ public interface OrderDao {
 
 	//查找订单id
 	@Select("select o_id from `order` where o_ordernumber=#{ordernumber}")
-	public Integer findIdByOrder(String ordernumber);	
+	public Integer findIdByOrder(String ordernumber);
+
+	//根据订单号修改交易号
+	@Update("update `order` set o_paynumber=#{o_paynumber} where o_ordernumber=#{o_ordernumber}")
+	public boolean updateOrderByOnum(@Param("o_ordernumber") String o_number,@Param("o_paynumber")String o_paynumber );	
 		
 	
 

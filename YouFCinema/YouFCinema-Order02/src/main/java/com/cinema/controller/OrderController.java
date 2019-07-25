@@ -66,6 +66,20 @@ public class OrderController {
 	}
 
 	
+	@PutMapping("/updateOrder/{o_number}/{o_paynumber}")
+	@ApiOperation(value="改",notes="将交易号插入订单")
+	public String updateOrderByOnum(@PathVariable("o_number")String o_number,@PathVariable("o_paynumber")String o_paynumber) {
+		
+		String result=orderService.updateOrderByOnum(o_number,o_paynumber);
+		System.out.println(result);
+		return result;
+		
+	}
+	
+	
+	
+	
+	
 	@PutMapping("/updateById/{o_id}")
 	@ApiOperation(value="取消",notes="取消当前订单")
 	/**

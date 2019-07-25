@@ -8,7 +8,7 @@ import com.cinema.pojo.OrderDTO;
 public class OrderProvider {
 	
 	public String addOrder(OrderDTO order) {
-		SQL sql=new SQL().INSERT_INTO("`order`").VALUES("scheduleid", order.getSchedule().getS_id()+"");
+		SQL sql=new SQL().INSERT_INTO("`order`").VALUES("scheduleid", order.getScheduleid()+"");
 		if(order.getO_number()!=null&&order.getO_number().toString().length()!=0) {
 			sql.VALUES("o_number", order.getO_number()+"");
 		}
@@ -27,6 +27,9 @@ public class OrderProvider {
 		}
 		if(order.getFlag()!=null&&order.getFlag().toString().length()!=0) {
 			sql.VALUES("flag", order.getFlag()+"");
+		}
+		if(order.getO_img()!=null&&order.getO_img().length()!=0) {
+			sql.VALUES("o_img", order.getO_img()+"");
 		}
 		return sql.toString();
 	}
