@@ -1,4 +1,7 @@
 package com.cinema.pojo;
+
+import java.util.List;
+
 /**
  * 	厅室表
  * @author 小范
@@ -12,8 +15,19 @@ public class Room {
     private Integer r_seatnumber;//座位数量
 
     private Integer flag;
+    
+    private List<Seats> seats;//该厅室的所有坐位
+    
 
-    public Integer getR_id() {
+    public List<Seats> getSeats() {
+		return seats;
+	}
+
+	public void setSeats(List<Seats> seats) {
+		this.seats = seats;
+	}
+
+	public Integer getR_id() {
         return r_id;
     }
 
