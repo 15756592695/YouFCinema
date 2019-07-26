@@ -18,6 +18,12 @@ public class FallbackConfig implements FallbackFactory<Order02Controller>{
 			public String addOrder(SeatToOrderDto sto) {
 				return "服务器降级";
 			}
+
+			@Override
+			public String updateOrderByOnum(String o_number, String o_paynumber) {
+				// TODO Auto-generated method stub
+				return "服务器降级";
+			}
 		};
 	}
 	
