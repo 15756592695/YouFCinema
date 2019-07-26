@@ -132,12 +132,13 @@ public class Movie {
     public BigDecimal getF_price() {
         return f_price;
     }
+  
 
     public void setF_price(BigDecimal f_price) {
         this.f_price = f_price;
     }
 
-    public String getF_performer() {
+	public String getF_performer() {
         return f_performer;
     }
 

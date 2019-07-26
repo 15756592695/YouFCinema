@@ -45,19 +45,27 @@
         <artifactId>alipay-sdk-java</artifactId>
         <version>3.7.110.ALL</version>
     </dependency>
-
     <dependency>
         <groupId> org.springframework.boot </groupId>
         <artifactId> spring-boot-configuration-processor </artifactId>
         <optional> true </optional>
     </dependency>
-
     <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
         <version>1.2.38</version>
     </dependency>
+    <!-- 将微服务provider注册进eureka，作为客户端的角色 -->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
 
+    <!-- 引入fegin组件 -->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
 
 </dependencies>
 

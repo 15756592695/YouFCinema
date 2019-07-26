@@ -2,18 +2,30 @@ package com.cinema.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class OrderDTO {
+	//order表用数据
+	private Integer scheduleid;//场次id，前端传参
+	private Integer o_number;//电影票票数量，前端传参
+	private String o_totalprice;//总价
+	private Integer uid;//用户id
+	private String o_ordernumber;//订单编号
+	private String o_paynumber;//支付号
+	private Integer flag;//订单状态0已支付，1未支付，2订单取消（退款）
+	private String o_img;//二维码图片地址
+	
+	
+	
 	private String f_name;//电影名字
 	private BigDecimal price;//电影单价
-	private Integer o_number;//电影票票数量
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date s_date;//上映日期
-	@DateTimeFormat(pattern="HH:mm")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date s_starttime;//开始时间
-	@DateTimeFormat(pattern="HH:mm")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date s_endtime;//结束时间
 	private String s_room;//放映厅
 	private String seat;//座次（a-a:b-b）前端将座次号合并，后台拆分解析
@@ -21,11 +33,41 @@ public class OrderDTO {
 	
 	private Schedule schedule;//场次（后台查询数据库）
 	
-	private String o_totalprice;//总价
-	private Integer uid;//用户id
-	private String o_ordernumber;//订单编号
-	private String o_paynumber;//支付号
-	private Integer flag;//订单状态0已支付，1未支付，2订单取消（退款）
+	
+	
+	
+	
+	
+	
+	
+	private List<String> test;//测试
+	
+	
+	
+	public String getO_img() {
+		return o_img;
+	}
+
+	public void setO_img(String o_img) {
+		this.o_img = o_img;
+	}
+
+	public Integer getScheduleid() {
+		return scheduleid;
+	}
+
+	public void setScheduleid(Integer scheduleid) {
+		this.scheduleid = scheduleid;
+	}
+
+	public List<String> getTest() {
+		return test;
+	}
+
+	public void setTest(List<String> test) {
+		this.test = test;
+	}
+
 	public String getF_name() {
 		return f_name;
 	}
@@ -127,8 +169,10 @@ public class OrderDTO {
 		return "OrderDTO [f_name=" + f_name + ", price=" + price + ", o_number=" + o_number + ", s_date=" + s_date
 				+ ", s_starttime=" + s_starttime + ", s_endtime=" + s_endtime + ", s_room=" + s_room + ", seat=" + seat
 				+ ", schedule=" + schedule + ", o_totalprice=" + o_totalprice + ", uid=" + uid + ", o_ordernumber="
-				+ o_ordernumber + ", o_paynumber=" + o_paynumber + ", flag=" + flag + "]";
+				+ o_ordernumber + ", o_paynumber=" + o_paynumber + ", flag=" + flag + ", test=" + test + "]";
 	}
+
+	
 
 	
 	
