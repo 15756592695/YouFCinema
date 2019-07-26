@@ -16,7 +16,7 @@ public interface MovieOpetationDao {
 	 * @param movie
 	 */
 	@Insert("insert into movie(f_name,f_typeid,f_area,f_runtime,f_hot,f_describe,f_price,f_performer,f_picture,"
-			+ "f_dimension,f_length"
+			+ "f_dimension,f_length)"
 			+ "values(#{f_name},#{f_typeid},#{f_area},#{f_runtime},#{f_hot},#{f_describe},#{f_price},#{f_performer},"
 			+ "#{f_picture},#{f_dimension},#{f_length})")
 	public Boolean addMovie(Movie movie);
@@ -25,14 +25,13 @@ public interface MovieOpetationDao {
 	 * 删除电影，软删除
 	 * @param id
 	 */
-	@Update("update movie set flag=0 where f_id=#{id}")
+	@Update("update movie set f_flag=0 where f_id=#{id}")
 	public Boolean delMovie(Integer id);
 	
 	/**
 	 * 修改电影信息
 	 * @param movie
 	 */
-	@Update("update movie set(f_runtime=#{f_runtime},f_hot=#{f_hot},f_describe=#{f_describe},f_price=#{f_price},"
-			+ "f_picture=#{f_picture}) where f_id=#{f_id}")
+	@Update("update movie set f_hot=#{f_hot},f_describe=#{f_describe},f_price=#{f_price} where f_id=#{f_id} and f_flag=1")
 	public Boolean updateMovieInfor(Movie movie);
 }

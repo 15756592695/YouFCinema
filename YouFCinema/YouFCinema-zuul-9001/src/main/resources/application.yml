@@ -24,6 +24,11 @@ zuul:
    # user: 
      # service-id: woniucloud-user
      # path: /**
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+
 
 info: #监控信息 
   app.name: YouFCinema

@@ -35,12 +35,12 @@ public class QiniuCloudUtil {
 	
 	
 	//base64方式上传
-    public String put64image(String image, String key) throws Exception{
-//        String file64 = new String(base64,"utf-8");
-        Integer l = image.length();
+    public String put64image(byte[] base64, String key) throws Exception{
+    	String file64 = Base64.encodeToString(base64, 0);
+        Integer l = base64.length;
         String url = "http://upload.qiniu.com/putb64/" + l + "/key/"+ UrlSafeBase64.encodeToString(key);      
         //非华东空间需要根据注意事项 1 修改上传域名
-        RequestBody rb = RequestBody.create(null, image);
+        RequestBody rb = RequestBody.create(null, file64);
         Request request = new Request.Builder().
                 url(url).
                 addHeader("Content-Type", "application/octet-stream")
@@ -49,7 +49,6 @@ public class QiniuCloudUtil {
         //System.out.println(request.headers());
         OkHttpClient client = new OkHttpClient();
         okhttp3.Response response = client.newCall(request).execute();
-        System.out.println(response);
         //如果不需要添加图片样式，使用以下方式
         return DOMAIN + key;
         //return DOMAIN + key + "?" + style;

@@ -1,4 +1,7 @@
 package com.cinema.pojo;
+
+import java.math.BigDecimal;
+
 /**
  * 	订单表
  * @author 小范
@@ -11,7 +14,7 @@ public class Order {
 
     private Integer o_number;//票数数量
 
-    private Long o_totalprice;//总价
+    private BigDecimal o_totalprice;//总价
 
     private String o_ordertime;//订单时间
 
@@ -47,11 +50,11 @@ public class Order {
         this.o_number = o_number;
     }
 
-    public Long getO_totalprice() {
+    public BigDecimal getO_totalprice() {
         return o_totalprice;
     }
 
-    public void setO_totalprice(Long o_totalprice) {
+    public void setO_totalprice(BigDecimal o_totalprice) {
         this.o_totalprice = o_totalprice;
     }
 

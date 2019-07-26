@@ -19,7 +19,7 @@ public interface MovieDao {
 	@Results({
 		@Result(id=true,column="f_id",property="f_id"),
 		@Result(column="f_typeid",property="f_typeid"),
-		@Result(column="f_typeid",property="filetype",one=@One(select="movieFiletype"))
+		@Result(column="f_typeid",property="filmType",one=@One(select="movieFiletype"))
 	})
 	public List<Movie> allMovies();
 	

@@ -58,6 +58,7 @@ public class MoviePlayController {
 	@GetMapping("/schedule/all")
 	public List<ScheduleDto> allSchedule(){
 		List<ScheduleDto> lists = moviePlayService.allSchedule();
+		System.out.println(lists);
 		return lists;
 		
 	}
