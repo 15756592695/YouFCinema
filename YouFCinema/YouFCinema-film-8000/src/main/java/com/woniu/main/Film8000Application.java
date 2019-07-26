@@ -9,7 +9,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan({"com.woniu.controller",
-	"com.woniu.service"})
+	"com.woniu.service",
+	"com.cinema.util",
+	"com.woniu.rabbit"})
 @MapperScan("com.woniu.dao")
 @EnableEurekaClient
 @EnableFeignClients("com.cinema.interfaces")

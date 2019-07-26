@@ -19,8 +19,8 @@ public class SeatsController {
 	/*
 	 * 添加厅室
 	 */
-	@RequestMapping("/setseats")
-	public String seat(@RequestBody String seatstr) throws UnsupportedEncodingException{
+	@RequestMapping("/addseats")
+	public String addSeat(@RequestBody String seatstr) throws UnsupportedEncodingException{
 		 seatstr = URLDecoder.decode(seatstr, "UTF-8");
 		 String result=seatsService.setSeats(seatstr); 
 		 return seatstr;
