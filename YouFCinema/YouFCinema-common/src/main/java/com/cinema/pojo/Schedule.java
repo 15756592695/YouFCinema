@@ -27,10 +27,20 @@ public class Schedule {
     
     private String room;//厅室名
     
+    private Movie film;//电影名
     private String start;
     private String end;
     
     
+
+	
+	public Movie getFilm() {
+		return film;
+	}
+
+	public void setFilm(Movie film) {
+		this.film = film;
+	}
 
 	public String getStart() {
 		return start;
