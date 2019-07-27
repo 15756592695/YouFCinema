@@ -35,7 +35,7 @@ public class SeatsController {
 	/*
 	 * 获取用户选中的坐位
 	 */
-	@RequestMapping("/setseats")
+	@RequestMapping("/chooseSeats")
 	public void selectSeat(@RequestBody String seatstr,@RequestBody Integer roomid,@RequestBody Integer scheduleid) throws UnsupportedEncodingException{
 		seatstr = URLDecoder.decode(seatstr, "UTF-8");
 		seatsService.getSelectedSeats(seatstr,roomid,scheduleid);
