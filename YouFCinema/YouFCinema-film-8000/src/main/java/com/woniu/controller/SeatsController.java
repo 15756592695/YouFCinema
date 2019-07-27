@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cinema.pojo.Seats;
@@ -36,9 +37,10 @@ public class SeatsController {
 	 * 获取用户选中的坐位
 	 */
 	@RequestMapping("/chooseSeats")
-	public void selectSeat(@RequestBody String seatstr,@RequestBody Integer roomid,@RequestBody Integer scheduleid) throws UnsupportedEncodingException{
+	public String selectSeat(@RequestParam(value="seatstr") String seatstr,@RequestParam(value="roomid") Integer roomid,@RequestParam(value="scheduleid") Integer scheduleid) throws UnsupportedEncodingException{
+		System.out.println(seatstr+","+roomid+","+scheduleid);
 		seatstr = URLDecoder.decode(seatstr, "UTF-8");
-		seatsService.getSelectedSeats(seatstr,roomid,scheduleid);
-		
+	/*	seatsService.getSelectedSeats(seatstr,roomid,scheduleid);*/
+		return seatstr;
 	}
 }

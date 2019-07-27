@@ -51,7 +51,7 @@ public class Receiver {
 		sto.setFilmId(schedule.getS_filmid());
 		
 		//跳转至订单页面
-		String result=orderController.addOrder(sto);
+		SeatToOrderDto result=orderController.addOrder(sto);
 		
 
 			/*
