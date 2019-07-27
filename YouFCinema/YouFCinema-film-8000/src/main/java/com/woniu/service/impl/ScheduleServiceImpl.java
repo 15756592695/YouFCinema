@@ -6,6 +6,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.cinema.pojo.Schedule;
@@ -37,7 +38,15 @@ public class ScheduleServiceImpl implements ScheduleService{
 		cal1.set(Calendar.SECOND, 0);
 		cal1.set(Calendar.MILLISECOND, 0);
 		schedule.setS_date(cal1.getTime());
-		return scheduleDao.findScheduleById(schedule);
+		return scheduleDao.findScheduleByFilmId(schedule);
+	}
+	/*
+	 * 根据排片id获取具体电影的排片信息(non-Javadoc)
+	 */
+	@Cacheable("findSchedule")
+	@Override
+	public Schedule findScheduleById(Integer scheduleid) {
+		return scheduleDao.findScheduleById(scheduleid);
 	}
 
 }

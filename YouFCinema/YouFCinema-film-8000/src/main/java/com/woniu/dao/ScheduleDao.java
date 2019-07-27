@@ -15,6 +15,16 @@ public interface ScheduleDao {
 		@Result(id=true,column="s_id",property="s_id"),
 		@Result(column="s_roomid",property="room",one=@One(select="com.woniu.dao.RoomDao.getNameById"))
 	})
-	public List<Schedule> findScheduleById(Schedule schedule);
+	public List<Schedule> findScheduleByFilmId(Schedule schedule);
+	//根据排片id获取具体电影的排片信息
+	@Select("select * from schedule where s_id=#{s_id}")
+	@Results({
+		@Result(id=true,column="s_id",property="s_id"),
+		@Result(column="s_roomid",property="room",one=@One(select="com.woniu.dao.RoomDao.getNameById")),
+		@Result(column="s_filmid",property="film",one=@One(select="com.woniu.dao.MovieDao.findNamePriceById"))
+	})
+	public Schedule findScheduleById(Integer scheduleid);
+
+	
 
 }

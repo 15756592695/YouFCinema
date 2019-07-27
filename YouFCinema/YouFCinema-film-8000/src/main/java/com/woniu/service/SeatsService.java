@@ -12,6 +12,6 @@ public interface SeatsService {
 	//获取影院所有坐位
 	public List<Seats> getAllSeats();
 	//获取用户选中的坐位
-	public void getSelectedSeats(String seatstr);
+	public int getSelectedSeats(String seatstr, Integer roomid, Integer scheduleid);
 
 }
