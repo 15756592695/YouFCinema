@@ -15,9 +15,9 @@ public class ErweiController {
 	private ErweiService erweiService;
 	
 	//用户订单号作为电影取票码
-	@GetMapping("/erweiPic/{o_id}")
-	public String createPic(@PathVariable("o_id")Integer o_id) {
-		String s=erweiService.createPic(o_id);
+	@GetMapping("/erweiPic")
+	public String createPic() {
+		String s=erweiService.createPic();
 		if(s!=null) {
 			return "ok";
 		}

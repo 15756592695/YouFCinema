@@ -4,7 +4,7 @@ public interface ErweiService {
 
 	
 	
-	public String createPic(Integer o_id);
+	public String createPic();
 	
 	
 	

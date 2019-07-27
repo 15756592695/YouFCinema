@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>YouFCinema</artifactId>
+        <groupId>com.wnxy</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yy.main</groupId>
+    <artifactId>YouFCinema_zhifubao</artifactId>
+<dependencies>
+    <!-- 依赖公共模块 -->
+    <dependency>
+        <groupId>com.wnxy</groupId>
+        <artifactId>YouFCinema-common</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+    <!-- spring mvc 的 web组件-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- jsp tomcat 依赖 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-tomcat</artifactId>
+    </dependency>
+    <!-- jstl jsp支持-->
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+    </dependency>
+    <!-- jasper 依赖（jsp 必带）-->
+    <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+    </dependency>
+    <!-- 引入支付宝 sdk-->
+    <dependency>
+        <groupId>com.alipay.sdk</groupId>
+        <artifactId>alipay-sdk-java</artifactId>
+        <version>3.7.110.ALL</version>
+    </dependency>
+    <dependency>
+        <groupId> org.springframework.boot </groupId>
+        <artifactId> spring-boot-configuration-processor </artifactId>
+        <optional> true </optional>
+    </dependency>
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.38</version>
+    </dependency>
+    <!-- 将微服务provider注册进eureka，作为客户端的角色 -->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+
+</dependencies>
+
+</project>

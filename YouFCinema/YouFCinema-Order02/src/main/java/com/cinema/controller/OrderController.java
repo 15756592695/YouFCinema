@@ -2,7 +2,6 @@ package com.cinema.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,16 +10,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cinema.interfaces.AliPayController;
 import com.cinema.pojo.Order;
+import com.cinema.pojo.OrderDTO;
 import com.cinema.service.OrderService;
 
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 public class OrderController {
+	
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private AliPayController aliPayController;
 	
+	
+	@GetMapping("/test")
+	@ApiOperation(value="测试",notes="测试")
+	/**
+	 * 
+	 * @param order
+	 * @return
+	 */
+	public String test(String out_trade_no ,String subject,String total_amount) {
+		String num=aliPayController.pay(out_trade_no, subject, total_amount);
+		System.out.println(num);
+		return num;
+	}
 	
 	@PostMapping("/addOrder")
 	@ApiOperation(value="增",notes="新增订单")
@@ -29,24 +47,38 @@ public class OrderController {
 	 * @param order
 	 * @return
 	 */
-	public String addOrder(@RequestBody Order order) {
-		System.out.println(order);
-		String result=orderService.addOrder(order);
+	public String addOrder(OrderDTO orderDTO) {
+		System.out.println(orderDTO);
+		String result=orderService.addOrder(orderDTO);
 		return result;
 	}
 	
-	@GetMapping("/findAll")
-	@ApiOperation(value="查",notes="查看所有订单")
+	@GetMapping("/findAllById/{id}")
+	@ApiOperation(value="查",notes="查看用户所有订单")
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Order> findAll(){
-		List<Order> orders=orderService.findAll();
+	public List<Order> findAllById(@PathVariable("id")Integer id){
+		List<Order> orders=orderService.findAllById(id);
 		
 		return orders;
 	}
 
+	
+	@PutMapping("/updateOrder/{o_number}/{o_paynumber}")
+	@ApiOperation(value="改",notes="将交易号插入订单")
+	public String updateOrderByOnum(@PathVariable("o_number")String o_number,@PathVariable("o_paynumber")String o_paynumber) {
+		
+		String result=orderService.updateOrderByOnum(o_number,o_paynumber);
+		System.out.println(result);
+		return result;
+		
+	}
+	
+	
+	
+	
 	
 	@PutMapping("/updateById/{o_id}")
 	@ApiOperation(value="取消",notes="取消当前订单")
@@ -58,5 +90,22 @@ public class OrderController {
 	public String cancel(@PathVariable Integer o_id) {
 		String result=orderService.cancel(o_id);
 		return result;
+	}
+	
+	
+	/**
+	 * 付款价格
+	 * @param f_name
+	 * @param s_date
+	 * @param s_starttime
+	 * @return
+	 */
+	@GetMapping("/getprice")
+	@ApiOperation(value="总价",notes="获取当前总价")
+	public String getPrice(OrderDTO orderDTO) {
+		
+		String price=orderService.getPrice(orderDTO.getF_name(), orderDTO.getS_date(), orderDTO.getS_starttime(), orderDTO.getO_number());
+		System.out.println("price"+price);
+		return price;
 	}
 }
