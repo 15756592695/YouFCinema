@@ -1,5 +1,6 @@
 package com.cinema.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 /**
  * 	排片表
@@ -27,13 +28,21 @@ public class Schedule {
     
     private String room;//厅室名
     
-    private Movie film;//电影名
+    private Movie film;//电影
     private String s_start;//开始时间
     private String s_end;//结束时间
-    
+    private BigDecimal price;
     
 
 	
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
 	public Movie getFilm() {
 		return film;
 	}
@@ -42,20 +51,22 @@ public class Schedule {
 		this.film = film;
 	}
 
-	public String getStart() {
+
+
+	public String getS_start() {
 		return s_start;
 	}
 
-	public void setStart(String start) {
-		this.s_start = start;
+	public void setS_start(String s_start) {
+		this.s_start = s_start;
 	}
 
-	public String getEnd() {
+	public String getS_end() {
 		return s_end;
 	}
 
-	public void setEnd(String end) {
-		this.s_end = end;
+	public void setS_end(String s_end) {
+		this.s_end = s_end;
 	}
 
 	public Integer getS_id() {

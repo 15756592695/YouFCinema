@@ -37,10 +37,10 @@ public class SeatsController {
 	 * 获取用户选中的坐位
 	 */
 	@RequestMapping("/chooseSeats")
-	public String selectSeat(@RequestParam(value="seatstr") String seatstr,@RequestParam(value="roomid") Integer roomid,@RequestParam(value="scheduleid") Integer scheduleid) throws UnsupportedEncodingException{
-		System.out.println(seatstr+","+roomid+","+scheduleid);
+	public int selectSeat(@RequestParam(value="seatstr") String seatstr,@RequestParam(value="roomid") Integer roomid,@RequestParam(value="scheduleid") Integer scheduleid) throws UnsupportedEncodingException{
+		
 		seatstr = URLDecoder.decode(seatstr, "UTF-8");
-	/*	seatsService.getSelectedSeats(seatstr,roomid,scheduleid);*/
-		return seatstr;
+		int reInt=seatsService.getSelectedSeats(seatstr,roomid,scheduleid);
+		return reInt;
 	}
 }

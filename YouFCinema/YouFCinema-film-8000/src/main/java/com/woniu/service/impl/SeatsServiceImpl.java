@@ -70,22 +70,28 @@ public class SeatsServiceImpl implements SeatsService {
 	 */
 	@Override
 	public int getSelectedSeats(String seatstr, Integer roomid, Integer scheduleid) {
-
-		String[] s1 = seatstr.split("row\":");
+		String[] s1 = seatstr.split("row\":"); 
+		
 		// 声明一个list存选的坐位
 		List<Seats> seats = new ArrayList<>();
 
 		for (int i = 0; i < s1.length; i++) {
-			String seat1 = s1[i + 1];
+			int j=i+1;
+			if(j==s1.length){
+				break;
+			}
+			String seat1 = s1[j];
 			String[] s2 = seat1.split(",\"col\":");
+			
 			int row = Integer.parseInt(s2[0]);
-			int col = Integer.parseInt(s2[1].split(",")[0]);
+			int col = Integer.parseInt(s2[1].split("}")[0]);
 			int seatNum = Integer.parseInt("" + row + col);
 			// 查看redis里是否有这个座位信息
 			Object se = redisUtil.get("" + scheduleid + roomid + row + col);
 			if (se != null) {
 				return seatNum;
 			}
+			
 			Seats seat = new Seats();
 			seat.setSe_col(col);
 			seat.setSe_row(row);
@@ -93,6 +99,7 @@ public class SeatsServiceImpl implements SeatsService {
 			// 添加进集合
 			seats.add(seat);
 		}
+		
 		// 将请求入队
 		ChooseSeatDto dto = new ChooseSeatDto();
 		dto.setRoomid(roomid);
