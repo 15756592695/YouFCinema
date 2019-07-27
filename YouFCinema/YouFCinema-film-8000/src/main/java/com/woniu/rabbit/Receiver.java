@@ -47,6 +47,8 @@ public class Receiver {
 		sto.setRoomName(schedule.getRoom());
 		sto.setSeats(seats);
 		sto.setStartTime(schedule.getS_starttime());
+		sto.setScheduleid(scheduleid);
+		sto.setFilmId(schedule.getS_filmid());
 		
 		//跳转至订单页面
 		String result=orderController.addOrder(sto);
