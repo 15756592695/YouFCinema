@@ -15,9 +15,9 @@ public class Schedule {
 
     private Date s_date;//播放日期
 
-    private Date s_starttime;//放映时间
+    private Date s_starttime;//放映开始时间
 
-    private Date s_endtime;//结束时间
+    private Date s_endtime;//放映结束时间
 
     private Integer s_roomid;//厅室id
 
@@ -27,25 +27,35 @@ public class Schedule {
     
     private String room;//厅室名
     
-    private String start;
-    private String end;
+    private Movie film;//电影名
+    private String s_start;//开始时间
+    private String s_end;//结束时间
     
     
 
+	
+	public Movie getFilm() {
+		return film;
+	}
+
+	public void setFilm(Movie film) {
+		this.film = film;
+	}
+
 	public String getStart() {
-		return start;
+		return s_start;
 	}
 
 	public void setStart(String start) {
-		this.start = start;
+		this.s_start = start;
 	}
 
 	public String getEnd() {
-		return end;
+		return s_end;
 	}
 
 	public void setEnd(String end) {
-		this.end = end;
+		this.s_end = end;
 	}
 
 	public Integer getS_id() {

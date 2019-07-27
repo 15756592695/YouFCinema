@@ -26,4 +26,8 @@ public interface MovieDao {
 		@Result(column="f_typeid",property="filmType",one=@One(select="com.woniu.dao.FilmTypeDao.findTypeById"))
 	})
 	public Movie getMovieDtailById(Integer movieid);
+	
+	//根据电影id获取电影名字
+	@Select("select f_name,f_price from movie where f_id=#{id}")
+	public Movie findNamePriceById(Integer id);
 }
