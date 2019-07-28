@@ -31,6 +31,8 @@ public class ScheduleServiceImpl implements ScheduleService{
 			cal1.add(Calendar.DATE, 1);
 		}else if(list==3){
 			cal1.add(Calendar.DATE, 2);
+		}else if(list==1){
+			cal1.setTime(date);
 		}
 		// 将时分秒,毫秒域清零
 		cal1.set(Calendar.HOUR_OF_DAY, 0);
@@ -38,7 +40,8 @@ public class ScheduleServiceImpl implements ScheduleService{
 		cal1.set(Calendar.SECOND, 0);
 		cal1.set(Calendar.MILLISECOND, 0);
 		schedule.setS_date(cal1.getTime());
-		return scheduleDao.findScheduleByFilmId(schedule);
+		List<Schedule> sc=scheduleDao.findScheduleByFilmId(schedule);
+		return sc;
 	}
 	/*
 	 * 根据排片id获取具体电影的排片信息(non-Javadoc)

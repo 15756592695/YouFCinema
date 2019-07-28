@@ -27,9 +27,9 @@ public class Schedule {
     private Integer s_flag;
     
     private String room;//厅室名
-    
-    private Movie film;//电影
-    private String s_start;//开始时间
+	    
+	private Movie film;//电影
+	private String s_start;//开始时间
     private String s_end;//结束时间
     private BigDecimal price;
     
