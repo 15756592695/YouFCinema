@@ -2,7 +2,9 @@ package com.woniu.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +54,17 @@ public class SeatsServiceImpl implements SeatsService {
 	 * @see com.woniu.service.SeatsService#getAllByRid(java.lang.Integer)
 	 */
 	@Override
-	public List<Seats> getAllByRid(Integer roomid) {
-
-		return seatsDao.getAllByRid(roomid);
+	public Map<String,Object> getAllByRid(Integer roomid,Integer scheduleid) {
+		Map<String,Object> seatMap=new HashMap<>();
+		//获取该厅室所有坐位
+		List<Seats> seats=seatsDao.getAllByRid(roomid);
+		//获取该场电影已经选了的座位
+		List<Seats> selectedSeats=null;
+		
+		seatMap.put("allSeats", seats);
+		seatMap.put("selected", selectedSeats);
+		
+		return seatMap;
 	}
 
 	@Override
@@ -87,8 +97,9 @@ public class SeatsServiceImpl implements SeatsService {
 			int col = Integer.parseInt(s2[1].split("}")[0]);
 			int seatNum = Integer.parseInt("" + row + col);
 			// 查看redis里是否有这个座位信息
-			Object se = redisUtil.get("" + scheduleid + roomid + row + col);
-			if (se != null) {
+			
+			boolean b=redisUtil.hasKey("" + scheduleid + roomid + row + col);
+			if (b) {
 				return seatNum;
 			}
 			

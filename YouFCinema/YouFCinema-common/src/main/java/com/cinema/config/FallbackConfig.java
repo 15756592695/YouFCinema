@@ -16,6 +16,7 @@ public class FallbackConfig implements FallbackFactory<Order02Controller>{
 		return new Order02Controller(){
 			@Override
 			public SeatToOrderDto addOrder(SeatToOrderDto sto) {
+				sto.setFilmName("defeat");
 				return sto;
 			}
 

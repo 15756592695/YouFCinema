@@ -22,6 +22,7 @@ public interface ScheduleDao {
 	@Select("select * from schedule where s_id=#{s_id}")
 	@Results({
 		@Result(id=true,column="s_id",property="s_id"),
+		@Result(column="s_roomid",property="s_roomid"),
 		@Result(column="s_roomid",property="room",one=@One(select="com.woniu.dao.RoomDao.getNameById")),
 		@Result(column="s_filmid",property="film",one=@One(select="com.woniu.dao.MovieDao.findNamePriceById"))
 	})

@@ -3,6 +3,7 @@ package com.woniu.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +31,9 @@ public class SeatsController {
 	 * 根据厅室id获取所有坐位
 	 */
 	@RequestMapping("/getAllSeats")
-	public List<Seats> getAll(Integer roomid){
-		return seatsService.getAllByRid(roomid);
+	public Map<String,Object> getAll(@RequestParam(value="roomid") Integer roomid,@RequestParam(value="scheduleid") Integer scheduleid){
+		System.out.println(roomid+"========================-----------"+scheduleid);
+		return seatsService.getAllByRid(roomid,scheduleid);
 	}
 	/*
 	 * 获取用户选中的坐位

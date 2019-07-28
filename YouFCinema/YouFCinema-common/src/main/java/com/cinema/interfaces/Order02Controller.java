@@ -14,8 +14,11 @@ import com.cinema.dto.SeatToOrderDto;
 @FeignClient(name="YouFCinema-order02",fallbackFactory=FallbackConfig.class)
 
 public interface Order02Controller {
+	//从选座页面跳转至订单页面
 	@RequestMapping("/showMessage")
 	public SeatToOrderDto addOrder(@RequestBody SeatToOrderDto sto);
+	//查询已选座位
+	
 	
 	/**
 	 * 更新订单支付号
