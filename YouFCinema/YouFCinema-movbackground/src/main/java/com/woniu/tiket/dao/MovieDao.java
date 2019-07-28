@@ -25,4 +25,16 @@ public interface MovieDao {
 	
 	@Select("select * from filmtype where t_id=#{f_typeid}")
 	public Filetype movieFiletype(Integer f_typeid);
+	
+	/**
+	 * 获取单个电影信息
+	 * @return
+	 */
+	@Select("select * from movie where f_id=#{id} and f_flag=1")
+	@Results({
+		@Result(id=true,column="f_id",property="f_id"),
+		@Result(column="f_typeid",property="f_typeid"),
+		@Result(column="f_typeid",property="filmType",one=@One(select="movieFiletype"))
+	})
+	public Movie moviesInfor(Integer id);
 }

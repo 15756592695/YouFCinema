@@ -1,20 +1,19 @@
 package com.woniu.tiket.controller;
 
-import static org.hamcrest.CoreMatchers.nullValue;
+
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,7 +36,7 @@ public class MovieController {
 
 	// 新增电影
 	@PostMapping("/movie/add")
-	public String addMovie(@RequestParam("file") MultipartFile file,String f_name,String f_area,Integer f_typeid,
+	public String addMovie(@RequestParam("file") MultipartFile file,@RequestParam("video") MultipartFile video,String f_name,String f_area,Integer f_typeid,
 			Integer f_length, String f_runtime,BigDecimal f_price, String f_dimension,Double f_hot,String f_performer,
 			String f_describe) throws IOException {
 		String data = "添加失败";
@@ -52,20 +51,24 @@ public class MovieController {
 		movie.setF_hot(f_hot);
 		movie.setF_performer(f_performer);
 		movie.setF_describe(f_describe);
-		System.out.println(movie);
 		// 判断图片是否为空
 		if (file.isEmpty()) {
 			return data;
 		}
 
 	    byte[] bytes = file.getBytes();
+	    byte[] bytes2 = video.getBytes();
 		String imageName = UUID.randomUUID().toString();
+		String imageName2 = UUID.randomUUID().toString();
 		QiniuCloudUtil qiniuUtil = new QiniuCloudUtil();
+		System.out.println(imageName2);
 		try {
 			// 使用base64方式上传到七牛云
 			String url = qiniuUtil.put64image(bytes, imageName);
-			System.out.println(url);
-			movie.setF_picture(url);
+			String url2 = qiniuUtil.put64image(bytes2, imageName2);
+			movie.setF_picture("http://"+url);
+			movie.setF_forecast("http://"+url2);
+			System.out.println(movie.getF_forecast());
 			// 添加电影到数据库
 			Boolean result = movieService.addMovie(movie);
 			if (result) {
@@ -80,6 +83,7 @@ public class MovieController {
 	// 删除电影
 	@DeleteMapping("/movie/del")
 	public String delMovie(Integer id) {
+		System.out.println(id);
 		String data = "下架失败";
 		Boolean result = movieService.delMovie(id);
 		if (result) {
@@ -98,4 +102,12 @@ public class MovieController {
 		}
 		return data;
 	}
+	
+	//查询某个电影信息
+		@GetMapping("/movie/movieinfo")
+		public Movie updateMovie(Integer id) {
+			System.out.println(id);
+			Movie movie = movieService.movieInfo(id);
+			return movie;
+		}
 }

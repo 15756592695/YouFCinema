@@ -43,5 +43,12 @@ public class MovieServiceImpl implements MovieService{
 		boolean result = movieOpetationDao.updateMovieInfor(movie);
 		return result;
 	}
+
+	//查找某个电影信息
+	@Override
+	public Movie movieInfo(Integer id) {
+		Movie movie = movieDao.moviesInfor(id);
+		return movie;
+	}
 	
 }

@@ -13,4 +13,6 @@ public interface MovieService {
 	public Boolean delMovie(Integer id);
 	//修改电影信息
 	public Boolean updateMovieInfor(Movie movie);
+	//查找某个电影的信息
+	public Movie movieInfo(Integer id);
 }

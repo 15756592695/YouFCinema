@@ -16,9 +16,9 @@ public interface MovieOpetationDao {
 	 * @param movie
 	 */
 	@Insert("insert into movie(f_name,f_typeid,f_area,f_runtime,f_hot,f_describe,f_price,f_performer,f_picture,"
-			+ "f_dimension,f_length)"
+			+ "f_dimension,f_length,f_forecast)"
 			+ "values(#{f_name},#{f_typeid},#{f_area},#{f_runtime},#{f_hot},#{f_describe},#{f_price},#{f_performer},"
-			+ "#{f_picture},#{f_dimension},#{f_length})")
+			+ "#{f_picture},#{f_dimension},#{f_length},#{f_forecast})")
 	public Boolean addMovie(Movie movie);
 	
 	/**

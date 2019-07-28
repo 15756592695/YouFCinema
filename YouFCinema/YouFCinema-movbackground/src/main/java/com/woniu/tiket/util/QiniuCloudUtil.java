@@ -50,7 +50,7 @@ public class QiniuCloudUtil {
         OkHttpClient client = new OkHttpClient();
         okhttp3.Response response = client.newCall(request).execute();
         //如果不需要添加图片样式，使用以下方式
-        return DOMAIN + key;
+        return DOMAIN +"/"+ key;
         //return DOMAIN + key + "?" + style;
     }
     class Ret {
