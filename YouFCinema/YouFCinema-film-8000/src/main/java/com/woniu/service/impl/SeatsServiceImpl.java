@@ -60,7 +60,21 @@ public class SeatsServiceImpl implements SeatsService {
 		List<Seats> seats=seatsDao.getAllByRid(roomid);
 		//获取该场电影已经选了的座位
 		List<Seats> selectedSeats=null;
+		//获取redis中的座位
 		
+		 for(int i=0;i<seats.size();i++){
+			 Integer row=seats.get(i).getSe_row();
+			 Integer col=seats.get(i).getSe_col();
+			 String key=""+ scheduleid + roomid + row + col;
+			 if(redisUtil.hasKey(key)){
+				 Seats seat=new Seats();
+				 seat.setSe_col(col);
+				 seat.setSe_row(row);
+				
+				 selectedSeats.add(seat);
+			 }
+			 
+		 }
 		seatMap.put("allSeats", seats);
 		seatMap.put("selected", selectedSeats);
 		
