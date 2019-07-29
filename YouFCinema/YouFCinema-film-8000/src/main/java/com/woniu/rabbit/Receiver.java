@@ -4,11 +4,14 @@ package com.woniu.rabbit;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import com.woniu.dto.ChooseSeatDto;
 import com.cinema.dto.SeatToOrderDto;
@@ -24,7 +27,8 @@ import com.woniu.service.ScheduleService;
 public class Receiver {
 	@Autowired
 	private Order02Controller orderController;
-
+	@Autowired
+	private RedisTemplate redisTemplate;
 	@Autowired
 	private RedisUtil redisUtil;
 	@Autowired
@@ -63,8 +67,15 @@ public class Receiver {
 				Integer row=seats.get(i).getSe_row();
 				Integer col=seats.get(i).getSe_col();
 				String key="" + scheduleid + rid + row + col;
+				
+				JedisConnectionFactory con=(JedisConnectionFactory) redisTemplate.getConnectionFactory();
+				//切换到数据库1
+				con.setDatabase(1);
+				redisTemplate.setConnectionFactory(con);
 				//将已选座位存进redis,在十五分钟之后移除redis中的座位
-				 boolean boo=redisUtil.set(key,1,900);
+				redisTemplate.opsForValue().set(key, 1,900,TimeUnit.SECONDS);
+				
+			/*	 boolean boo=redisUtil.set(key,1,900);*/
 				
 			}			
 		}/*else if(result.getFilmName().equals("defeat")){
@@ -72,14 +83,6 @@ public class Receiver {
 		
 		}
 */
-			/*
-			//向数据库添加订单并减少库存
-			service.addOrder(newOrder,dto.getGoodsid());
-			//
-			int number=(int) redisUtil.get(dto.getGoodsid()+"");
-			redisUtil.set(dto.getGoodsid()+"",--number);
-	
-			//订单创建后，Redis添加seckillOrder
-			redisUtil.hset("seckillOrder", dto.getUserid()+"", "ok");*/
+			
 	}
 }
