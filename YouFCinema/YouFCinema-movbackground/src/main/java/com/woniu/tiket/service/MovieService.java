@@ -15,4 +15,6 @@ public interface MovieService {
 	public Boolean updateMovieInfor(Movie movie);
 	//查找某个电影的信息
 	public Movie movieInfo(Integer id);
+	//查找所有排片id
+	public List<Integer> findAllid(String name);
 }

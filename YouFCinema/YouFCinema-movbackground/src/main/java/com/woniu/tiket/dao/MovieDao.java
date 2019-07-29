@@ -37,4 +37,12 @@ public interface MovieDao {
 		@Result(column="f_typeid",property="filmType",one=@One(select="movieFiletype"))
 	})
 	public Movie moviesInfor(Integer id);
+	
+	/**
+	 * 根据电影名称获取排片id
+	 * @param name
+	 * @return
+	 */
+	@Select("select s_id from schedule INNER JOIN movie on schedule.s_filmid=movie.f_id where f_name=#{name}")
+	public List<Integer> findAllid(String name);
 }

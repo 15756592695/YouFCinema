@@ -50,5 +50,12 @@ public class MovieServiceImpl implements MovieService{
 		Movie movie = movieDao.moviesInfor(id);
 		return movie;
 	}
+
+	//查找某个电影的排片
+	@Override
+	public List<Integer> findAllid(String name) {
+		List<Integer> ids = movieDao.findAllid(name);
+		return ids;
+	}
 	
 }

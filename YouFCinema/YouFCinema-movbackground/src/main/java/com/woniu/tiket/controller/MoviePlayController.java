@@ -1,5 +1,6 @@
 package com.woniu.tiket.controller;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,31 +23,26 @@ public class MoviePlayController {
 	
 	//添加排片
 	@PostMapping("/movieplay/add")
-	public String addMoviePlay(String roomName,@DateTimeFormat(pattern = "yyyy-MM-dd") Date date,String rid,
-			String startDate,String endDate,String discount,String s_dimension) {
+	public String addMoviePlay(String r_name,@DateTimeFormat(pattern = "yyyy-MM-dd") Date s_date,Integer s_filmid,
+			String s_start,String s_end,Double s_discount) throws ParseException {
+		String data = "添加失败";
 		Schedule schedule = new Schedule();
 		//将年月日时分秒合并
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date startTime;
-		Date endTime;
-		try {
-			startTime = df.parse(date + startDate);
-			endTime = df.parse(date + endDate);
-			schedule.setS_starttime(startTime);
-			schedule.setS_endtime(endTime);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		String data = "添加失败";
-		int s_id = Integer.parseInt(rid);
-		double s_discount = Double.parseDouble(discount);	
-		schedule.setS_filmid(s_id);
-		schedule.setS_date(date);		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");		
+		String start = new SimpleDateFormat("yyyy-MM-dd ").format(s_date);
+		String startTime1 = start+s_start;
+		String endTime1 = start+s_end;
+		Date startTime = df.parse(startTime1);
+		Date endTime = df.parse(endTime1);
+		//将数据加入对象
+		schedule.setS_date(s_date);
+		schedule.setS_starttime(startTime);
+		schedule.setS_endtime(endTime);
+		schedule.setS_filmid(s_filmid);
 		schedule.setS_discount(s_discount);
-		schedule.setS_dimension(s_dimension);
-		
-		Boolean result = moviePlayService.addMoviePlay(schedule, roomName);
+		schedule.setS_discount(s_discount);
+
+		Boolean result = moviePlayService.addMoviePlay(schedule);
 		if (result) {
 			data = "添加成功";
 		}

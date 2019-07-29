@@ -15,8 +15,8 @@ public interface MoviePlayDao {
 	 * @param schedule
 	 * @return
 	 */
-	@Insert("insert into schedule values(default,#{s_filmid},#{s_dimension},#{s_date},#{s_starttime},#{s_endtime}"
-			+ ",#{s_roomid},#{s_discount},default)")
+	@Insert("insert into schedule(s_filmid,s_date,s_date,s_starttime,s_endtime,s_start,s_end,s_roomid,s_discount)"
+			+ " values(#{s_filmid},#{s_date},#{s_starttime},#{s_endtime},#{s_start},#{s_end},#{s_roomid},#{s_discount})")
 	public boolean addMoviePlay(Schedule schedule);
 	
 	/**

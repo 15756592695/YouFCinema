@@ -1,9 +1,10 @@
 package com.woniu.service.impl;
 
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,9 +54,31 @@ public class SeatsServiceImpl implements SeatsService {
 	 * @see com.woniu.service.SeatsService#getAllByRid(java.lang.Integer)
 	 */
 	@Override
-	public List<Seats> getAllByRid(Integer roomid) {
-
-		return seatsDao.getAllByRid(roomid);
+	public Map<String,Object> getAllByRid(Integer roomid,Integer scheduleid) {
+		Map<String,Object> seatMap=new HashMap<>();
+		//获取该厅室所有坐位
+		List<Seats> seats=seatsDao.getAllByRid(roomid);
+		//获取该场电影已经选了的座位
+		List<Seats> selectedSeats=null;
+		//获取redis中的座位
+		
+		 for(int i=0;i<seats.size();i++){
+			 Integer row=seats.get(i).getSe_row();
+			 Integer col=seats.get(i).getSe_col();
+			 String key=""+ scheduleid + roomid + row + col;
+			 if(redisUtil.hasKey(key)){
+				 Seats seat=new Seats();
+				 seat.setSe_col(col);
+				 seat.setSe_row(row);
+				
+				 selectedSeats.add(seat);
+			 }
+			 
+		 }
+		seatMap.put("allSeats", seats);
+		seatMap.put("selected", selectedSeats);
+		
+		return seatMap;
 	}
 
 	@Override
@@ -71,22 +94,29 @@ public class SeatsServiceImpl implements SeatsService {
 	 */
 	@Override
 	public int getSelectedSeats(String seatstr, Integer roomid, Integer scheduleid) {
-
-		String[] s1 = seatstr.split("row\":");
+		String[] s1 = seatstr.split("row\":"); 
+		
 		// 声明一个list存选的坐位
 		List<Seats> seats = new ArrayList<>();
 
 		for (int i = 0; i < s1.length; i++) {
-			String seat1 = s1[i + 1];
+			int j=i+1;
+			if(j==s1.length){
+				break;
+			}
+			String seat1 = s1[j];
 			String[] s2 = seat1.split(",\"col\":");
+			
 			int row = Integer.parseInt(s2[0]);
-			int col = Integer.parseInt(s2[1].split(",")[0]);
+			int col = Integer.parseInt(s2[1].split("}")[0]);
 			int seatNum = Integer.parseInt("" + row + col);
 			// 查看redis里是否有这个座位信息
-			Object se = redisUtil.get("" + scheduleid + roomid + row + col);
-			if (se != null) {
+			
+			boolean b=redisUtil.hasKey("" + scheduleid + roomid + row + col);
+			if (b) {
 				return seatNum;
 			}
+			
 			Seats seat = new Seats();
 			seat.setSe_col(col);
 			seat.setSe_row(row);
@@ -94,6 +124,7 @@ public class SeatsServiceImpl implements SeatsService {
 			// 添加进集合
 			seats.add(seat);
 		}
+		
 		// 将请求入队
 		ChooseSeatDto dto = new ChooseSeatDto();
 		dto.setRoomid(roomid);

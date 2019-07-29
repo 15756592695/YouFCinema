@@ -6,6 +6,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradePayModel;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
 import com.alipay.api.response.AlipayTradePayResponse;
 import com.cinema.interfaces.Order02Controller;
@@ -14,9 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -120,8 +125,57 @@ public class AliPay {
                 //付款完成后，支付宝系统发送该交易状态通知
             }
         }
+    }
+
+    @RequestMapping("/refund")
+    @ResponseBody
+    public void refund(@RequestParam("response") HttpServletResponse response,@RequestParam("ordernumber") String ordernumber,@RequestParam("payNumber") String payNumber,@RequestParam("total_money") String total_money) {
+        //获得初始化的AlipayClient
+        AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, "json", AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
+
+        //设置请求参数
+        AlipayTradeRefundRequest alipayRequest = new AlipayTradeRefundRequest();
+
+//		//商户订单号，商户网站订单系统中唯一订单号
+        String out_trade_no = ordernumber;
+//		//支付宝交易号
+        String trade_no = payNumber;
+//		//请二选一设置
+//		//需要退款的金额，该金额不能大于订单金额，必填
+        String total_amount =  total_money;
+//		//退款的原因说明
+        String refund_reason = "";
+//		//标识一次退款请求，同一笔交易多次退款需要保证唯一，如需部分退款，则此参数必传
+        String out_request_no = "";
+
+        alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
+                + "\"trade_no\":\""+ trade_no +"\","
+                + "\"refund_amount\":\""+ total_amount +"\","
+                + "\"refund_reason\":\""+ refund_reason +"\","
+                + "\"out_request_no\":\""+ out_request_no +"\"}");
+
+        //请求
+        String result;
+        try {
+            result = alipayClient.execute(alipayRequest).getBody();
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out;
+            try {
+                out = response.getWriter();
+                response.sendRedirect("https://www.baidu.com");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } catch (AlipayApiException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
     }
+
+
+
 
 
 

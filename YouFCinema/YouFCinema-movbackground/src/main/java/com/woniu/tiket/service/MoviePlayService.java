@@ -7,7 +7,7 @@ import com.cinema.pojo.ScheduleDto;
 
 public interface MoviePlayService {
 	//排片
-	public boolean addMoviePlay(Schedule schedule,String roomName);
+	public boolean addMoviePlay(Schedule schedule);
 	
 	//所有排列记录
 	public List<ScheduleDto> allSchedule();

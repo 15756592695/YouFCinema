@@ -40,7 +40,9 @@ public class MovieController {
 	 */
 	@RequestMapping("/movieSchedule")
 	public List<Schedule> findSchedule(Integer movieid,Integer list){
+		
 		List<Schedule> scheduleMap=scheduleService.findScheduleById(movieid,list);
+		
 		return scheduleMap;
 	}
 }

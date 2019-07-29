@@ -110,4 +110,11 @@ public class MovieController {
 			Movie movie = movieService.movieInfo(id);
 			return movie;
 		}
+	
+	//查找电影的所有排片
+		@GetMapping("/movie/findid")
+		public List<Integer> findAllid(String name){
+			List<Integer> ids = movieService.findAllid(name);
+			return ids;			
+		}
 }
