@@ -11,6 +11,8 @@
 
     <artifactId>YouFCinema_user8247</artifactId>
     <dependencies>
+
+
         <dependency>
             <groupId>com.wnxy</groupId>
             <artifactId>YouFCinema-common</artifactId>
