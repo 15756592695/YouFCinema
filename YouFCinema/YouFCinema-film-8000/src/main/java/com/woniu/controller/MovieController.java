@@ -32,7 +32,7 @@ public class MovieController {
 	public List<Movie> allMovies(){
 		return movieService.findAll();
 	}
-	
+	  
 	/*
 	 * 根据电影id获取电影所有信息
 	 */
