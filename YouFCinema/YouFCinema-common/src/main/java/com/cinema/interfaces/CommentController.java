@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name="comment")
+@FeignClient(name="comment-provider-8888")
 public interface CommentController {
 
     @GetMapping("/comment/{id}")
