@@ -1,5 +1,6 @@
 package com.cinema.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * @author 小范
  *
  */
-public class Movie {
+public class Movie implements Serializable {
 	
     public Movie() {
 		super();

@@ -1,5 +1,6 @@
 package com.cinema.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -7,7 +8,7 @@ import java.math.BigDecimal;
  * @author 小范
  *
  */
-public class Order {
+public class Order implements Serializable {
     private Integer o_id;//id
 
     private Integer scheduleid;//排片表id
