@@ -111,7 +111,7 @@ public class SeatsServiceImpl implements SeatsService {
 			int col = Integer.parseInt(s2[1].split("}")[0]);
 			int seatNum = Integer.parseInt("" + row + col);
 			// 查看redis里是否有这个座位信息
-			
+			/*System.out.println("row:"+row+",col:"+col+",seatNum:"+seatNum);*/
 			boolean b=redisUtil.hasKey("" + scheduleid + roomid + row + col);
 			if (b) {
 				return seatNum;

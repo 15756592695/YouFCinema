@@ -3,6 +3,7 @@ package com.woniu.rabbit;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -30,7 +31,10 @@ public class Receiver {
 	private ScheduleService scheduleService;
 	
 	@RabbitHandler
-	public void process(ChooseSeatDto dto,List<Seats> seats){
+	public void process(Map<String,Object> map){
+		System.out.println("receiver-----:"+map);
+		ChooseSeatDto dto=(ChooseSeatDto) map.get("dto");
+		List<Seats> seats=(List<Seats>) map.get("seats");
 		//获取排片id
 		Integer scheduleid=dto.getScheduleid();
 		//根据排片id获取具体电影的排片信息
@@ -51,8 +55,9 @@ public class Receiver {
 		sto.setFilmId(schedule.getS_filmid());
 		
 		//跳转至订单页面
-		SeatToOrderDto result=orderController.addOrder(sto);
-		if(!result.getFilmName().equals("defeat")){
+		/*SeatToOrderDto result=orderController.addOrder(sto);
+		if(!result.getFilmName().equals("defeat")){*/
+		if(true){
 			Integer rid=schedule.getS_roomid();
 			for(int i=0;i<seats.size();i++){
 				Integer row=seats.get(i).getSe_row();
@@ -62,11 +67,11 @@ public class Receiver {
 				 boolean boo=redisUtil.set(key,1,900);
 				
 			}			
-		}else if(result.getFilmName().equals("defeat")){
+		}/*else if(result.getFilmName().equals("defeat")){
 			//服务器降级
 		
 		}
-
+*/
 			/*
 			//向数据库添加订单并减少库存
 			service.addOrder(newOrder,dto.getGoodsid());
