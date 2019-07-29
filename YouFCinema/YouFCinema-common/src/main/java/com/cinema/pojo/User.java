@@ -1,10 +1,13 @@
 package com.cinema.pojo;
+
+import java.io.Serializable;
+
 /**
  * 	 用户表
  * @author 小范
  *
  */
-public class User {
+public class User implements Serializable {
     private Integer u_id;//id
 
     private String u_tel;//手机号

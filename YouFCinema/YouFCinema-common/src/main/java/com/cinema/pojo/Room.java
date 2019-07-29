@@ -1,5 +1,6 @@
 package com.cinema.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @author 小范
  *
  */
-public class Room {
+public class Room implements Serializable {
     private Integer r_id;//id
 
     private String r_name;//厅室名字

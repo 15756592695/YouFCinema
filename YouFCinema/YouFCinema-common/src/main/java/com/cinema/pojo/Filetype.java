@@ -1,10 +1,13 @@
 package com.cinema.pojo;
+
+import java.io.Serializable;
+
 /**
  * 	电影类型表
  * @author 小范
  *
  */
-public class Filetype {
+public class Filetype implements Serializable {
     private Integer t_id;//id
 
     private String t_name;//类型名称
