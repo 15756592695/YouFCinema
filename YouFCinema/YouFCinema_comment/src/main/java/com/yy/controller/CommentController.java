@@ -2,14 +2,13 @@ package com.yy.controller;
 
 import com.cinema.pojo.Comment;
 import com.yy.service.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 public class CommentController {
 
     @Resource
@@ -21,7 +20,6 @@ public class CommentController {
 //        System.out.println(id);
         return commentService.findAllById(id);
     }
-
     // 添加评论
     @PostMapping("/comment")
     public Boolean addComment(Comment comment){
