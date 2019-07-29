@@ -9,7 +9,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import com.cinema.dto.ChooseSeatDto;
+import com.woniu.dto.ChooseSeatDto;
 import com.cinema.dto.SeatToOrderDto;
 import com.cinema.interfaces.Order02Controller;
 import com.cinema.pojo.Schedule;

@@ -9,7 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cinema.dto.ChooseSeatDto;
+import com.woniu.dto.ChooseSeatDto;
 import com.cinema.pojo.Seats;
 import com.cinema.util.RedisUtil;
 import com.woniu.dao.SeatsDao;

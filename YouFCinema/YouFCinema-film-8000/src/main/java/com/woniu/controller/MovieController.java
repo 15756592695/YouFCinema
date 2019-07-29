@@ -43,6 +43,7 @@ public class MovieController {
 		Movie movie=movieService.getMovieDetailById(movieid);
 		//获取电影的评论
 		List<Comment> comments=commentController.findAllById(movieid);
+	/*	List<Comment> comments=null;*/
 		//存进map
 		map.put("movie",movie );
 		map.put("comments", comments);
