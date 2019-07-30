@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CommentDao {
 
-    @Select("SELECT * FROM `comment` WHERE c_id=#{id} AND flag = 0")
+    @Select("SELECT * FROM `comment` WHERE filmid=#{id} AND flag = 0")
     List<Comment> findAllById(int id);
 
     @Insert("INSERT INTO comment(c_message,uid,filmid,c_score) VALUES (#{c_message},#{uid},#{filmid},#{c_score})")

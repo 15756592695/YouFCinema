@@ -2,25 +2,22 @@ package com.cinema.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.cinema.pojo.Order;
-import com.cinema.pojo.OrderDTO;
+import com.cinema.pojo.Seatrecords;
 import com.cinema.provider.OrderProvider;
 
-import aj.org.objectweb.asm.Type;
-import lombok.Value;
 
 public interface OrderDao {
 	
 	
 	//新增订单(付款)
 	@InsertProvider(type=OrderProvider.class,method="addOrder")
-	public boolean addOrder(OrderDTO order);
+	public boolean addOrder(Order order);
 	
 	//取消订单(退款)
 	@Update("update `order` set flag=0 where o_id=#{o_id} ")
@@ -31,12 +28,16 @@ public interface OrderDao {
 	public List<Order> findAllById(Integer id);
 
 	//查找订单id
-	@Select("select o_id from `order` where o_ordernumber=#{ordernumber}")
-	public Integer findIdByOrder(String ordernumber);
+	@Select("select * from `order` where o_ordernumber=#{ordernumber}")
+	public Order findAllByOrder(String ordernumber);
 
 	//根据订单号修改交易号
-	@Update("update `order` set o_paynumber=#{o_paynumber} where o_ordernumber=#{o_ordernumber}")
-	public boolean updateOrderByOnum(@Param("o_ordernumber") String o_number,@Param("o_paynumber")String o_paynumber );	
+	@Update("update `order` set o_paynumber=#{o_paynumber} and flag=1 where o_ordernumber=#{o_ordernumber}")
+	public boolean updateOrderByOnum(@Param("o_ordernumber") String o_number,@Param("o_paynumber")String o_paynumber );
+
+	//查询座次
+	@Select("SELECT * FROM seatrecords WHERE orderid IN ( SELECT o_id FROM `order` WHERE scheduleid=#{scheduleid}  )")
+	public List<Seatrecords> findSeats(Integer scheduleid);	
 		
 	
 

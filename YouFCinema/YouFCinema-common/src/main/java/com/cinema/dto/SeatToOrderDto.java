@@ -12,6 +12,8 @@ public class SeatToOrderDto {
 	
 	private String filmName;//电影名
 	
+	private Integer filmId;//电影id
+	
 	private String RoomName;//厅室名
 	
 	private Date date;//放映日期
@@ -25,6 +27,26 @@ public class SeatToOrderDto {
 	private BigDecimal price;//价格
 	
 	private List<Seats> seats;//所选座位
+	
+	private Integer scheduleid;
+	
+	
+	
+	public Integer getFilmId() {
+		return filmId;
+	}
+
+	public void setFilmId(Integer filmId) {
+		this.filmId = filmId;
+	}
+
+	public Integer getScheduleid() {
+		return scheduleid;
+	}
+
+	public void setScheduleid(Integer scheduleid) {
+		this.scheduleid = scheduleid;
+	}
 
 	public String getFilmName() {
 		return filmName;

@@ -1,12 +1,13 @@
 package com.cinema.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  * 	评论表
  * @author 小范
  *
  */
-public class Comment {
+public class Comment implements Serializable {
     private Integer c_id;//id
 
     private String c_message;//评论信息

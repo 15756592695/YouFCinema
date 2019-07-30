@@ -13,6 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @MapperScan("com.cinema.dao")
 @EnableSwagger2
 @ComponentScan({"com.cinema.controller","com.cinema.service","com.cinema.config"})
+@ComponentScan("com.cinema.util")
 @EnableEurekaClient
 @EnableFeignClients(basePackages="com.cinema.interfaces")
 public class Application {

@@ -1,6 +1,8 @@
 package com.cinema.pojo;
 
-public class Seats {
+import java.io.Serializable;
+
+public class Seats implements Serializable {
     private Integer se_id;
 
     private Integer se_num;//座号
