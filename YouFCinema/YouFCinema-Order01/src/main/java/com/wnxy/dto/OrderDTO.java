@@ -1,71 +1,97 @@
 package com.wnxy.dto;
 
-import java.util.Date;
+
 
 public class OrderDTO {
-	private Date starttime;
-	private Date endtime;
+	private String starttime;
+	private String endtime;
 	private Integer uid;
-	private Integer scheduleid;
+	private String filmname;
 	private String ordernumber;
 	private String paynumber;
-	
 	
 	
 	public OrderDTO() {
 		super();
 	}
-	public OrderDTO(Date starttime, Date endtime, Integer uid, Integer scheduleid, String ordernumber,
+
+
+	public OrderDTO(String starttime, String endtime, Integer uid, String filmname, String ordernumber,
 			String paynumber) {
 		super();
 		this.starttime = starttime;
 		this.endtime = endtime;
 		this.uid = uid;
-		this.scheduleid = scheduleid;
+		this.filmname = filmname;
 		this.ordernumber = ordernumber;
 		this.paynumber = paynumber;
 	}
-	@Override
-	public String toString() {
-		return "OrderDTO [starttime=" + starttime + ", endtime=" + endtime + ", uid=" + uid + ", scheduleid="
-				+ scheduleid + ", ordernumber=" + ordernumber + ", paynumber=" + paynumber + "]";
-	}
-	public Date getStarttime() {
+
+
+	public String getStarttime() {
 		return starttime;
 	}
-	public void setStarttime(Date starttime) {
+
+
+	public void setStarttime(String starttime) {
 		this.starttime = starttime;
 	}
-	public Date getEndtime() {
+
+
+	public String getEndtime() {
 		return endtime;
 	}
-	public void setEndtime(Date endtime) {
+
+
+	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
+
+
 	public Integer getUid() {
 		return uid;
 	}
+
+
 	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
-	public Integer getScheduleid() {
-		return scheduleid;
+
+
+	public String getFilmname() {
+		return filmname;
 	}
-	public void setScheduleid(Integer scheduleid) {
-		this.scheduleid = scheduleid;
+
+
+	public void setFilmname(String filmname) {
+		this.filmname = filmname;
 	}
+
+
 	public String getOrdernumber() {
 		return ordernumber;
 	}
+
+
 	public void setOrdernumber(String ordernumber) {
 		this.ordernumber = ordernumber;
 	}
+
+
 	public String getPaynumber() {
 		return paynumber;
 	}
+
+
 	public void setPaynumber(String paynumber) {
 		this.paynumber = paynumber;
 	}
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "OrderDTO [starttime=" + starttime + ", endtime=" + endtime + ", uid=" + uid + ", filmname=" + filmname
+				+ ", ordernumber=" + ordernumber + ", paynumber=" + paynumber + "]";
+	}
+		
 }

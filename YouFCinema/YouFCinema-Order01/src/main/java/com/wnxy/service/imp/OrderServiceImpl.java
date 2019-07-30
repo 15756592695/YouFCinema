@@ -1,5 +1,6 @@
 package com.wnxy.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinema.pojo.Order;
 import com.wnxy.dao.OrderDao;
+import com.wnxy.dto.OrderDTO;
 import com.wnxy.service.IOrderService;
 
 @Service
@@ -44,6 +46,25 @@ public class OrderServiceImpl implements IOrderService{
 	public String refund(int ordernumber) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	/**
+	 * 	条件查询订单
+	 */
+	@Override
+	public List<Order> findAllByMany(OrderDTO orderDTO) {
+		// TODO Auto-generated method stub
+		return orderDao.manyQuery(orderDTO);
+	}
+	/**
+	 * 	根据电影查询订单
+	 */
+	@Override
+	public List<Order> findAllByScheduleid(List<Integer> scheduleids) {
+		List<Order> orders=new ArrayList<Order>();
+		for(int i=0;i<scheduleids.size();i++) {
+			orders.addAll(orderDao.oneQuery(scheduleids.get(i)));
+		}
+		return orders;
 	}
 	
 }

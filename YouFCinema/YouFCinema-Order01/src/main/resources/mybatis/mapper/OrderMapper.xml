@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wnxy.dao.OrderDao">
+	<select id="manyQuery" parameterType="com.wnxy.dto.OrderDTO"
+		resultType="Order">
+		SELECT
+		o_id, scheduleid,o_number,o_totalprice,o_ordertime,uid,o_ordernumber,o_paynumber,flag
+		FROM
+		`order`
+		<where>
+			  flag=0
+			<if test="starttime!=null">
+				and	o_ordertime  &gt;=#{starttime}
+			</if>
+			<if test="endtime!=null">
+				and o_ordertime  &lt;=#{endtime}
+			</if>
+			<if test="uid!=null">
+				and uid = #{uid}
+			</if>
+			<if test="paynumber!=null">
+				and o_paynumber = #{paynumber}
+			</if>
+			<if test="ordernumber!=null">
+				and	o_ordernumber = #{ordernumber}
+			</if>
+		</where>
+	</select>
+</mapper>
+ 

@@ -1,5 +1,6 @@
 package com.wnxy.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,16 @@ public class OrderController {
 	/**
 	 * 	多条件查询订单
 	 */
-	@GetMapping
+	@GetMapping("order/findMany")
 	public void queryMore(OrderDTO orderDto) {
-		System.out.println(orderDto);
-
+		System.out.println("进来了");
+		if(orderDto.getFilmname()!=null||orderDto.getFilmname().length()>0) {
+			List<Integer> scheduleids =new ArrayList<Integer>();
+			List<Order>	orders = service.findAllByScheduleid(scheduleids);
+		}else {
+			List<Order> orders=service.findAllByMany(orderDto);
+			System.out.println(orders);
+		}
+		
 	}
 }
