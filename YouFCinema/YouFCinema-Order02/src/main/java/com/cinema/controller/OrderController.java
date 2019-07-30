@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.cinema.util.RedisUtil;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
+@CrossOrigin
 public class OrderController {
 	
 	@Autowired
@@ -43,8 +45,10 @@ public class OrderController {
 	 */
 	@GetMapping("/getMassage")
 	public SeatToOrderDto getMessage() {
+		System.out.println("请求");
 		String uid="1";
 		SeatToOrderDto seatToOrderDto= (SeatToOrderDto) redisUtil.get("order"+uid);
+		System.out.println(seatToOrderDto);
 		return seatToOrderDto;
 	}
 	
@@ -64,17 +68,18 @@ public class OrderController {
 		return seat;
 	}
 	
-	@GetMapping("/test")
+	@PostMapping("/test")
 	@ApiOperation(value="测试",notes="测试")
 	/**
 	 * 
 	 * @param order
 	 * @return
 	 */
-	public boolean  test() {
-		
-		boolean b =redisUtil.set("key", "value");
-		return b;
+	public String test(@RequestBody SeatToOrderDto orderDTO) {
+		String uid="1";
+		boolean b =redisUtil.set("order"+uid, orderDTO);
+		System.out.println(b);
+		return "ok";
 	}
 	
 	
