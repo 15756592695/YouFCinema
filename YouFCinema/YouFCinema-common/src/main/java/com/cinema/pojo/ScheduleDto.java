@@ -15,9 +15,9 @@ public class ScheduleDto {
 
     private Date s_date;//播放日期
 
-    private Date s_starttime;//放映时间
+    private String s_start;//放映时间
 
-    private Date s_endtime;//结束时间
+    private String s_end;//结束时间
 
     private Integer s_roomid;//厅室号
     
@@ -32,19 +32,19 @@ public class ScheduleDto {
 	@Override
 	public String toString() {
 		return "ScheduleDto [s_id=" + s_id + ", f_name=" + f_name + ", s_filmid=" + s_filmid + ", s_date=" + s_date
-				+ ", s_starttime=" + s_starttime + ", s_endtime=" + s_endtime + ", s_roomid=" + s_roomid + ", r_name="
-				+ r_name + ", s_discount=" + s_discount + ", s_dimension=" + s_dimension + ", s_flag=" + s_flag + "]";
+				+ ", s_start=" + s_start + ", s_end=" + s_end + ", s_roomid=" + s_roomid + ", r_name=" + r_name
+				+ ", s_discount=" + s_discount + ", s_dimension=" + s_dimension + ", s_flag=" + s_flag + "]";
 	}
 
-	public ScheduleDto(Integer s_id, String f_name, Integer s_filmid, Date s_date, Date s_starttime, Date s_endtime,
+	public ScheduleDto(Integer s_id, String f_name, Integer s_filmid, Date s_date, String s_start, String s_end,
 			Integer s_roomid, String r_name, Double s_discount, String s_dimension, Integer s_flag) {
 		super();
 		this.s_id = s_id;
 		this.f_name = f_name;
 		this.s_filmid = s_filmid;
 		this.s_date = s_date;
-		this.s_starttime = s_starttime;
-		this.s_endtime = s_endtime;
+		this.s_start = s_start;
+		this.s_end = s_end;
 		this.s_roomid = s_roomid;
 		this.r_name = r_name;
 		this.s_discount = s_discount;
@@ -88,20 +88,20 @@ public class ScheduleDto {
 		this.s_date = s_date;
 	}
 
-	public Date getS_starttime() {
-		return s_starttime;
+	public String getS_start() {
+		return s_start;
 	}
 
-	public void setS_starttime(Date s_starttime) {
-		this.s_starttime = s_starttime;
+	public void setS_start(String s_start) {
+		this.s_start = s_start;
 	}
 
-	public Date getS_endtime() {
-		return s_endtime;
+	public String getS_end() {
+		return s_end;
 	}
 
-	public void setS_endtime(Date s_endtime) {
-		this.s_endtime = s_endtime;
+	public void setS_end(String s_end) {
+		this.s_end = s_end;
 	}
 
 	public Integer getS_roomid() {

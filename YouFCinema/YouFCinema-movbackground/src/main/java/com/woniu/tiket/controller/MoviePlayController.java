@@ -38,11 +38,13 @@ public class MoviePlayController {
 		schedule.setS_date(s_date);
 		schedule.setS_starttime(startTime);
 		schedule.setS_endtime(endTime);
+		schedule.setS_start(s_start);
+		schedule.setS_end(s_end);
 		schedule.setS_filmid(s_filmid);
 		schedule.setS_discount(s_discount);
 		schedule.setS_discount(s_discount);
 
-		Boolean result = moviePlayService.addMoviePlay(schedule);
+		Boolean result = moviePlayService.addMoviePlay(schedule,r_name);
 		if (result) {
 			data = "添加成功";
 		}

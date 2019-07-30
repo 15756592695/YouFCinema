@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cinema.pojo.Images;
 import com.cinema.pojo.Movie;
 import com.woniu.tiket.service.MovieService;
 import com.woniu.tiket.util.QiniuCloudUtil;
@@ -36,11 +37,13 @@ public class MovieController {
 
 	// 新增电影
 	@PostMapping("/movie/add")
-	public String addMovie(@RequestParam("file") MultipartFile file,@RequestParam("video") MultipartFile video,String f_name,String f_area,Integer f_typeid,
+	public String addMovie(@RequestParam("file") MultipartFile file,@RequestParam("file1") MultipartFile file1,@RequestParam("file2") MultipartFile file2,@RequestParam("file3") MultipartFile file3,
+			@RequestParam("video") MultipartFile video,String f_name,String f_area,Integer f_typeid,
 			Integer f_length, String f_runtime,BigDecimal f_price, String f_dimension,Double f_hot,String f_performer,
 			String f_describe) throws IOException {
 		String data = "添加失败";
 		Movie movie = new Movie();
+		Images images = new Images();
 		movie.setF_name(f_name);
 		movie.setF_area(f_area);
 		movie.setF_typeid(f_typeid);
@@ -58,19 +61,30 @@ public class MovieController {
 
 	    byte[] bytes = file.getBytes();
 	    byte[] bytes2 = video.getBytes();
+	    byte[] bytes3 = file1.getBytes();
+	    byte[] bytes4 = file2.getBytes();
+	    byte[] bytes5 = file3.getBytes();
 		String imageName = UUID.randomUUID().toString();
 		String imageName2 = UUID.randomUUID().toString();
+		String imageName3 = UUID.randomUUID().toString();
+		String imageName4 = UUID.randomUUID().toString();
+		String imageName5 = UUID.randomUUID().toString();
 		QiniuCloudUtil qiniuUtil = new QiniuCloudUtil();
 		System.out.println(imageName2);
 		try {
 			// 使用base64方式上传到七牛云
 			String url = qiniuUtil.put64image(bytes, imageName);
 			String url2 = qiniuUtil.put64image(bytes2, imageName2);
+			String url3 = qiniuUtil.put64image(bytes3, imageName2);
+			String url4 = qiniuUtil.put64image(bytes4, imageName2);
+			String url5 = qiniuUtil.put64image(bytes5, imageName2);
 			movie.setF_picture("http://"+url);
 			movie.setF_forecast("http://"+url2);
-			System.out.println(movie.getF_forecast());
+			images.setImage1("http://"+url3);
+			images.setImage2("http://"+url4);
+			images.setImage2("http://"+url5);			
 			// 添加电影到数据库
-			Boolean result = movieService.addMovie(movie);
+			Boolean result = movieService.addMovie(movie,images);
 			if (result) {
 				data = "添加成功";
 			}

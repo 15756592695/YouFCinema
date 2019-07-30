@@ -17,7 +17,9 @@ public class MoviePlayServiceImpl implements MoviePlayService{
 	
 	//排片表中加入数据
 	@Override
-	public boolean addMoviePlay(Schedule schedule) {
+	public boolean addMoviePlay(Schedule schedule,String r_name) {
+		int rid = moviePlayDao.findRoom(r_name);
+		schedule.setS_roomid(rid);
 		boolean result = moviePlayDao.addMoviePlay(schedule);
 		return result;
 	}

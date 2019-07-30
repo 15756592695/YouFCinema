@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cinema.pojo.Images;
 import com.cinema.pojo.Movie;
 import com.woniu.tiket.dao.MovieDao;
 import com.woniu.tiket.dao.MovieOpetationDao;
@@ -25,11 +26,18 @@ public class MovieServiceImpl implements MovieService{
 
 	//新增电影
 	@Override
-	public Boolean addMovie(Movie movie) {
+	public Boolean addMovie(Movie movie,Images images) {
+		Boolean data = false;
 		boolean result = movieOpetationDao.addMovie(movie);
-		return result;
+		int id = movieOpetationDao.findMovieid(movie.getF_name());
+		images.setI_id(id);
+		boolean res = movieOpetationDao.addImages(images);
+		if (result && res) {
+			data = true;
+		}
+		return data;
 	}
-
+	
 	//删除电影
 	@Override
 	public Boolean delMovie(Integer id) {
