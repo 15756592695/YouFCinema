@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cinema.dto.SeatToOrderDto;
-import com.cinema.interfaces.AliPayController;
 import com.cinema.pojo.Order;
-import com.cinema.pojo.OrderDTO;
-import com.cinema.pojo.Seatrecords;
 import com.cinema.pojo.Seats;
 import com.cinema.service.OrderService;
 import com.cinema.util.RedisUtil;
@@ -31,13 +28,27 @@ public class OrderController {
 	private RedisUtil redisUtil;
 	
 	/**
-	 * 渲染前端
+	 * 前端提交的数据，放入redis缓存
 	 */
-	@GetMapping("/showMessage")
-	@ApiOperation(value="渲染前端",notes="将信息渲染在前端")
-	public SeatToOrderDto view(@RequestBody SeatToOrderDto orderDTO) {
-		return orderDTO;
+	@PostMapping("/postMessage")
+	@ApiOperation(value="发送数据",notes="将信息保存在redis")
+	public String view(@RequestBody SeatToOrderDto orderDTO) {
+		String uid="1";
+		redisUtil.set("order"+uid, orderDTO, 900l);
+		return "ok";
 	}
+	
+	/**
+	 * 获取信息，渲染前端
+	 */
+	@GetMapping("/getMassage")
+	public SeatToOrderDto getMessage() {
+		String uid="1";
+		SeatToOrderDto seatToOrderDto= (SeatToOrderDto) redisUtil.get("order"+uid);
+		return seatToOrderDto;
+	}
+	
+	
 	
 	/**
 	 * 查座次，common类的接口
@@ -60,8 +71,9 @@ public class OrderController {
 	 * @param order
 	 * @return
 	 */
-	public String  test() {
-		String b=orderService.test();
+	public boolean  test() {
+		
+		boolean b =redisUtil.set("key", "value");
 		return b;
 	}
 	
