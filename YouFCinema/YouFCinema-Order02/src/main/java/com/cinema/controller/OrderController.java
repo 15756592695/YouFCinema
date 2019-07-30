@@ -39,7 +39,7 @@ public class OrderController {
 	}
 	
 	/**
-	 * 获取信息，渲染前端
+	 * 在redis中获取信息，渲染前端
 	 */
 	@GetMapping("/getMassage")
 	public SeatToOrderDto getMessage() {
@@ -91,14 +91,15 @@ public class OrderController {
 		return result;
 	}
 	
-	@GetMapping("/findAllById/{id}")
-	@ApiOperation(value="查",notes="查看用户所有订单")
+	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Order> findAllById(@PathVariable("id")Integer id){
-		List<Order> orders=orderService.findAllById(id);
+	@GetMapping("/findAllById/{id}")
+	@ApiOperation(value="查",notes="查看用户所有订单")
+	public List<SeatToOrderDto> findAllById(@PathVariable("id")Integer id){
+		List<SeatToOrderDto> orders=orderService.findAllById(id);
 		System.out.println(orders);
 		return orders;
 	}

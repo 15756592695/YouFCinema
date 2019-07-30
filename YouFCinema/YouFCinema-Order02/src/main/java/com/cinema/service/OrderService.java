@@ -1,18 +1,15 @@
 package com.cinema.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.cinema.dto.SeatToOrderDto;
-import com.cinema.pojo.Order;
-import com.cinema.pojo.OrderDTO;
 import com.cinema.pojo.Seats;
 
 public interface OrderService {
 	
 	public String addOrder(SeatToOrderDto orderDTO) ;
 	public String cancel(Integer o_id); 
-	public List<Order> findAllById(Integer id);	
+	public List<SeatToOrderDto> findAllById(Integer id);	
 	//获取价格
 //	public String getPrice(String f_name,Date s_date,Date s_starttime,Integer number);
 	//添加支付号
