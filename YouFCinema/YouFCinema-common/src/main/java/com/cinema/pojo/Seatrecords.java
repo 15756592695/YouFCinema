@@ -1,8 +1,11 @@
 package com.cinema.pojo;
+
+import java.io.Serializable;
+
 /**
  *	座位记录表
  */
-public class Seatrecords {
+public class Seatrecords implements Serializable {
     private Integer s_id;//id
 
     private String s_room;//厅室号

@@ -12,7 +12,7 @@ eureka:
 
 spring:
   application:
-    name: comment_provider_8888   #当前服务的名字，后面会用到
+    name: comment-provider-8888   #当前服务的名字，后面会用到
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource       # 当前数据源操作类型
     driver-class-name: com.mysql.jdbc.Driver           # mysql驱动包

@@ -33,7 +33,9 @@ public class SeatsController {
 	@RequestMapping("/getAllSeats")
 	public Map<String,Object> getAll(@RequestParam(value="roomid") Integer roomid,@RequestParam(value="scheduleid") Integer scheduleid){
 		System.out.println(roomid+"========================-----------"+scheduleid);
-		return seatsService.getAllByRid(roomid,scheduleid);
+		Map<String,Object> map=seatsService.getAllByRid(roomid,scheduleid);
+		System.out.println(map);
+		return map;
 	}
 	/*
 	 * 获取用户选中的坐位

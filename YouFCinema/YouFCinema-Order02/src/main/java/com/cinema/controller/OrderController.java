@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cinema.dto.SeatToOrderDto;
 import com.cinema.interfaces.AliPayController;
 import com.cinema.pojo.Order;
 import com.cinema.pojo.OrderDTO;
+import com.cinema.pojo.Seatrecords;
+import com.cinema.pojo.Seats;
 import com.cinema.service.OrderService;
+import com.cinema.util.RedisUtil;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -24,8 +28,30 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	@Autowired
-	private AliPayController aliPayController;
+	private RedisUtil redisUtil;
 	
+	/**
+	 * 渲染前端
+	 */
+	@GetMapping("/showMessage")
+	@ApiOperation(value="渲染前端",notes="将信息渲染在前端")
+	public SeatToOrderDto view(@RequestBody SeatToOrderDto orderDTO) {
+		return orderDTO;
+	}
+	
+	/**
+	 * 查座次，common类的接口
+	 */
+	@GetMapping("/getSeats/{scheduleid}")
+	@ApiOperation(value="获取座位",notes="获取座位")
+	public List<Seats> findSeats(@PathVariable("scheduleid")Integer scheduleid) {
+		//通过scheduleid查找订单
+		//通过订单查seatrecords
+		//将横纵坐标封装返回
+		List<Seats> seat=null;
+		seat=orderService.findSeats(scheduleid);
+		return seat;
+	}
 	
 	@GetMapping("/test")
 	@ApiOperation(value="测试",notes="测试")
@@ -34,20 +60,20 @@ public class OrderController {
 	 * @param order
 	 * @return
 	 */
-	public String test(String out_trade_no ,String subject,String total_amount) {
-		String num=aliPayController.pay(out_trade_no, subject, total_amount);
-		System.out.println(num);
-		return num;
+	public String  test() {
+		String b=orderService.test();
+		return b;
 	}
 	
-	@PostMapping("/addOrder")
-	@ApiOperation(value="增",notes="新增订单")
+	
 	/**
 	 * 
 	 * @param order
 	 * @return
 	 */
-	public String addOrder(OrderDTO orderDTO) {
+	@PostMapping("/addOrder")
+	@ApiOperation(value="增",notes="新增订单")
+	public String addOrder(@RequestBody SeatToOrderDto orderDTO) {
 		System.out.println(orderDTO);
 		String result=orderService.addOrder(orderDTO);
 		return result;
@@ -61,7 +87,7 @@ public class OrderController {
 	 */
 	public List<Order> findAllById(@PathVariable("id")Integer id){
 		List<Order> orders=orderService.findAllById(id);
-		
+		System.out.println(orders);
 		return orders;
 	}
 
@@ -77,35 +103,43 @@ public class OrderController {
 	}
 	
 	
-	
-	
-	
-	@PutMapping("/updateById/{o_id}")
-	@ApiOperation(value="取消",notes="取消当前订单")
 	/**
-	 * 
+	 * 删除用户的缓存，用于取消未支付的订单
+	 * @return
+	 */
+	public String del() {
+		String key="findAllById::"+1;//1代表用户id，后期替换
+		if(redisUtil.hasKey(key)) {
+			redisUtil.del(key);
+		}
+		return "ok";
+	}
+	
+	
+	
+	/**
+	 * 退款调用此方法，将订单的flag改为2
 	 * @param o_id
 	 * @return
 	 */
+	@PutMapping("/updateById/{o_id}")
+	@ApiOperation(value="取消",notes="取消订单")
 	public String cancel(@PathVariable Integer o_id) {
 		String result=orderService.cancel(o_id);
 		return result;
 	}
 	
 	
+	
+	
 	/**
-	 * 付款价格
-	 * @param f_name
-	 * @param s_date
-	 * @param s_starttime
+	 * 用于计算未支付订单剩余时间，获取的是创建时间+总剩余时间
 	 * @return
 	 */
-	@GetMapping("/getprice")
-	@ApiOperation(value="总价",notes="获取当前总价")
-	public String getPrice(OrderDTO orderDTO) {
-		
-		String price=orderService.getPrice(orderDTO.getF_name(), orderDTO.getS_date(), orderDTO.getS_starttime(), orderDTO.getO_number());
-		System.out.println("price"+price);
-		return price;
+	@GetMapping("/gettime")
+	public String getDate(){
+		String begintime=redisUtil.get("dateTime::"+1)+"";
+		return begintime;
 	}
+	
 }

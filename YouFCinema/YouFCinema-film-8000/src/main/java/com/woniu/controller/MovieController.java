@@ -1,5 +1,6 @@
 package com.woniu.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cinema.interfaces.CommentController;
+import com.cinema.pojo.Comment;
 import com.cinema.pojo.Movie;
 import com.cinema.pojo.Schedule;
 import com.woniu.service.MovieService;
@@ -19,6 +22,9 @@ public class MovieController {
 	
 	@Autowired
 	private ScheduleService scheduleService;
+	
+	@Autowired
+	private CommentController commentController;
 	/*
 	 * 获取所有电影
 	 */
@@ -26,14 +32,22 @@ public class MovieController {
 	public List<Movie> allMovies(){
 		return movieService.findAll();
 	}
-	
+	  
 	/*
 	 * 根据电影id获取电影所有信息
 	 */
 	@RequestMapping("/moviedetail")
-	public Movie movieDetail(Integer movieid){
+	public Map<String,Object> movieDetail(Integer movieid){
+		Map<String,Object> map=new HashMap<>();
+		//获取电影详情
 		Movie movie=movieService.getMovieDetailById(movieid);
-		return movie;
+		//获取电影的评论
+		List<Comment> comments=commentController.findAllById(movieid);
+	/*	List<Comment> comments=null;*/
+		//存进map
+		map.put("movie",movie );
+		map.put("comments", comments);
+		return map;
 	}
 	/*
 	 * 根据日期查看当日所有影片排片情况

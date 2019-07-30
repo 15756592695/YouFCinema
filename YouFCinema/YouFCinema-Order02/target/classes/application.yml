@@ -28,5 +28,17 @@ spring:
     #  initial-size: 5                                  # 初始化连接数
     #  max-total: 5                                     # 最大连接数
     #  max-wait-millis: 200                             # 等待连接获取的最大超时时间
-      
+    # redis的配置信息
+   redis:
+    database: 0         #连接Redis的库
+    host: 192.168.3.135     #主机名称
+    port: 6379          # 端口号
+    password:           # 连接密码，没有密码可以不写
+    lettuce:            # 設置redis連接池
+       pool: 
+         max-active: 10   # 最大連接數量
+         max-wait: -1     # 連接等待時間，如果為-1 默認不等待
+         max-idle: 8
+         min-idle: 0      # 最小連接數量   
+         timeout: 10000
     

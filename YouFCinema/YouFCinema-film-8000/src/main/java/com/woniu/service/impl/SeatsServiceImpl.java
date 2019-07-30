@@ -7,9 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
-import com.cinema.dto.ChooseSeatDto;
+import com.woniu.dto.ChooseSeatDto;
 import com.cinema.pojo.Seats;
 import com.cinema.util.RedisUtil;
 import com.woniu.dao.SeatsDao;
@@ -24,6 +27,8 @@ public class SeatsServiceImpl implements SeatsService {
 	private RedisUtil redisUtil;
 	@Autowired
 	private Sender sender;
+	//redis切换数据库
+	private RedisTemplate redisTemplate;
 
 	/*
 	 * 添加厅室和坐位信息(non-Javadoc)
@@ -110,12 +115,28 @@ public class SeatsServiceImpl implements SeatsService {
 			int row = Integer.parseInt(s2[0]);
 			int col = Integer.parseInt(s2[1].split("}")[0]);
 			int seatNum = Integer.parseInt("" + row + col);
-			// 查看redis里是否有这个座位信息
 			
-			boolean b=redisUtil.hasKey("" + scheduleid + roomid + row + col);
+			JedisConnectionFactory con=(JedisConnectionFactory) redisTemplate.getConnectionFactory();
+			//切换到数据库1
+			con.setDatabase(1);
+			redisTemplate.setConnectionFactory(con);
+			/*ValueOperations<String, String> stringStringValueOperations = stringRedisTemplate.opsForValue();
+		    stringStringValueOperations.set("testkey","testvalue");*/
+			// 查看redis里是否有这个座位信息
+			/*ValueOperations valueOperations = redisTemplate.opsForValue();*/
+			
+			boolean b=redisTemplate.hasKey("" + scheduleid + roomid + row + col);
+			/*String result=(String) valueOperations.get("" + scheduleid + roomid + row + col);*/
+	        /*if(result!=null){
+	        	return seatNum;
+	        }*/
+			/*boolean b=redisUtil.hasKey("" + scheduleid + roomid + row + col);*/
 			if (b) {
+				//切换到数据库0
+				con.setDatabase(0);
 				return seatNum;
 			}
+			con.setDatabase(0);
 			
 			Seats seat = new Seats();
 			seat.setSe_col(col);
