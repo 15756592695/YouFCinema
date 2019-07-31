@@ -44,7 +44,7 @@ public class RabbitConfig {
 		Map<String, Object> args = new HashMap<>();
         //dlx的名称必须与创建exchange的名称相同
         args.put("x-dead-letter-exchange","deadExchange");
-        args.put("x-message-ttl" , 30*1000);//设置队列里消息的ttl的时间30s
+        args.put("x-message-ttl" , 900*1000);//设置队列里消息的ttl的时间30s
         args.put("x-dead-letter-routing-key","topic.seats.dead");
         
         return QueueBuilder.durable(QUEUE_DELAY).withArguments(args).build();

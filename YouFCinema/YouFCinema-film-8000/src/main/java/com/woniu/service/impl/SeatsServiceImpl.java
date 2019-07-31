@@ -27,9 +27,6 @@ public class SeatsServiceImpl implements SeatsService {
 	private RedisUtil redisUtil;
 	@Autowired
 	private Sender sender;
-	//redis切换数据库
-	@Autowired
-	private RedisTemplate redisTemplate;
 	@Autowired
 	private DelaySender delaySender;
 	@Autowired
@@ -67,15 +64,16 @@ public class SeatsServiceImpl implements SeatsService {
 		Map<String,Object> seatMap=new HashMap<>();
 		//获取该厅室所有坐位
 		List<Seats> seats=seatsDao.getAllByRid(roomid);
-		//获取该场电影已经选了的座位
+		//获取该场电影已经选了的并付款的座位
 		List<Seats> selectedSeats=order02Controller.findSeats(scheduleid);
 		System.out.println("selectedSeats:"+selectedSeats);
 		//获取redis中的座位
 		 for(int i=0;i<seats.size();i++){
 			 Integer row=seats.get(i).getSe_row();
 			 Integer col=seats.get(i).getSe_col();
-			 String key="s"+ scheduleid + roomid + row + col;
+			 String key="s"+ scheduleid  + row + col;
 			 if(redisUtil.hasKey(key)){
+				 System.out.println(key+"key");
 				 Seats seat=new Seats();
 				 seat.setSe_col(col);
 				 seat.setSe_row(row);
@@ -84,6 +82,10 @@ public class SeatsServiceImpl implements SeatsService {
 			 }
 			 
 		 }
+		 Seats seat=new Seats();
+		 seat.setSe_col(2);
+		 seat.setSe_row(1);
+		 selectedSeats.add(seat);
 		seatMap.put("allSeats", seats);
 		seatMap.put("selected", selectedSeats);
 		
@@ -114,11 +116,12 @@ public class SeatsServiceImpl implements SeatsService {
 			int row = Integer.parseInt(s2[0]);
 			int col = Integer.parseInt(s2[1].split("}")[0]);
 			int seatNum = Integer.parseInt("" + row + col);
-			System.out.println("=====+++++++++++++"+seatNum);
-					
-			// 查看redis里是否有这个座位信息
-			boolean b=redisUtil.hasKey("s" + scheduleid + roomid + row + col);
+			String key=	"s"+scheduleid+row+col;	
 			
+			// 查看map对象里是否有这个座位信息
+			/*boolean b=redisUtil.hHasKey("selectedSeats", key);*/
+			boolean b=redisUtil.hasKey(key);
+		
 			if (b) {
 				return seatNum;
 			}
@@ -136,7 +139,7 @@ public class SeatsServiceImpl implements SeatsService {
 		dto.setRoomid(roomid);
 		dto.setScheduleid(scheduleid);
 		sender.send(dto,seats);
-		delaySender.send(dto, seats);
+	/*	delaySender.send(dto, seats);*/
 		return 1;
 
 	}

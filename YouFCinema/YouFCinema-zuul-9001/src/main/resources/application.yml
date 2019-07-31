@@ -24,22 +24,27 @@ zuul:
     film: 
       service-id: youfciname-film
       path: /**
-    order: 
-      service-id: YouFCinema-order02
-      path: /**    
-    comment: 
-      service-id: comment-provider-8888
-      path: /**    
-    user: 
-      service-id: user8247
-      path: /**    
+    #order: 
+     # service-id: YouFCinema-order02
+      #path: /**    
+    #comment: 
+     # service-id: comment-provider-8888
+      #path: /**    
+   # user: 
+    #  service-id: user8247
+     # path: /**    
     
      
-  ReadTimeout: 10000
-  ConnectTimeout: 10000
-  MaxAutoRetries: 0
+  ReadTimeout: 6000
+  ConnectTimeout: 1000
+  MaxAutoRetries: 1
   MaxAutoRetriesNextServer: 1
 
+ribbon: 
+  ReadTimeout: 10000 
+  ConnectTimeout: 10000 
+  MaxAutoRetries: 0 
+  MaxAutoRetriesNextServer: 1 
 
 info: #监控信息 
   app.name: YouFCinema

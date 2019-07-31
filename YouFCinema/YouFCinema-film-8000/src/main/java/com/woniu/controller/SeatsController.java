@@ -51,8 +51,7 @@ public class SeatsController {
 		return reInt;
 	}
 	
-	@RequestMapping("/test")
-	@ResponseBody
+	@RequestMapping("/testq")
 	public String test(){
 		return "ok";
 	}
