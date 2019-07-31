@@ -37,6 +37,11 @@ public class FallbackConfig implements FallbackFactory<Order02Controller>{
 			public String view(SeatToOrderDto orderDTO) {
 				return "服务器降级";
 			}
+
+			@Override
+			public void upSeats(SeatToOrderDto orderDTO) {
+				
+			}
 		};
 	}
 	
