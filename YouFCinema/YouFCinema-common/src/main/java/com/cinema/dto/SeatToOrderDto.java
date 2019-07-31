@@ -166,6 +166,15 @@ public class SeatToOrderDto {
 	public void setSeats(List<Seats> seats) {
 		this.seats = seats;
 	}
+
+	@Override
+	public String toString() {
+		return "SeatToOrderDto [filmName=" + filmName + ", filmId=" + filmId + ", RoomName=" + RoomName + ", date="
+				+ date + ", startTime=" + startTime + ", endTime=" + endTime + ", dimention=" + dimention + ", price="
+				+ price + ", seats=" + seats + ", scheduleid=" + scheduleid + ", o_number=" + o_number + ", uid=" + uid
+				+ ", o_ordernumber=" + o_ordernumber + ", o_id=" + o_id + ", o_paynumber=" + o_paynumber + ", flag="
+				+ flag + "]";
+	}
 	
 	
 }
