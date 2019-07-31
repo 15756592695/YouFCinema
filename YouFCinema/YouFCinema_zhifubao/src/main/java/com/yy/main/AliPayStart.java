@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
-@EnableFeignClients(basePackages="com.cinema.interfaces")
-@ComponentScan("com.yy.pay")
+@EnableFeignClients("com.cinema.interfaces")
+@ComponentScan({"com.yy.pay","com.yy.config","com.yy.util"})
 @SpringBootApplication
 public class AliPayStart {
     public static void main(String[] args) {

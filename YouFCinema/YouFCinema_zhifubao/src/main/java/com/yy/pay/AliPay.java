@@ -9,11 +9,16 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
 import com.alipay.api.response.AlipayTradePayResponse;
+import com.cinema.dto.SeatToOrderDto;
 import com.cinema.interfaces.Order02Controller;
 import com.yy.config.AlipayConfig;
+import com.yy.util.RedisUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -32,6 +38,9 @@ public class AliPay {
 
     @Autowired
     private Order02Controller order02Controller;
+    
+    @Autowired
+	private RedisUtil redisUtil;
 
     /*
      *  out_trade_no;// 订单编号 （商家提供唯一的编号）
@@ -42,10 +51,10 @@ public class AliPay {
      */
     @ResponseBody
     @GetMapping("/pay")
-    public String pay(String out_trade_no ,String subject,String total_amount) throws AlipayApiException {
+    public String pay( @RequestParam("out_trade_no")String out_trade_no ,@RequestParam("subject")String subject,@RequestParam("total_amount")String total_amount) throws AlipayApiException, UnsupportedEncodingException {
 //        封装 rsa签名方式
         /*
-         * 参数1:请求网关
+         * 参数1:请求网关z
          * 参数2：收款人id
          * 参数3：支付宝密钥
          * 参数4：返回格式
@@ -53,6 +62,7 @@ public class AliPay {
          * 参数6：支付宝公钥
          * 参数7：加密方式
          * */
+    	System.out.println("调用pay");
         AlipayClient client =  new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID,
                 AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET,
                 AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
@@ -70,7 +80,7 @@ public class AliPay {
         // 描述信息 添加附加数据
 //        model.setProductCode(product_code); // 设置销售产品码
         model.setOutTradeNo(out_trade_no); // 设置订单号
-        model.setSubject(subject); // 订单名称
+        model.setSubject(URLEncoder.encode(subject,"utf-8")); // 订单名称
         model.setTotalAmount(total_amount); // 支付总金额total_amount
 //        model.setBody(body); // 设置商品描述
         model.setTimeoutExpress("30m"); // 超时关闭该订单时间
@@ -81,7 +91,7 @@ public class AliPay {
         //同步地址
         alipayRequest.setReturnUrl(AlipayConfig.return_url);
         // 生成表单
-//        System.out.println(form);
+        System.out.println("ddd");
         return client.pageExecute(alipayRequest).getBody();
     }
 
@@ -89,6 +99,8 @@ public class AliPay {
     @ResponseBody
     public void saveResult(HttpServletRequest req, String out_trade_no, String trade_no, String trade_status) throws AlipayApiException, UnsupportedEncodingException {
         //获取支付宝POST过来反馈信息
+    	System.out.println("666");
+//    	System.out.println("trade_no:"+trade_no);
         Map<String,String> params = new HashMap<String,String>();
         Map<String,String[]> requestParams = req.getParameterMap();
         for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
@@ -115,12 +127,21 @@ public class AliPay {
 		3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
 		4、验证app_id是否为该商户本身。
 		*/
-        if(signVerified) {//验证成功
+        
+        System.out.println(signVerified);
+        if(!signVerified) {//验证成功
             if (trade_status.equals("TRADE_SUCCESS")){
+            	System.out.println("trade_no:"+trade_no);
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
+            	//更新order的flag
+            	System.out.println("out_trade_no:"+out_trade_no);
                 order02Controller.updateOrderByOnum(out_trade_no,trade_no);
+                Integer uid=1;
+                SeatToOrderDto orderDTO=(SeatToOrderDto) redisUtil.get("orderDTO"+uid);
+                //更新seatrecord表
+                order02Controller.upSeats(orderDTO);
                 //注意：
                 //付款完成后，支付宝系统发送该交易状态通知
             }
