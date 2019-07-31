@@ -38,8 +38,8 @@ public class OrderServiceImpl implements OrderService {
 	// 新增
 	@Override
 	// @CacheEvict(value={"findAllById"},allEntries=true)
-	public String addOrder(SeatToOrderDto orderDTO) {
-		String result = null;
+	public SeatToOrderDto addOrder(SeatToOrderDto orderDTO) {
+		
 		// 根据座位数获取票数
 		int o_number = orderDTO.getSeats().size();
 		// 生成订单号（利用当前毫秒数后八位）
@@ -52,48 +52,21 @@ public class OrderServiceImpl implements OrderService {
 		orderDTO.setO_number(o_number);
 		orderDTO.setUid(uid);
 		orderDTO.setO_ordernumber(ordernumber);
+//		redisUtil.set("ordernumber" + uid, ordernumber);// 订单号存入redis
 		// 首先，生成订单
-		 orderDao.addOrder(orderDTO);
-		// 调用支付接口，支付方法里将支付号写入订单
-		try {
-			aliPayController.pay(ordernumber, orderDTO.getFilmName(), orderDTO.getPrice() + "");
-		} catch (Exception e) {
-			// 手动回滚
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			System.out.println("支付异常");
-		} finally {
-			// 判断支付是否成功
-			Order neworder = orderDao.findAllByOrder(ordernumber);
-			// 支付失败
-			if (neworder.getFlag() != 1 || neworder == null) {
-				System.out.println("支付失败");
-				// 手动回滚
-				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-				// 将订单信息存入redis，15min后取消
-				String key = "findAllById::" + uid;// 1代表用户id，后期替换
-				List<SeatToOrderDto> orders = orderDao.findAllById(uid);
-				orders.add(orderDTO);
-				redisUtil.set(key, orders, 120l);// 设置未完成订单过期时间
-				result = "false";
-			} else if (neworder != null && neworder.getFlag() == 1) {
-				System.out.println("支付成功");
-				// 把订单id插入seatrecords,flag改为1
-				for (int i = 0; i < orderDTO.getSeats().size(); i++) {
-					String s_room = seatDao.findRoomById(orderDTO.getSeats().get(i).getSe_roomid());
-					boolean b2 = seatDao.updateSeat(neworder.getO_id(), s_room, orderDTO.getSeats().get(i).getSe_row(),
-							orderDTO.getSeats().get(i).getSe_col());
-				}
-				// 查找该订单的缓存，把redis缓存该订单信息清除
-				String key = "findAllById::" + uid;// 1代表用户id，后期替换
-				if (redisUtil.hasKey(key)) {
-					redisUtil.del(key);
-				}
-				
-				
-				result = "ok";
-			}
-		}
-		return result;
+		orderDao.addOrder(orderDTO);
+		Order neworder = orderDao.findAllByOrder(ordernumber);
+		orderDTO.setO_id(neworder.getO_id());
+		//将
+		//将orderid插入seatsrecords
+		redisUtil.set("orderDTO"+ uid, orderDTO);//	将所有订单信息存入redis
+		/*for (int i = 0; i < orderDTO.getSeats().size(); i++) {
+			String s_room = seatDao.findRoomById(orderDTO.getSeats().get(i).getSe_roomid());
+			boolean b2 = seatDao.updateSeat(neworder.getO_id(), s_room, orderDTO.getSeats().get(i).getSe_row(),
+					orderDTO.getSeats().get(i).getSe_col());
+		}*/
+		
+		return orderDTO;
 	}
 
 	// 取消订单
@@ -118,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
 
 		System.out.println("持久层操作");
 		List<SeatToOrderDto> orders = orderDao.findAllById(id);
-		
+
 		return orders;
 	}
 
@@ -156,6 +129,7 @@ public class OrderServiceImpl implements OrderService {
 		List<Seats> seats = new ArrayList<Seats>();
 		// 通过scheduleid查找订单
 		// 通过订单查seatrecords
+
 		List<Seatrecords> seatsrecords = orderDao.findSeats(scheduleid);
 		int roomid = scheduleDao.findRoomid(scheduleid);
 		for (int i = 0; i < seatsrecords.size(); i++) {
@@ -171,4 +145,16 @@ public class OrderServiceImpl implements OrderService {
 		return seats;
 	}
 
+	/**
+	 *改座次状态
+	 */
+	@Override
+	public void upSeats(SeatToOrderDto orderDTO) {
+		for (int i = 0; i < orderDTO.getSeats().size(); i++) {
+			String s_room = seatDao.findRoomById(orderDTO.getSeats().get(i).getSe_roomid());
+			boolean b2 = seatDao.updateSeat(orderDTO.getO_id(), s_room, orderDTO.getSeats().get(i).getSe_row(),
+					orderDTO.getSeats().get(i).getSe_col());
+		}
+		
+	}
 }

@@ -33,7 +33,7 @@ public interface OrderDao {
 	public Order findAllByOrder(String ordernumber);
 
 	//根据订单号修改交易号
-	@Update("update `order` set o_paynumber=#{o_paynumber} and flag=1 where o_ordernumber=#{o_ordernumber}")
+	@Update("update `order` set o_paynumber=#{o_paynumber} , flag=1 where o_ordernumber=#{o_ordernumber}")
 	public boolean updateOrderByOnum(@Param("o_ordernumber") String o_number,@Param("o_paynumber")String o_paynumber );
 
 	//查询座次

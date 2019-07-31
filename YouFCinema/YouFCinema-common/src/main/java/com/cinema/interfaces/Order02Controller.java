@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cinema.config.FallbackConfig;
 import com.cinema.dto.SeatToOrderDto;
@@ -40,4 +41,10 @@ public interface Order02Controller {
 	 */
 	@PutMapping("/updateOrder/{o_number}/{o_paynumber}")
 	public String updateOrderByOnum(@PathVariable("o_number")String o_number,@PathVariable("o_paynumber")String o_paynumber);
+
+	/**
+	 * 
+	 */
+	@RequestMapping("/upSeats")
+	public void upSeats(@RequestBody SeatToOrderDto orderDTO);
 }

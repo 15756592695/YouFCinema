@@ -7,7 +7,7 @@ import com.cinema.pojo.Seats;
 
 public interface OrderService {
 	
-	public String addOrder(SeatToOrderDto orderDTO) ;
+	public SeatToOrderDto addOrder(SeatToOrderDto orderDTO) ;
 	public String cancel(Integer o_id); 
 	public List<SeatToOrderDto> findAllById(Integer id);	
 	//获取价格
@@ -19,4 +19,6 @@ public interface OrderService {
 	//查座次，common类的接口
 	public List<Seats> findSeats(Integer scheduleid);
 
+	//更新座次记录
+	public void upSeats(SeatToOrderDto orderDTO);
 }
