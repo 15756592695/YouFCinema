@@ -22,7 +22,7 @@ public class RedisDataLoad implements InitializingBean{
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		//获取影院所有坐位
+		/*//获取影院所有坐位
 		List<Seats> seats=seatsService.getAllSeats();
 		for(int i=0;i<seats.size();i++){
 			Seats seat=seats.get(i);
@@ -31,7 +31,7 @@ public class RedisDataLoad implements InitializingBean{
 			int seatNum=seat.getSe_num();
 			//将座位信息存在redis,键为影厅id+座位编号
 			redisUtil.set(""+roomid+seatNum, 1);
-		}
+		}*/
 		
 	}
 

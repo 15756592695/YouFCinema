@@ -22,8 +22,8 @@ import com.cinema.util.RedisUtil;
 import com.woniu.service.ScheduleService;
 
 
-@Configuration
-@RabbitListener(queues="topic.seats.dead")
+/*@Configuration
+@RabbitListener(queues="topic.seats.dead")*/
 public class DeadReceiver {
 	@Autowired
 	private Order02Controller orderController;

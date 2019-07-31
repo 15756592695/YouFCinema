@@ -27,6 +27,7 @@ public class FallbackConfig implements FallbackFactory<Order02Controller>{
 
 			@Override
 			public  List<String> findSeats(Integer scheduleid) {
+				System.out.println("====================");
 				List<String> seats=new ArrayList<String>();
 				String result="服务器降级";
 				seats.add(result);

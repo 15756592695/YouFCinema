@@ -21,9 +21,20 @@ zuul:
     product: #路由的名称，这个名字可以自己写
       service-id: YouFCinema-Order01
       path: /**      # 如果通过路由来访问，可以根据微服务的名字来访问，也可以直接访问资源
-   # user: 
-     # service-id: woniucloud-user
-     # path: /**
+    film: 
+      service-id: youfciname-film
+      path: /**
+    order: 
+      service-id: YouFCinema-order02
+      path: /**    
+    comment: 
+      service-id: comment-provider-8888
+      path: /**    
+    user: 
+      service-id: user8247
+      path: /**    
+    
+     
   ReadTimeout: 10000
   ConnectTimeout: 10000
   MaxAutoRetries: 0

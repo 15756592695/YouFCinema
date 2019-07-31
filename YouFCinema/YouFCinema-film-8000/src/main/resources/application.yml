@@ -14,7 +14,7 @@ eureka:
   
 spring:
    application:
-    name: woniucloud-provider   #当前服务的名字，后面会用到
+    name: youfciname-film   #当前服务的名字，后面会用到
     
    # springboot配置redis 
    redis: 

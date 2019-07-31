@@ -45,8 +45,9 @@ public class RabbitConfig {
         //dlx的名称必须与创建exchange的名称相同
         args.put("x-dead-letter-exchange","deadExchange");
         args.put("x-message-ttl" , 30*1000);//设置队列里消息的ttl的时间30s
-
-        return QueueBuilder.nonDurable(QUEUE_DELAY).withArguments(args).build();
+        args.put("x-dead-letter-routing-key","topic.seats.dead");
+        
+        return QueueBuilder.durable(QUEUE_DELAY).withArguments(args).build();
 
 	}
 	
@@ -57,19 +58,16 @@ public class RabbitConfig {
 	
 	
 	@Bean
-	
 	public Binding bingdingExchangeMessage1(@Qualifier("topicExchange")TopicExchange topicExchange,Queue chooseseat){
 		return BindingBuilder.bind(chooseseat).to(topicExchange).with("topic.product.chooseseat");
 	}
 	//缓冲队列
 	@Bean
-	
 	public Binding bingdingExchangeMessage2(@Qualifier("topicExchange")TopicExchange topicExchange,Queue outofdate){
 		return BindingBuilder.bind(outofdate).to(topicExchange).with("topic.seats.outofdate");
 	}
 	//普通队列与死信路由绑定
 	@Bean
-	
 	public Binding bingdingExchangeMessage3(@Qualifier("deadExchange")TopicExchange topic,@Qualifier("dead")Queue message3){
 		return BindingBuilder.bind(message3).to(topic).with("topic.seats.dead");
 	}

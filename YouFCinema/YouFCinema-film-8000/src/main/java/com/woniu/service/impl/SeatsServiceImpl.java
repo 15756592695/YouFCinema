@@ -7,13 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import com.woniu.dto.ChooseSeatDto;
+import com.cinema.interfaces.Order02Controller;
 import com.cinema.pojo.Seats;
 import com.cinema.util.RedisUtil;
 import com.woniu.dao.SeatsDao;
@@ -34,6 +32,8 @@ public class SeatsServiceImpl implements SeatsService {
 	private RedisTemplate redisTemplate;
 	@Autowired
 	private DelaySender delaySender;
+	@Autowired
+	private Order02Controller order02Controller;
 	/*
 	 * 添加厅室和坐位信息(non-Javadoc)
 	 * 
@@ -68,13 +68,13 @@ public class SeatsServiceImpl implements SeatsService {
 		//获取该厅室所有坐位
 		List<Seats> seats=seatsDao.getAllByRid(roomid);
 		//获取该场电影已经选了的座位
-		List<Seats> selectedSeats=null;
+		List<Seats> selectedSeats=order02Controller.findSeats(scheduleid);
+		System.out.println("selectedSeats:"+selectedSeats);
 		//获取redis中的座位
-		
 		 for(int i=0;i<seats.size();i++){
 			 Integer row=seats.get(i).getSe_row();
 			 Integer col=seats.get(i).getSe_col();
-			 String key=""+ scheduleid + roomid + row + col;
+			 String key="s"+ scheduleid + roomid + row + col;
 			 if(redisUtil.hasKey(key)){
 				 Seats seat=new Seats();
 				 seat.setSe_col(col);
@@ -90,12 +90,7 @@ public class SeatsServiceImpl implements SeatsService {
 		return seatMap;
 	}
 
-	@Override
-	public List<Seats> getAllSeats() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	/*
 	 * 用户选中的坐位(non-Javadoc)
 	 * 
@@ -122,7 +117,7 @@ public class SeatsServiceImpl implements SeatsService {
 			System.out.println("=====+++++++++++++"+seatNum);
 					
 			// 查看redis里是否有这个座位信息
-			boolean b=redisUtil.hasKey("" + scheduleid + roomid + row + col);
+			boolean b=redisUtil.hasKey("s" + scheduleid + roomid + row + col);
 			
 			if (b) {
 				return seatNum;
@@ -145,5 +140,6 @@ public class SeatsServiceImpl implements SeatsService {
 		return 1;
 
 	}
+
 
 }

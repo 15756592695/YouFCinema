@@ -27,11 +27,4 @@ public class DelaySender {
 		this.amqpTemplate.convertAndSend("topicExchange", "topic.seats.outofdate", map);
 	}
 	
-	 /**
-     * 设置消息的相关参数
-     * @return
-	 * @throws InterruptedException 
-     */
-    
-
 }
