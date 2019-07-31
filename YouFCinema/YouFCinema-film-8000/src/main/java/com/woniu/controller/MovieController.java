@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cinema.interfaces.CommentController;
@@ -30,6 +31,7 @@ public class MovieController {
 	 */
 	@RequestMapping("/allmovies")
 	public List<Movie> allMovies(){
+		System.out.println("===========----------------");
 		return movieService.findAll();
 	}
 	  
@@ -41,6 +43,7 @@ public class MovieController {
 		Map<String,Object> map=new HashMap<>();
 		//获取电影详情
 		Movie movie=movieService.getMovieDetailById(movieid);
+		System.out.println(movie+"-----------");
 		//获取电影的评论
 		List<Comment> comments=commentController.findAllById(movieid);
 	/*	List<Comment> comments=null;*/
@@ -59,4 +62,5 @@ public class MovieController {
 		
 		return scheduleMap;
 	}
+	
 }

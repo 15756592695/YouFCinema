@@ -28,8 +28,6 @@ public class Receiver {
 	@Autowired
 	private Order02Controller orderController;
 	@Autowired
-	private RedisTemplate redisTemplate;
-	@Autowired
 	private RedisUtil redisUtil;
 	@Autowired
 	private ScheduleService scheduleService;
@@ -43,9 +41,9 @@ public class Receiver {
 		Integer scheduleid=dto.getScheduleid();
 		//根据排片id获取具体电影的排片信息
 		Schedule schedule=scheduleService.findScheduleById(scheduleid);
-		
+		//创建传给订单的对象
 		SeatToOrderDto sto=new SeatToOrderDto();
-		
+		//设置值
 		sto.setDate(schedule.getS_date());
 		sto.setDimention(schedule.getS_dimension());
 		sto.setEndTime(schedule.getS_endtime());
@@ -59,24 +57,28 @@ public class Receiver {
 		sto.setFilmId(schedule.getS_filmid());
 		
 		//跳转至订单页面
-		/*SeatToOrderDto result=orderController.addOrder(sto);
-		if(!result.getFilmName().equals("defeat")){*/
-		if(true){
-			Integer rid=schedule.getS_roomid();
-			for(int i=0;i<seats.size();i++){
-				Integer row=seats.get(i).getSe_row();
-				Integer col=seats.get(i).getSe_col();
-				String key="" + scheduleid + rid + row + col;
-				
-				//将已选座位存进redis,在十五分钟之后移除redis中的座位
-			/*	 boolean boo=redisUtil.set(key,1,900);*/
-				
+		String result=orderController.view(sto);
+		if(!result.equals("服务器降级")){
+			if(true){
+				Integer rid=schedule.getS_roomid();
+				for(int i=0;i<seats.size();i++){
+					Integer row=seats.get(i).getSe_row();
+					Integer col=seats.get(i).getSe_col();
+					String key="s" + scheduleid + row + col;
+					//将已选座位存进redis的hasn表
+					/*boolean b= redisUtil.hset("selectedSeats", key, 1);*/
+					boolean b=redisUtil.set(key, 1,90);
+					 if(!b){
+						 System.out.println("将已选座位存进redis的hasn表,失败");
+					 }
+					 
+				}	
 			}			
-		}/*else if(result.getFilmName().equals("defeat")){
+		}else if(result.equals("服务器降级")){
 			//服务器降级
-		
+			System.out.println("服务器降级");
 		}
-*/
+
 			
 	}
 }

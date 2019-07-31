@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cinema.interfaces.Order02Controller;
 import com.cinema.pojo.Seats;
 import com.woniu.service.SeatsService;
 
@@ -18,6 +20,7 @@ import com.woniu.service.SeatsService;
 public class SeatsController {
 	@Autowired
 	private SeatsService seatsService;
+
 	/*
 	 * 添加厅室
 	 */
@@ -31,8 +34,8 @@ public class SeatsController {
 	 * 根据厅室id获取所有坐位
 	 */
 	@RequestMapping("/getAllSeats")
-	public Map<String,Object> getAll(@RequestParam(value="roomid") Integer roomid,@RequestParam(value="scheduleid") Integer scheduleid){
-		System.out.println(roomid+"========================-----------"+scheduleid);
+	public Map<String,Object> getAllSeats(@RequestParam(value="roomid") Integer roomid,@RequestParam(value="scheduleid") Integer scheduleid){
+		System.out.println(roomid+"-----====="+scheduleid);
 		Map<String,Object> map=seatsService.getAllByRid(roomid,scheduleid);
 		System.out.println(map);
 		return map;
@@ -46,5 +49,10 @@ public class SeatsController {
 		seatstr = URLDecoder.decode(seatstr, "UTF-8");
 		int reInt=seatsService.getSelectedSeats(seatstr,roomid,scheduleid);
 		return reInt;
+	}
+	
+	@RequestMapping("/testq")
+	public String test(){
+		return "ok";
 	}
 }

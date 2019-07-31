@@ -31,7 +31,7 @@ public interface Order02Controller {
 	 * @return
 	 */
 	@GetMapping("/getSeats/{scheduleid}")
-	public <E> List<E> findSeats(@PathVariable("scheduleid")Integer scheduleid);
+	public <E> List<E> findSeats(@PathVariable(name="scheduleid")Integer scheduleid);
 	
 	/**
 	 * 更新订单支付号
