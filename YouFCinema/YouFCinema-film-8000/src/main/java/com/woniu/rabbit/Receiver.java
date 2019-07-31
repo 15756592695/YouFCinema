@@ -68,13 +68,7 @@ public class Receiver {
 				Integer col=seats.get(i).getSe_col();
 				String key="" + scheduleid + rid + row + col;
 				
-				JedisConnectionFactory con=(JedisConnectionFactory) redisTemplate.getConnectionFactory();
-				//切换到数据库1
-				con.setDatabase(1);
-				redisTemplate.setConnectionFactory(con);
 				//将已选座位存进redis,在十五分钟之后移除redis中的座位
-				redisTemplate.opsForValue().set(key, 1,900,TimeUnit.SECONDS);
-				
 			/*	 boolean boo=redisUtil.set(key,1,900);*/
 				
 			}			
