@@ -33,6 +33,14 @@ public class MovieController {
 	public List<Movie> allMovies(){
 		return movieService.findAll();
 	}
+	/*
+	 * 根据电影名获取电影信息
+	 */
+	@RequestMapping("/findFileByName")
+	public Movie findFileByName(String filmName){
+	
+		return movieService.findFileByName(filmName);
+	}
 	  
 	/*
 	 * 根据电影id获取电影所有信息

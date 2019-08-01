@@ -35,4 +35,8 @@ public interface MovieDao {
 	//根据电影id查找电影价格
 	@Select("select * from movie where f_id=#{id}")
 	public Movie findPriceById(Integer id);
+	
+	//根据电影名获取电影信息
+	@Select("select * from movie where f_name=#{filmName} and f_flag!=0")
+	public Movie findFileByName(String filmName);
 }
