@@ -27,5 +27,14 @@ public class MovieServiceImpl implements MovieService{
 		
 		return movieDao.getMovieDtailById(movieid);
 	}
+	/*
+	 * 根据电影名获取电影信息(non-Javadoc)
+	 * @see com.woniu.service.MovieService#findFileByName(java.lang.String)
+	 */
+	@Override
+	public Movie findFileByName(String filmName) {
+		
+		return movieDao.findFileByName(filmName);
+	}
 	
 }

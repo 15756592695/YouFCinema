@@ -31,8 +31,15 @@ public class MovieController {
 	 */
 	@RequestMapping("/allmovies")
 	public List<Movie> allMovies(){
-		System.out.println("===========----------------");
 		return movieService.findAll();
+	}
+	/*
+	 * 根据电影名获取电影信息
+	 */
+	@RequestMapping("/findFileByName")
+	public Movie findFileByName(String filmName){
+	
+		return movieService.findFileByName(filmName);
 	}
 	  
 	/*
