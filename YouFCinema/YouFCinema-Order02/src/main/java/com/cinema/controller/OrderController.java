@@ -4,18 +4,21 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cinema.dto.SeatToOrderDto;
 import com.cinema.interfaces.AliPayController;
 import com.cinema.pojo.Order;
-import com.cinema.pojo.OrderDTO;
-import com.cinema.pojo.Seatrecords;
 import com.cinema.pojo.Seats;
 import com.cinema.service.OrderService;
 import com.cinema.util.RedisUtil;
@@ -23,21 +26,41 @@ import com.cinema.util.RedisUtil;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
+@CrossOrigin
 public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
 	@Autowired
 	private RedisUtil redisUtil;
+	@Autowired
+	private AliPayController aliPayController;
 	
 	/**
-	 * 渲染前端
+	 * 前端提交的数据，放入redis缓存
 	 */
-	@GetMapping("/showMessage")
-	@ApiOperation(value="渲染前端",notes="将信息渲染在前端")
-	public SeatToOrderDto view(@RequestBody SeatToOrderDto orderDTO) {
-		return orderDTO;
+	@PostMapping("/postMessage")
+	@ApiOperation(value="发送数据",notes="将信息保存在redis")
+	public String view(@RequestBody SeatToOrderDto orderDTO) {
+		String uid="1";
+//		redisUtil.set("order"+uid, orderDTO, 900l);
+		redisUtil.set("order"+uid, orderDTO);
+		return "ok";
 	}
+	
+	/**
+	 * 在redis中获取信息，渲染前端
+	 */
+	@GetMapping("/getMassage")
+	public SeatToOrderDto getMessage() {
+		System.out.println("请求");
+		String uid="1";
+		SeatToOrderDto seatToOrderDto= (SeatToOrderDto) redisUtil.get("order"+uid);
+		System.out.println(seatToOrderDto);
+		return seatToOrderDto;
+	}
+	
+	
 	
 	/**
 	 * 查座次，common类的接口
@@ -53,16 +76,18 @@ public class OrderController {
 		return seat;
 	}
 	
-	@GetMapping("/test")
+	@PostMapping("/test")
 	@ApiOperation(value="测试",notes="测试")
 	/**
 	 * 
 	 * @param order
 	 * @return
 	 */
-	public String  test() {
-		String b=orderService.test();
-		return b;
+	public String test(@RequestBody SeatToOrderDto orderDTO) {
+		String uid="1";
+		boolean b =redisUtil.set("order"+uid, orderDTO);
+		System.out.println(b);
+		return "ok";
 	}
 	
 	
@@ -70,23 +95,28 @@ public class OrderController {
 	 * 
 	 * @param order
 	 * @return
+	 * @throws Exception 
 	 */
-	@PostMapping("/addOrder")
+	@GetMapping("/addOrder")
 	@ApiOperation(value="增",notes="新增订单")
-	public String addOrder(@RequestBody SeatToOrderDto orderDTO) {
-		System.out.println(orderDTO);
-		String result=orderService.addOrder(orderDTO);
-		return result;
+	public String addOrder() throws Exception {
+		String uid="1";
+//		redisUtil.set("order"+uid, orderDTO, 900l);
+		SeatToOrderDto orderDTO01=(SeatToOrderDto) redisUtil.get("order"+uid);//获取前端提交在redis的订单数据
+		SeatToOrderDto orderDTO=orderService.addOrder(orderDTO01);
+		System.out.println("orderDTO:"+orderDTO);
+		return aliPayController.pay(orderDTO.getO_ordernumber(), orderDTO.getFilmName(), orderDTO.getPrice() + "");
 	}
+
 	
-	@GetMapping("/findAllById/{id}")
-	@ApiOperation(value="查",notes="查看用户所有订单")
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Order> findAllById(@PathVariable("id")Integer id){
-		List<Order> orders=orderService.findAllById(id);
+	@GetMapping("/findAllById/{id}")
+	@ApiOperation(value="查",notes="查看用户所有订单")
+	public List<SeatToOrderDto> findAllById(@PathVariable("id")Integer id){
+		List<SeatToOrderDto> orders=orderService.findAllById(id);
 		System.out.println(orders);
 		return orders;
 	}
@@ -129,17 +159,21 @@ public class OrderController {
 		return result;
 	}
 	
-	
-	
-	
-	/**
-	 * 用于计算未支付订单剩余时间，获取的是创建时间+总剩余时间
-	 * @return
-	 */
-	@GetMapping("/gettime")
-	public String getDate(){
-		String begintime=redisUtil.get("dateTime::"+1)+"";
-		return begintime;
+	@GetMapping("/testpay")
+	public String payTest() throws Exception {
+		
+	System.out.println("11");
+		
+		
+		 return aliPayController.pay("111", "dd", "1");
 	}
+	
+	
+	@RequestMapping("/upSeats")
+	public void upSeats(@RequestBody SeatToOrderDto orderDTO) {
+		orderService.upSeats(orderDTO);
+	}
+	
+	
 	
 }

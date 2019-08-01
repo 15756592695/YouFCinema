@@ -28,10 +28,65 @@ public class SeatToOrderDto {
 	
 	private List<Seats> seats;//所选座位
 	
-	private Integer scheduleid;
+	private Integer scheduleid;//场次id
 	
+	//订单用数据
+	 private Integer o_number;//票数数量
+	 private Integer uid;//用户id
+	 private String o_ordernumber;//订单号
+	 private Integer o_id;//订单id
+	 private String o_paynumber;//支付号
+	 private Integer flag;
+	 
 	
-	
+	public Integer getO_id() {
+		return o_id;
+	}
+
+	public void setO_id(Integer o_id) {
+		this.o_id = o_id;
+	}
+
+	public String getO_paynumber() {
+		return o_paynumber;
+	}
+
+	public void setO_paynumber(String o_paynumber) {
+		this.o_paynumber = o_paynumber;
+	}
+
+	public Integer getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
+
+	public Integer getO_number() {
+		return o_number;
+	}
+
+	public void setO_number(Integer o_number) {
+		this.o_number = o_number;
+	}
+
+	public Integer getUid() {
+		return uid;
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public String getO_ordernumber() {
+		return o_ordernumber;
+	}
+
+	public void setO_ordernumber(String o_ordernumber) {
+		this.o_ordernumber = o_ordernumber;
+	}
+
 	public Integer getFilmId() {
 		return filmId;
 	}
@@ -110,6 +165,15 @@ public class SeatToOrderDto {
 
 	public void setSeats(List<Seats> seats) {
 		this.seats = seats;
+	}
+
+	@Override
+	public String toString() {
+		return "SeatToOrderDto [filmName=" + filmName + ", filmId=" + filmId + ", RoomName=" + RoomName + ", date="
+				+ date + ", startTime=" + startTime + ", endTime=" + endTime + ", dimention=" + dimention + ", price="
+				+ price + ", seats=" + seats + ", scheduleid=" + scheduleid + ", o_number=" + o_number + ", uid=" + uid
+				+ ", o_ordernumber=" + o_ordernumber + ", o_id=" + o_id + ", o_paynumber=" + o_paynumber + ", flag="
+				+ flag + "]";
 	}
 	
 	

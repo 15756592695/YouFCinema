@@ -29,4 +29,9 @@ public class CommentServiceImp implements CommentService {
     public Boolean delComment(Integer id) {
         return commentDao.delComment(id);
     }
+
+    @Override
+    public List<Comment> findAll(int id) {
+        return commentDao.findAll(id);
+    }
 }

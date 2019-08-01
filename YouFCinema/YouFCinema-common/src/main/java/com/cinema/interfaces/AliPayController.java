@@ -2,6 +2,8 @@ package com.cinema.interfaces;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +18,7 @@ public interface AliPayController {
 	//total_amount：价格
     @ResponseBody
     @GetMapping("/pay")
-    String pay(@RequestParam("out_trade_no") String out_trade_no ,@RequestParam("subject") String subject,@RequestParam("total_amount") String total_amount);
+    public  String pay(@RequestParam("out_trade_no")String out_trade_no ,@RequestParam("subject")String subject,@RequestParam("total_amount")String total_amount) throws Exception;
 
 
     @RequestMapping("/refund")

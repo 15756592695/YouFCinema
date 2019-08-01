@@ -1,0 +1,53 @@
+server:
+  port: 8000         #当前服务的端口号
+  
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url: 
+       #defaultZone: http://eurekaserver9000.com:9000/eureka,http://eurekaserver9001.com:9001/eureka
+       defaultZone: http://eurakeserver9000.com:9000/eureka
+  instance: 
+    instance-id: woniucloud-provider8000 # 配置注册中心显示出来的微服务名称
+    prefer-ip-address: true     #访问路径可以显示IP地址 
+
+ 
+  
+spring:
+   application:
+    name: youfciname-film   #当前服务的名字，后面会用到
+    
+   # springboot配置redis 
+   redis: 
+    #数据库索引
+    database: 0 
+    #服务器地址
+    host: 192.168.117.128
+    #服务器连接端口
+    port: 6379
+    password: 
+     #哨兵模式
+   # sentinel: 
+    #  master: mymaster #哨兵集群的名称
+     # nodes: 192.168.117.128:6379,192.168.117.128:6380,192.168.117.128:6381 #哨兵节点 
+    lettuce:
+      pool:
+        max-active: 10 #最大连接数
+        max-wait: -1  #连接等待时间没有限制，无限等待
+        min-idle: 1 #最小连接数为1   
+        
+   datasource:
+    driver-class-name: com.mysql.jdbc.Driver           # mysql驱动包
+    url: jdbc:mysql://120.79.100.105:3306/youfinema              # 数据库名称
+    username: root
+    password: 123456
+    dbcp2:
+      min-idle: 5                                      # 数据库连接池的最小维持连接数
+      initial-size: 5                                  # 初始化连接数
+      max-total: 5                                     # 最大连接数
+      max-wait-millis: 200                             # 等待连接获取的最大超时时间
+      
+info: #监控信息 
+  app.name: woniucloud
+  company.name: www.woniu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
