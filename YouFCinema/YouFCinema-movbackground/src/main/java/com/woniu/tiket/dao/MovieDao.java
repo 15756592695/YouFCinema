@@ -19,10 +19,30 @@ public interface MovieDao {
 	@Results({
 		@Result(id=true,column="f_id",property="f_id"),
 		@Result(column="f_typeid",property="f_typeid"),
-		@Result(column="f_typeid",property="filetype",one=@One(select="movieFiletype"))
+		@Result(column="f_typeid",property="filmType",one=@One(select="movieFiletype"))
 	})
 	public List<Movie> allMovies();
 	
 	@Select("select * from filmtype where t_id=#{f_typeid}")
 	public Filetype movieFiletype(Integer f_typeid);
+	
+	/**
+	 * 获取单个电影信息
+	 * @return
+	 */
+	@Select("select * from movie where f_id=#{id} and f_flag=1")
+	@Results({
+		@Result(id=true,column="f_id",property="f_id"),
+		@Result(column="f_typeid",property="f_typeid"),
+		@Result(column="f_typeid",property="filmType",one=@One(select="movieFiletype"))
+	})
+	public Movie moviesInfor(Integer id);
+	
+	/**
+	 * 根据电影名称获取排片id
+	 * @param name
+	 * @return
+	 */
+	@Select("select s_id from schedule INNER JOIN movie on schedule.s_filmid=movie.f_id where f_name=#{name}")
+	public List<Integer> findAllid(String name);
 }

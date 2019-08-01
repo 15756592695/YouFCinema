@@ -1,4 +1,23 @@
+<<<<<<< HEAD
 F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\config\FallbackConfig.java
+=======
+<<<<<<< HEAD
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Comment.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\User.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\config\RedisConfig.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Filetype.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Movie.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\util\RedisUtil.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Seatrecords.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Order.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\interfaces\OrderController.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Schedule.java
+E:\repository\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Room.java
+=======
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\config\RedisConfig.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\User.java
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\util\RedisUtil.java
+>>>>>>> branch 'master' of https://github.com/15756592695/YouFCinema.git
 F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Schedule.java
 F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\interfaces\OrderController.java
 F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Order.java
@@ -14,4 +33,9 @@ F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\c
 F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\dto\SeatToOrderDto.java
 F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Movie.java
 F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Filetype.java
+<<<<<<< HEAD
 F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Seats.java
+=======
+F:\git_fz\YouFCinema\YouFCinema\YouFCinema\YouFCinema-common\src\main\java\com\cinema\pojo\Comment.java
+>>>>>>> branch 'master' of https://github.com/15756592695/YouFCinema.git
+>>>>>>> branch 'master' of https://github.com/15756592695/YouFCinema.git

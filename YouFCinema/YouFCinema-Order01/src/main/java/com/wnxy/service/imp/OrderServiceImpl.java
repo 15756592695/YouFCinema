@@ -52,7 +52,7 @@ public class OrderServiceImpl implements IOrderService{
 	 */
 	@Override
 	public List<Order> findAllByMany(OrderDTO orderDTO) {
-		// TODO Auto-generated method stub
+		System.out.println(orderDTO+"dao");
 		return orderDao.manyQuery(orderDTO);
 	}
 	/**

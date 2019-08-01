@@ -130,15 +130,14 @@ public class Movie implements Serializable {
         this.f_forecast = f_forecast == null ? null : f_forecast.trim();
     }
 
+    public BigDecimal getF_price() {
+        return f_price;
+    }
   
 
-    public BigDecimal getF_price() {
-		return f_price;
-	}
-
-	public void setF_price(BigDecimal f_price) {
-		this.f_price = f_price;
-	}
+    public void setF_price(BigDecimal f_price) {
+        this.f_price = f_price;
+    }
 
 	public String getF_performer() {
         return f_performer;
