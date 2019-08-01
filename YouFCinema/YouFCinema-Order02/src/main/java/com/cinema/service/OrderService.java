@@ -21,4 +21,6 @@ public interface OrderService {
 
 	//更新座次记录
 	public void upSeats(SeatToOrderDto orderDTO);
+	
+	public SeatToOrderDto findOrder(String o_ordernumber);
 }

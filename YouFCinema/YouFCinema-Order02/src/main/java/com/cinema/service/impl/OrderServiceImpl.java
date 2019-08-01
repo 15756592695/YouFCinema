@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
 
 	// 新增
 	@Override
-	// @CacheEvict(value={"findAllById"},allEntries=true)
+	 @CacheEvict(value={"findAllById"},allEntries=true)
 	public SeatToOrderDto addOrder(SeatToOrderDto orderDTO) {
 		
 		// 根据座位数获取票数
@@ -57,9 +58,7 @@ public class OrderServiceImpl implements OrderService {
 		orderDao.addOrder(orderDTO);
 		Order neworder = orderDao.findAllByOrder(ordernumber);
 		orderDTO.setO_id(neworder.getO_id());
-		//将
-		//将orderid插入seatsrecords
-		redisUtil.set("orderDTO"+ uid, orderDTO);//	将所有订单信息存入redis
+		redisUtil.set("orderDTO"+ ordernumber, orderDTO);//	将该订单的所有信息存入redis
 		/*for (int i = 0; i < orderDTO.getSeats().size(); i++) {
 			String s_room = seatDao.findRoomById(orderDTO.getSeats().get(i).getSe_roomid());
 			boolean b2 = seatDao.updateSeat(neworder.getO_id(), s_room, orderDTO.getSeats().get(i).getSe_row(),
@@ -70,6 +69,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	// 取消订单
+	 @CacheEvict(value={"findAllById"},allEntries=true)
 	@Override
 	public String cancel(Integer o_id) {
 		String result = null;
@@ -156,5 +156,17 @@ public class OrderServiceImpl implements OrderService {
 					orderDTO.getSeats().get(i).getSe_col());
 		}
 		
+	}
+
+	/**
+	 * 查找单条订单信息
+	 */
+	@Override
+	public SeatToOrderDto findOrder(String o_ordernumber) {
+		String key="orderDTO"+o_ordernumber;
+		SeatToOrderDto oneorder= (SeatToOrderDto) redisUtil.get(key);
+		
+		System.out.println("oneorder:"+oneorder);
+		return oneorder;
 	}
 }
