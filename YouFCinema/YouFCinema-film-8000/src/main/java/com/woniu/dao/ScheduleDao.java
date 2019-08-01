@@ -27,6 +27,13 @@ public interface ScheduleDao {
 		@Result(column="s_filmid",property="film",one=@One(select="com.woniu.dao.MovieDao.findNamePriceById"))
 	})
 	public Schedule findScheduleById(Integer scheduleid);
+	//根据id查找电影价格
+	@Select("select * from schedule where s_id=#{scheduleid}")
+	@Results({
+		@Result(id=true,column="s_id",property="s_id"),
+		@Result(column="s_filmid",property="film",one=@One(select="com.woniu.dao.MovieDao.findPriceById"))
+	})
+	public Schedule findPriceById(Integer scheduleid);
 
 	
 

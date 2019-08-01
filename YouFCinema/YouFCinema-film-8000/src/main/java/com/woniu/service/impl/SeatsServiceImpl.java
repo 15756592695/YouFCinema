@@ -1,5 +1,6 @@
 package com.woniu.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,13 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.woniu.dto.ChooseSeatDto;
 import com.cinema.interfaces.Order02Controller;
+import com.cinema.pojo.Schedule;
 import com.cinema.pojo.Seats;
 import com.cinema.util.RedisUtil;
+import com.woniu.dao.ScheduleDao;
 import com.woniu.dao.SeatsDao;
 import com.woniu.rabbit.DelaySender;
 import com.woniu.rabbit.Sender;
@@ -24,11 +26,11 @@ public class SeatsServiceImpl implements SeatsService {
 	@Autowired
 	private SeatsDao seatsDao;
 	@Autowired
+	private ScheduleDao scheduleDao;
+	@Autowired
 	private RedisUtil redisUtil;
 	@Autowired
 	private Sender sender;
-	@Autowired
-	private DelaySender delaySender;
 	@Autowired
 	private Order02Controller order02Controller;
 	/*
@@ -56,24 +58,27 @@ public class SeatsServiceImpl implements SeatsService {
 
 	/*
 	 * 根据厅室id获取所有坐位(non-Javadoc)
-	 * 
-	 * @see com.woniu.service.SeatsService#getAllByRid(java.lang.Integer)
 	 */
 	@Override
 	public Map<String,Object> getAllByRid(Integer roomid,Integer scheduleid) {
 		Map<String,Object> seatMap=new HashMap<>();
+		//获取该场电影所有信息
+		Schedule movie=scheduleDao.findPriceById(scheduleid);
+		//单价
+		BigDecimal price=movie.getFilm().getF_price().multiply(new BigDecimal(movie.getS_discount()));
+		//电影名
+		String filmName=movie.getFilm().getF_name();
 		//获取该厅室所有坐位
 		List<Seats> seats=seatsDao.getAllByRid(roomid);
 		//获取该场电影已经选了的并付款的座位
 		List<Seats> selectedSeats=order02Controller.findSeats(scheduleid);
-		System.out.println("selectedSeats:"+selectedSeats);
 		//获取redis中的座位
-		 for(int i=0;i<seats.size();i++){
+		for(int i=0;i<seats.size();i++){
 			 Integer row=seats.get(i).getSe_row();
 			 Integer col=seats.get(i).getSe_col();
 			 String key="s"+ scheduleid  + row + col;
+			
 			 if(redisUtil.hasKey(key)){
-				 System.out.println(key+"key");
 				 Seats seat=new Seats();
 				 seat.setSe_col(col);
 				 seat.setSe_row(row);
@@ -82,13 +87,10 @@ public class SeatsServiceImpl implements SeatsService {
 			 }
 			 
 		 }
-		 Seats seat=new Seats();
-		 seat.setSe_col(2);
-		 seat.setSe_row(1);
-		 selectedSeats.add(seat);
 		seatMap.put("allSeats", seats);
 		seatMap.put("selected", selectedSeats);
-		
+		seatMap.put("price", price);
+		seatMap.put("filmName", filmName);
 		return seatMap;
 	}
 
@@ -120,6 +122,7 @@ public class SeatsServiceImpl implements SeatsService {
 			
 			// 查看map对象里是否有这个座位信息
 			/*boolean b=redisUtil.hHasKey("selectedSeats", key);*/
+		
 			boolean b=redisUtil.hasKey(key);
 		
 			if (b) {

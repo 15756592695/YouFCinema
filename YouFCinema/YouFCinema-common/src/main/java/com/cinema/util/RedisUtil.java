@@ -20,6 +20,8 @@ public class RedisUtil {
 	@Autowired
 	private RedisTemplate redisTemplate;
 	
+	
+	
 	//=============================common============================
 		/**
 		 * 指定缓存失效时间

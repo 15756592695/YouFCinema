@@ -1,6 +1,7 @@
 package com.woniu.rabbit;
 
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +32,11 @@ public class Receiver {
 	private RedisUtil redisUtil;
 	@Autowired
 	private ScheduleService scheduleService;
+	@Autowired
+	private RedisTemplate redisTemplate;
 	
 	@RabbitHandler
 	public void process(Map<String,Object> map){
-		System.out.println("receiver-----:"+map);
 		ChooseSeatDto dto=(ChooseSeatDto) map.get("dto");
 		List<Seats> seats=(List<Seats>) map.get("seats");
 		//获取排片id
@@ -48,7 +50,7 @@ public class Receiver {
 		sto.setDimention(schedule.getS_dimension());
 		sto.setEndTime(schedule.getS_endtime());
 		sto.setFilmName(schedule.getFilm().getF_name());
-		BigDecimal discount=new BigDecimal(schedule.getS_discount());
+		BigDecimal discount=new BigDecimal(schedule.getS_discount()*seats.size());
 		sto.setPrice(schedule.getFilm().getF_price().multiply(discount));
 		sto.setRoomName(schedule.getRoom());
 		sto.setSeats(seats);
@@ -67,7 +69,9 @@ public class Receiver {
 					String key="s" + scheduleid + row + col;
 					//将已选座位存进redis的hasn表
 					/*boolean b= redisUtil.hset("selectedSeats", key, 1);*/
+					
 					boolean b=redisUtil.set(key, 1,90);
+				
 					 if(!b){
 						 System.out.println("将已选座位存进redis的hasn表,失败");
 					 }

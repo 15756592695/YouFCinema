@@ -31,7 +31,6 @@ public class MovieController {
 	 */
 	@RequestMapping("/allmovies")
 	public List<Movie> allMovies(){
-		System.out.println("===========----------------");
 		return movieService.findAll();
 	}
 	  

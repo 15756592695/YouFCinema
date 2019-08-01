@@ -11,7 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({"com.woniu.controller",
 	"com.woniu.service",
 	"com.cinema.util",
-	"com.woniu.rabbit"})
+	"com.woniu.rabbit",
+	"com.woniu.config"})
 @MapperScan("com.woniu.dao")
 @EnableEurekaClient
 @EnableFeignClients("com.cinema.interfaces")
