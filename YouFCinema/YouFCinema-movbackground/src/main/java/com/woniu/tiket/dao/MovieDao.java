@@ -15,7 +15,7 @@ public interface MovieDao {
 	 * 查找所有电影
 	 * @return
 	 */
-	@Select("select * from movie where f_flag=1 or f_flag=2")
+	@Select("select * from movie")
 	@Results({
 		@Result(id=true,column="f_id",property="f_id"),
 		@Result(column="f_typeid",property="f_typeid"),

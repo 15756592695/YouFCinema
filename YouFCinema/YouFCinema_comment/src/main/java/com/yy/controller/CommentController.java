@@ -31,8 +31,8 @@ public class CommentController {
         return commentService.delComment(c_id);
     }
 
-    @GetMapping("/commentAll/{id}")
-    public List<Comment> findAll(@PathVariable(name = "id") int id){
-        return commentService.findAll(id);
+    @GetMapping("/commentAll")
+    public List<Comment> findAll(){
+        return commentService.findAll();
     }
 }

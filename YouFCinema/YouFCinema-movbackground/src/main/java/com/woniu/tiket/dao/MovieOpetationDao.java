@@ -28,7 +28,7 @@ public interface MovieOpetationDao {
 	 * @param moviename
 	 * @return
 	 */
-	@Select("select f_id from movie where f_name=#{moviename} and flag=1 or flag=2")
+	@Select("select f_id from movie where f_name=#{moviename} and f_flag=1 or f_flag=2")
 	public Integer findMovieid(String moviename);
 	
 	/**

@@ -17,5 +17,5 @@ public interface CommentService {
     Boolean delComment(Integer id);
 
     //查询所有电影 可动态查询  电影
-    List<Comment> findAll(int id);
+    List<Comment> findAll();
 }

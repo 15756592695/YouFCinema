@@ -21,6 +21,6 @@ public interface CommentDao {
     Boolean delComment(Integer id);
 
     // 查询所有评论
-    @SelectProvider(type= DynaSqlProvider.class,method="selectWhitParamSql")
-    List<Comment> findAll(int id);
+    @Select("SELECT * FROM `comment` WHERE flag = 0")
+    List<Comment> findAll();
 }

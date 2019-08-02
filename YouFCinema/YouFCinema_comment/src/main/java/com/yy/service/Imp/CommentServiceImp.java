@@ -31,7 +31,7 @@ public class CommentServiceImp implements CommentService {
     }
 
     @Override
-    public List<Comment> findAll(int id) {
-        return commentDao.findAll(id);
+    public List<Comment> findAll() {
+        return commentDao.findAll();
     }
 }
