@@ -28,7 +28,7 @@ public interface OrderDao {
 	public boolean cancel(Integer o_id); 
 	
 	//查找用户所有的订单
-	@Select("SELECT o_id,scheduleid,o_number,o_totalprice price,uid,o_ordernumber,o_paynumber,flag,s_filmid filmId,s_starttime startTime,f_name filmName,f_picture from `order` o INNER JOIN `schedule` s ON o.scheduleid=s.s_id INNER JOIN movie m on s.s_filmid=m.f_id WHERE uid=#{uid} and flag!=2")
+	@Select("SELECT o_id,scheduleid,o_number,o_totalprice price,uid,o_ordernumber,o_paynumber,flag,s_filmid filmId,s_starttime startTime,f_name filmName,f_picture from `order` o INNER JOIN `schedule` s ON o.scheduleid=s.s_id INNER JOIN movie m on s.s_filmid=m.f_id WHERE uid=#{uid} and flag!=2 ORDER BY o_id DESC ")
 	public List<SeatToOrderDto> findAllById(Integer id);
 
 	//查找订单id

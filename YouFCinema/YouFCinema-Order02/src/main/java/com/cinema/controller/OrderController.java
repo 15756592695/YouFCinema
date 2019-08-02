@@ -43,6 +43,7 @@ public class OrderController {
 	@ApiOperation(value="发送数据",notes="将信息保存在redis")
 	public String view(@RequestBody SeatToOrderDto orderDTO) {
 		String uid="1";
+		System.out.println(orderDTO);
 //		redisUtil.set("order"+uid, orderDTO, 900l);
 		redisUtil.set("order"+uid, orderDTO);
 		return "ok";
@@ -83,11 +84,9 @@ public class OrderController {
 	 * @param order
 	 * @return
 	 */
-	public String test(@RequestBody SeatToOrderDto orderDTO) {
-		String uid="1";
-		boolean b =redisUtil.set("order"+uid, orderDTO);
-		System.out.println(b);
-		return "ok";
+	public SeatToOrderDto test(@RequestBody SeatToOrderDto orderDTO) {
+		System.out.println(orderDTO.getDate());
+		return orderDTO;
 	}
 	
 	
@@ -164,7 +163,7 @@ public class OrderController {
 	 * 支付宝接口调用的方法1
 	 * @param orderDTO
 	 */
-	@RequestMapping("/upSeats")
+	@PostMapping("/upSeats")
 	public void upSeats(@RequestBody SeatToOrderDto orderDTO) {
 		orderService.upSeats(orderDTO);
 	}

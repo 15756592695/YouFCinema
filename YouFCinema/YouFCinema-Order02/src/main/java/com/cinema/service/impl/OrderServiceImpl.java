@@ -32,8 +32,6 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private ScheduleDao scheduleDao;
 	@Autowired
-	private AliPayController aliPayController;
-	@Autowired
 	private RedisUtil redisUtil;
 
 	// 新增
@@ -56,15 +54,10 @@ public class OrderServiceImpl implements OrderService {
 //		redisUtil.set("ordernumber" + uid, ordernumber);// 订单号存入redis
 		// 首先，生成订单
 		orderDao.addOrder(orderDTO);
+		
 		Order neworder = orderDao.findAllByOrder(ordernumber);
 		orderDTO.setO_id(neworder.getO_id());
 		redisUtil.set("orderDTO"+ ordernumber, orderDTO);//	将该订单的所有信息存入redis
-		/*for (int i = 0; i < orderDTO.getSeats().size(); i++) {
-			String s_room = seatDao.findRoomById(orderDTO.getSeats().get(i).getSe_roomid());
-			boolean b2 = seatDao.updateSeat(neworder.getO_id(), s_room, orderDTO.getSeats().get(i).getSe_row(),
-					orderDTO.getSeats().get(i).getSe_col());
-		}*/
-		
 		return orderDTO;
 	}
 
@@ -95,21 +88,7 @@ public class OrderServiceImpl implements OrderService {
 		return orders;
 	}
 
-	// 更新订单的支付宝号
-	@Override
-	/**
-	 * o_number：订单号 o_paynumber：支付号
-	 */
-	public String updateOrderByOnum(String o_number, String o_paynumber) {
-		Boolean b = orderDao.updateOrderByOnum(o_number, o_paynumber);
-		String result = null;
-		if (b) {
-			result = "ok";
-		} else {
-			result = "false";
-		}
-		return result;
-	}
+	
 
 	/**
 	 * 测试
@@ -145,16 +124,31 @@ public class OrderServiceImpl implements OrderService {
 		return seats;
 	}
 
+		/**更新订单的支付宝号
+		 * o_number：订单号 o_paynumber：支付号
+		 */
+	@Override
+		public String updateOrderByOnum(String o_number, String o_paynumber) {
+			Boolean b = orderDao.updateOrderByOnum(o_number, o_paynumber);
+			String result = null;
+			if (b) {
+				result = "ok";
+			} else {
+				result = "false";
+			}
+			return result;
+		}
+	
 	/**
-	 *改座次状态
+	 *新增座次记录
 	 */
 	@Override
 	public void upSeats(SeatToOrderDto orderDTO) {
-		for (int i = 0; i < orderDTO.getSeats().size(); i++) {
-			String s_room = seatDao.findRoomById(orderDTO.getSeats().get(i).getSe_roomid());
-			boolean b2 = seatDao.updateSeat(orderDTO.getO_id(), s_room, orderDTO.getSeats().get(i).getSe_row(),
-					orderDTO.getSeats().get(i).getSe_col());
-		}
+		
+		//生成座次记录表
+				for(int i = 0; i < orderDTO.getSeats().size(); i++) {
+					seatDao.insertRecords(orderDTO.getRoomName(), orderDTO.getSeats().get(i).getSe_row(), orderDTO.getSeats().get(i).getSe_col(),orderDTO.getO_id());
+				}
 		
 	}
 

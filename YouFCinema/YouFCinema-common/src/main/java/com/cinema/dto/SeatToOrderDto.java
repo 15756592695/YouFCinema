@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cinema.pojo.Seats;
+import com.fasterxml.jackson.annotation.JsonFormat;
 /*
  * 选座与订单交互DTO
  */
@@ -19,11 +20,8 @@ public class SeatToOrderDto implements Serializable {
 	
 	private String RoomName;//厅室名
 	
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date date;//放映日期
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date startTime;//放映开始时间
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date endTime;//放映结束时间
 	
 	private String dimention;//3D，2D

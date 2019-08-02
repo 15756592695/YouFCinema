@@ -45,6 +45,6 @@ public interface Order02Controller {
 	/**
 	 * 
 	 */
-	@RequestMapping("/upSeats")
+	@PostMapping("/upSeats")
 	public void upSeats(@RequestBody SeatToOrderDto orderDTO);
 }
