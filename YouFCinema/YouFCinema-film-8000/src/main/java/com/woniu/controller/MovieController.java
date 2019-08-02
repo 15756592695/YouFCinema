@@ -31,8 +31,15 @@ public class MovieController {
 	 */
 	@RequestMapping("/allmovies")
 	public List<Movie> allMovies(){
-		System.out.println("===========----------------");
 		return movieService.findAll();
+	}
+	/*
+	 * 根据电影名获取电影信息
+	 */
+	@RequestMapping("/findFileByName")
+	public Movie findFileByName(String filmName){
+	
+		return movieService.findFileByName(filmName);
 	}
 	  
 	/*
@@ -43,7 +50,6 @@ public class MovieController {
 		Map<String,Object> map=new HashMap<>();
 		//获取电影详情
 		Movie movie=movieService.getMovieDetailById(movieid);
-		System.out.println(movie+"-----------");
 		//获取电影的评论
 		List<Comment> comments=commentController.findAllById(movieid);
 	/*	List<Comment> comments=null;*/

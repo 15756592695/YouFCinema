@@ -1,14 +1,17 @@
 package com.cinema.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cinema.pojo.Seats;
 /*
  * 选座与订单交互DTO
  */
-public class SeatToOrderDto {
+public class SeatToOrderDto implements Serializable {
 	
 	private String filmName;//电影名
 	
@@ -17,9 +20,7 @@ public class SeatToOrderDto {
 	private String RoomName;//厅室名
 	
 	private Date date;//放映日期
-	
 	private Date startTime;//放映开始时间
-	
 	private Date endTime;//放映结束时间
 	
 	private String dimention;//3D，2D
@@ -30,6 +31,9 @@ public class SeatToOrderDto {
 	
 	private Integer scheduleid;//场次id
 	
+	private String f_picture;//图片地址
+	
+	
 	//订单用数据
 	 private Integer o_number;//票数数量
 	 private Integer uid;//用户id
@@ -39,6 +43,14 @@ public class SeatToOrderDto {
 	 private Integer flag;
 	 
 	
+	public String getF_picture() {
+		return f_picture;
+	}
+
+	public void setF_picture(String f_picture) {
+		this.f_picture = f_picture;
+	}
+
 	public Integer getO_id() {
 		return o_id;
 	}

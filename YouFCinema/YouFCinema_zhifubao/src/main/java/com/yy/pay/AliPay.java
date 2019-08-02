@@ -16,6 +16,7 @@ import com.yy.util.RedisUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 @Controller
+@CrossOrigin
 public class AliPay {
 
     @Autowired
@@ -139,7 +141,7 @@ public class AliPay {
             	System.out.println("out_trade_no:"+out_trade_no);
                 order02Controller.updateOrderByOnum(out_trade_no,trade_no);
                 Integer uid=1;
-                SeatToOrderDto orderDTO=(SeatToOrderDto) redisUtil.get("orderDTO"+uid);
+                SeatToOrderDto orderDTO=(SeatToOrderDto) redisUtil.get("orderDTO"+out_trade_no);
                 //更新seatrecord表
                 order02Controller.upSeats(orderDTO);
                 //注意：

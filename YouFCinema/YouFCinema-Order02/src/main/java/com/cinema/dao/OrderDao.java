@@ -3,7 +3,10 @@ package com.cinema.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -20,12 +23,12 @@ public interface OrderDao {
 	@InsertProvider(type=OrderProvider.class,method="addOrder")
 	public boolean addOrder(SeatToOrderDto order);
 	
-	//取消订单(退款)
+	//取消订单()
 	@Update("update `order` set flag=2 where o_id=#{o_id} ")
 	public boolean cancel(Integer o_id); 
 	
 	//查找用户所有的订单
-	@Select("SELECT o_id,scheduleid,o_number,o_totalprice,uid,o_ordernumber,o_paynumber,flag,s_filmid,s_starttime,f_name,f_picture from `order` o INNER JOIN `schedule` s ON o.scheduleid=s.s_id INNER JOIN movie m on s.s_filmid=m.f_id WHERE uid=#{uid}")
+	@Select("SELECT o_id,scheduleid,o_number,o_totalprice price,uid,o_ordernumber,o_paynumber,flag,s_filmid filmId,s_starttime startTime,f_name filmName,f_picture from `order` o INNER JOIN `schedule` s ON o.scheduleid=s.s_id INNER JOIN movie m on s.s_filmid=m.f_id WHERE uid=#{uid} and flag!=2 ORDER BY o_id DESC ")
 	public List<SeatToOrderDto> findAllById(Integer id);
 
 	//查找订单id
@@ -41,5 +44,5 @@ public interface OrderDao {
 	public List<Seatrecords> findSeats(Integer scheduleid);	
 		
 	
-
+	
 }

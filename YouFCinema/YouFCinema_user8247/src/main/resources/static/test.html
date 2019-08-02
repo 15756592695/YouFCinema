@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+
+    <script src="js/jQuery-2.2.2-min.js"></script>
+
+    <style>
+        p{
+            color: #ff1b1c;
+            font-size: x-large;
+        }
+    </style>
+
+
+</head>
+<body>
+<div id="app">
+    <p>用户登录</p>
+    <input type="text" name="" value="" placeholder="昵称" v-model="user.u_tel"><br>
+    <input type="text" name="" value="" placeholder="密码" v-model="user.u_password"><br>
+    <input type="button" name="" value="登  录" @click="login"><br>
+    <p>用户注册</p>
+    <input type="text" name="" value="" placeholder="昵称" v-model="user.u_tel"><br>
+    <input type="text" name="" value="" placeholder="密码" v-model="user.u_password"><br>
+    <input type="button" name="" value="注  册" @click="register"><br>
+    <p>个人信息显示（登陆后才可用，需要session）<button @click="myInfo">显示</button></p>
+    <ol>
+        <li>id：<span>{{user3.u_id}}</span></li>
+        <li>电话号码：<span>{{user3.u_tel}}</span>
+            <input v-model="user4.u_tel" placeholder="修改电话">
+            <button @click="modifyMyself">确认修改电话</button>
+        </li>
+        <li>密码：<span>{{user3.u_password}}</span>
+            <input v-model="user4.u_password" placeholder="修改密码">
+            <button @click="modifyMyself">确认修改密码</button>
+        </li>
+        <li>角色：<span>{{user3.u_role}}</span></li>
+        <li>头像：<span>{{user3.u_headimg}}</span>
+            <img :src="user3.u_headimg" style="width: 80px">
+            <form action="/user/uploadHead" method="post" enctype="multipart/form-data">
+                <input type="file" name="file"><br>
+                <button type="submit">确认上传</button>
+            </form>
+        </li>
+        <li>注册时间：<span>{{user3.u_registertime}}</span></li>
+        <li>昵称：<span>{{user3.u_nickname}}</span>
+            <input v-model="user4.u_nickname" placeholder="修改昵称">
+            <button @click="modifyMyself">确认修改昵称</button>
+        </li>
+        <li v-if="user3.flag==0">白名单</li>
+        <li v-if="user3.flag==1">黑名单</li>
+    </ol>
+    <p>所有用户显示</p>
+    <table>
+        <tr>
+            <td>用户id</td>
+            <td>用户昵称</td>
+            <td>用户电话</td>
+            <td>用户角色</td>
+            <td>注册时间</td>
+            <td>用户flag</td>
+            <td>操作</td>
+            <td>操作</td>
+            <td>批量删除</td>
+        </tr>
+        <tr v-for="(user1,index) in users" :key="user1.u_id">
+            <td>{{user1.u_id}}</td>
+            <td>{{user1.u_nickname}}</td>
+            <td>{{user1.u_tel}}</td>
+            <td>{{user1.u_role}}</td>
+            <td>{{user1.u_registertime}}</td>
+            <td>{{user1.flag}}</td>
+            <td>
+                <button @click="deleteUser(index)" >删除</button>
+            </td>
+            <td>
+                <button @click="blackUser(index)">拉黑/取消</button>
+            </td>
+
+            <td>
+                <button>删除{{index}}</button>
+            </td>
+        </tr>
+    </table>
+    <p>根据电话号码或者用户角色模糊查询用户</p>
+    <input v-model="likeTel" placeholder="输入电话号码或者角色"><button @click="findUsersByTel(likeTel)">检索</button>
+    <table>
+        <tr>
+            <td>用户id</td>
+            <td>用户昵称</td>
+            <td>用户电话</td>
+            <td>用户角色</td>
+            <td>注册时间</td>
+            <td>用户flag</td>
+            <td>操作</td>
+            <td>操作</td>
+            <td>批量删除</td>
+        </tr>
+        <tr v-for="(user2,index) in users2" :key="user2.u_id">
+            <td>{{user2.u_id}}</td>
+            <td>{{user2.u_nickname}}</td>
+            <td>{{user2.u_tel}}</td>
+            <td>{{user2.u_role}}</td>
+            <td>{{user2.u_registertime}}</td>
+            <td>{{user2.flag}}</td>
+            <td>
+                <button @click="deleteUser(index)" >删除</button>
+            </td>
+            <td>
+                <button>拉黑</button>
+            </td>
+            <td>
+                <button>删除{{index}}</button>
+            </td>
+        </tr>
+    </table>
+    <p>验证码获取</p>
+
+    <img src="/loginCode" id="limgpic" >
+    <button @click="getCode" >刷新验证码</button>
+    <p>监听器测试</p>
+    在线人数:<span>{{countUser}}</span>
+</div>
+
+
+</body>
+<script src="js/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            user: {u_tel: "", u_password: ""},
+            users: [],
+            users2: [],
+            delete_ids: [],
+            likeTel:{},
+            user3:{},
+            user4:{},
+            countUser:"0"
+        },
+
+        methods: {
+            aa: function () {
+                alert(123)
+            },
+            //用户登录
+            login: function () {
+                //关于get，后台接收到的是键值对，而不是json
+                axios.get("/user/login", {
+                    params: {
+                        u_tel: this.user.u_tel,
+                        u_password: this.user.u_password
+                    }
+                })
+                    .then(res => {
+                        if (res.data == "登陆成功") {
+                            alert("登陆成功~")
+                        } else {
+                            alert("登录失败~");
+                        }
+
+                    })
+                    .catch(res => {
+                        console.info(res);
+                    });
+
+            },
+            //用户注册
+            register: function () {
+                //关于post，后台接收到的就是json了
+                axios.post("/user/register", this.user)
+                    .then(res => {
+                          if (res.data == "注册成功") {
+                            alert(res.data)
+                        } else {
+                            alert(res.data);
+                        }
+
+                    })
+                    .catch(res => {
+                        console.info(res);
+                    });
+
+            },
+            //删除用户
+
+             deleteUser: function (index) {
+                axios.delete("/user/deleteMore",{
+                    data:[this.users[index].u_id]
+                })
+                    .then(res => {
+                        this.users.splice(index,1)
+                    })
+                    .catch(res => {
+                        console.info(res);
+                    });
+
+            },
+            //根据电话号码或者用户角色模糊查询用户
+            findUsersByTel:function (likeTel) {
+                axios.get("/user/findUsersByTel/"+likeTel)
+                    .then(res => {
+                        this.users2 = res.data
+
+                    })
+                    .catch(res => {
+                        console.info(res);
+                    });
+            },
+            //拉黑/取消拉黑用户（待更新）
+            blackUser:function (index) {
+                axios.put("/user/getBlacks",[this.users[index].u_id])
+                    .then(res => {
+                        location.reload();
+
+                    })
+                    .catch(res => {
+                        console.info(res);
+                    });
+            },
+            //显示个人信息
+            myInfo:function () {
+                axios.get("/user/myselfInfo")
+                    .then(res => {
+                        this.user3 = res.data;
+
+                    })
+                    .catch(res => {
+                        console.info(res);
+                    });
+            },
+            //修改个人信息
+            modifyMyself:function () {
+                axios.put("/user/update",this.user4)
+                    .then(res => {
+                        this.user3 = res.data;
+
+                    })
+                    .catch(res => {
+                        console.info(res);
+                    });
+            },
+            getCode:function () {
+                $("#limgpic").prop("src","/loginCode?a="+Math.random());
+            }
+        },
+        //钩子函数
+        created() {
+            axios.get("/user/findAll")
+                .then(res => {
+                    this.users = res.data
+                })
+                .catch(res => {
+                    console.info(res)
+                });
+            axios.get("/OnlineUser")
+                .then(res => {
+                    this.countUser = res.data
+                })
+                .catch(res => {
+                    console.info(res)
+                });
+        },
+    })
+</script>
+</html>

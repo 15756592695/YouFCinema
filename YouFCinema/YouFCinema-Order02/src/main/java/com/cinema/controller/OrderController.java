@@ -43,6 +43,7 @@ public class OrderController {
 	@ApiOperation(value="发送数据",notes="将信息保存在redis")
 	public String view(@RequestBody SeatToOrderDto orderDTO) {
 		String uid="1";
+		System.out.println(orderDTO);
 //		redisUtil.set("order"+uid, orderDTO, 900l);
 		redisUtil.set("order"+uid, orderDTO);
 		return "ok";
@@ -83,11 +84,9 @@ public class OrderController {
 	 * @param order
 	 * @return
 	 */
-	public String test(@RequestBody SeatToOrderDto orderDTO) {
-		String uid="1";
-		boolean b =redisUtil.set("order"+uid, orderDTO);
-		System.out.println(b);
-		return "ok";
+	public SeatToOrderDto test(@RequestBody SeatToOrderDto orderDTO) {
+		System.out.println(orderDTO.getDate());
+		return orderDTO;
 	}
 	
 	
@@ -102,7 +101,7 @@ public class OrderController {
 	public String addOrder() throws Exception {
 		String uid="1";
 //		redisUtil.set("order"+uid, orderDTO, 900l);
-		SeatToOrderDto orderDTO01=(SeatToOrderDto) redisUtil.get("order"+uid);//获取前端提交在redis的订单数据
+		SeatToOrderDto orderDTO01=(SeatToOrderDto) redisUtil.get("order"+uid);//获取前端提交在redis的订单数据，只有15分钟有效
 		SeatToOrderDto orderDTO=orderService.addOrder(orderDTO01);
 		System.out.println("orderDTO:"+orderDTO);
 		return aliPayController.pay(orderDTO.getO_ordernumber(), orderDTO.getFilmName(), orderDTO.getPrice() + "");
@@ -113,24 +112,15 @@ public class OrderController {
 	 * 
 	 * @return
 	 */
-	@GetMapping("/findAllById/{id}")
+	@GetMapping("/findAllById")
 	@ApiOperation(value="查",notes="查看用户所有订单")
-	public List<SeatToOrderDto> findAllById(@PathVariable("id")Integer id){
+	public List<SeatToOrderDto> findAllById(@RequestParam("id")Integer id){
 		List<SeatToOrderDto> orders=orderService.findAllById(id);
 		System.out.println(orders);
 		return orders;
 	}
 
 	
-	@PutMapping("/updateOrder/{o_number}/{o_paynumber}")
-	@ApiOperation(value="改",notes="将交易号插入订单")
-	public String updateOrderByOnum(@PathVariable("o_number")String o_number,@PathVariable("o_paynumber")String o_paynumber) {
-		
-		String result=orderService.updateOrderByOnum(o_number,o_paynumber);
-		System.out.println(result);
-		return result;
-		
-	}
 	
 	
 	/**
@@ -148,7 +138,7 @@ public class OrderController {
 	
 	
 	/**
-	 * 退款调用此方法，将订单的flag改为2
+	 * 订单过时调用此方法，将订单的flag改为2
 	 * @param o_id
 	 * @return
 	 */
@@ -159,6 +149,7 @@ public class OrderController {
 		return result;
 	}
 	
+	
 	@GetMapping("/testpay")
 	public String payTest() throws Exception {
 		
@@ -168,12 +159,41 @@ public class OrderController {
 		 return aliPayController.pay("111", "dd", "1");
 	}
 	
-	
-	@RequestMapping("/upSeats")
+	/**
+	 * 支付宝接口调用的方法1
+	 * @param orderDTO
+	 */
+	@PostMapping("/upSeats")
 	public void upSeats(@RequestBody SeatToOrderDto orderDTO) {
 		orderService.upSeats(orderDTO);
 	}
+	/**
+	 * 支付宝接口调用的方法2
+	 * @param o_number
+	 * @param o_paynumber
+	 * @return
+	 */
+	@PutMapping("/updateOrder/{o_number}/{o_paynumber}")
+	@ApiOperation(value="改",notes="将交易号插入订单")
+	public String updateOrderByOnum(@PathVariable("o_number")String o_number,@PathVariable("o_paynumber")String o_paynumber) {
+		
+		String result=orderService.updateOrderByOnum(o_number,o_paynumber);
+		System.out.println(result);
+		return result;
+		
+	}
 	
 	
+	/**
+	 * 根据订单信息查询该订单的信息
+	 */
+	@GetMapping("/findOrder")
+	@ApiOperation(value="查",notes="查单条订单")
+	public SeatToOrderDto findOrderByOIdUid (@RequestParam("o_ordernumber")String o_ordernumber) {
+		SeatToOrderDto order=orderService.findOrder(o_ordernumber);
+		return order;
+	}
+	
+
 	
 }
