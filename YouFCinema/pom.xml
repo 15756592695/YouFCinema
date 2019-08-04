@@ -101,6 +101,7 @@
 	  <module>YouFCinema-zuul-9001</module>
 	  <module>YouFCinema-9999</module>
       <module>YouFCinema_user8247</module>
-	  <module>YouFCinema-movbackground</module>  
+	  <module>YouFCinema-movbackground</module>
+	  <module>YouFCinema-seats-8066</module>
   </modules>
 </project>
