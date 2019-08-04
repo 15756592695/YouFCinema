@@ -49,12 +49,13 @@ public class MovieController {
 	public Map<String,Object> movieDetail(Integer movieid){
 		Map<String,Object> map=new HashMap<>();
 		//获取电影详情
-		Movie movie=movieService.getMovieDetailById(movieid);
+		Map<String,Object> movie=movieService.getMovieDetailById(movieid);
 		//获取电影的评论
 		List<Comment> comments=commentController.findAllById(movieid);
 	/*	List<Comment> comments=null;*/
 		//存进map
-		map.put("movie",movie );
+		map.put("movie",movie.get("movie") );
+		map.put("images", movie.get("images"));
 		map.put("comments", comments);
 		return map;
 	}
