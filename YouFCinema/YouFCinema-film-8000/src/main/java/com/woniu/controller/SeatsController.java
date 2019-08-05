@@ -21,15 +21,7 @@ public class SeatsController {
 	@Autowired
 	private SeatsService seatsService;
 
-	/*
-	 * 添加厅室
-	 */
-	@RequestMapping("/addseats")
-	public String addSeat(@RequestBody String seatstr) throws UnsupportedEncodingException{
-		 seatstr = URLDecoder.decode(seatstr, "UTF-8");
-		 String result=seatsService.setSeats(seatstr); 
-		 return seatstr;
-	}
+	
 	/*
 	 * 根据厅室id获取所有坐位
 	 */
@@ -51,8 +43,4 @@ public class SeatsController {
 		return reInt;
 	}
 	
-	@RequestMapping("/testq")
-	public String test(){
-		return "ok";
-	}
 }
