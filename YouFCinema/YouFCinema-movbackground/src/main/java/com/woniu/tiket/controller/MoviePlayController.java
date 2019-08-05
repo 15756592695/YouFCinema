@@ -54,7 +54,7 @@ public class MoviePlayController {
 		if (result) {
 			data = "添加成功";
 		}
-		return "redirect:http://127.0.0.1:8848/%E6%AF%95%E4%B8%9A/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E5%89%8D%E7%AB%AF/playtime.html";
+		return "redirect:http://192.168.3.162:8848/%E6%AF%95%E4%B8%9A/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E5%89%8D%E7%AB%AF/playtime.html";
 	}
 	
 	// 新增电影
@@ -79,7 +79,8 @@ public class MoviePlayController {
 			if (result) {
 				data = "添加成功";
 			}
-			return "redirect:http://127.0.0.1:8848/%E6%AF%95%E4%B8%9A/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E5%89%8D%E7%AB%AF/picture-list.html";
+			return "redirect:http://192.168.3.:8848/%E7%94%B5%E5%BD%B1%E9%99%A2/index.html\r\n" + 
+					"";
 
 		}
 }

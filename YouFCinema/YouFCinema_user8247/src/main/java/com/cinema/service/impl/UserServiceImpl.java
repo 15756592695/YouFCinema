@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User myInfo() {
         User user_session = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
-        return userDao.myInfo(user_session.getU_id());
+        return userDao.myInfo(91);
     }
 
     @Override

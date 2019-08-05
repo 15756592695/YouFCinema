@@ -45,7 +45,7 @@ public interface UserDao {
     public void modifyNickname(@Param("u_nickname") String nickname,@Param("u_id") Integer u_id);
 
     @Select("select * from user where u_id=#{u_id}")
-    public User myInfo(Integer u_id);
+    public User myInfo(@Param("u_id") Integer u_id);
 
     @Select("select u_id from user where u_tel=#{u_tel}")
     public Integer findIdByTel(String u_tel);

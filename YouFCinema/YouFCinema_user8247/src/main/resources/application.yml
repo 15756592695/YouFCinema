@@ -10,8 +10,8 @@ spring:
 
   redis:
     database: 0
-    host: 192.168.3.155
-    port: 6380
+    host: 120.78.14.238
+    port: 6379
     password:
     lettuce:
       pool:

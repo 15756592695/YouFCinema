@@ -1,9 +1,10 @@
 server:
   port: 9001          #当前服务的端口号
-  
+ 
 spring:
    application:
     name: YouFCinema-zuul   #当前服务的名字，后面会用到
+
       
 eureka:
   client: #客户端注册进eureka服务列表内
@@ -26,7 +27,7 @@ zuul:
        path: /order/**      # 如果通过路由来访问，可以根据微服务的名字来访问，也可以直接访问资源
     film: 
       service-id: youfciname-film
-      path: /**
+      path: /film/**
     movie:
        service-id: movie-provider
        path: /movie/** 
@@ -43,6 +44,8 @@ zuul:
   ConnectTimeout: 1000
   MaxAutoRetries: 1
   MaxAutoRetriesNextServer: 1
+  
+
 
 ribbon: 
   ReadTimeout: 10000 

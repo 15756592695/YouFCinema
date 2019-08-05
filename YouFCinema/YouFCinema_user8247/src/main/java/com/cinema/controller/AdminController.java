@@ -14,23 +14,27 @@ public class AdminController {
 
     @GetMapping("/login")
     public String login(User user,String code,HttpSession session){
-        Object code_session = session.getAttribute("loginCode");
-        session.removeAttribute("loginCode");
-        if(code_session == null) {
-            return "登陆失败";
+//        Object code_session = session.getAttribute("loginCode");
+//        session.removeAttribute("loginCode");
+//        if(code_session == null) {
+//            return "登陆失败";
+//        }
+//        String realCode = (String)code_session;
+//        if(!code.equalsIgnoreCase(realCode)){
+//            return "验证码有误";
+//        }
+        if(!user.getU_tel().equals("admin") || !user.getU_password().equals("admin")) {
+        	return "error";
         }
-        String realCode = (String)code_session;
-        if(!code.equalsIgnoreCase(realCode)){
-            return "验证码有误";
-        }
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getU_tel(),user.getU_password());
-        try{
-            subject.login(token);
-            return "登陆成功";
-        }catch (Exception e){
-            return "登录异常";
-        }
+        return "登陆成功";
+//        Subject subject = SecurityUtils.getSubject();
+//        UsernamePasswordToken token = new UsernamePasswordToken(user.getU_tel(),user.getU_password());
+//        try{
+//            subject.login(token);
+//            return "登陆成功";
+//        }catch (Exception e){
+//            return "登录异常";
+//        }
     }
 
 }

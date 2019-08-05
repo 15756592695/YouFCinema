@@ -31,7 +31,7 @@ spring:
     # redis的配置信息
    redis:
     database: 0         #连接Redis的库
-    host: 192.168.3.135     #主机名称
+    host: 192.168.117.128    #主机名称
     port: 6379          # 端口号
     password:           # 连接密码，没有密码可以不写
     lettuce:            # 設置redis連接池
