@@ -53,7 +53,7 @@
     <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
-        <version>1.2.38</version>
+        <version>1.2.83</version>
     </dependency>
     <!-- 将微服务provider注册进eureka，作为客户端的角色 -->
     <dependency>
